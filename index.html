@@ -8,175 +8,259 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Экспресс">
-<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#16181b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F3F5">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
 :root{
-  --bg:#f4f1ea; --surface:#fffdf8; --surface2:#ece7dc; --ink:#1d1f22; --muted:#6b6a66;
-  --line:#ddd6c8; --accent:#b4432a; --accent-ink:#fff; --ok:#2f7d4f; --part:#c08a1e;
-  --quote:#1d1f22; --shadow:0 1px 2px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.05);
-  --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
+  --bg:#F2F3F5; --card:#FFFFFF; --soft:#E4E6EA; --ink:#14161A; --ink2:#3D424B; --muted:#5E6470;
+  --line:#DADDE3; --line2:#9AA1AC; --a:#C23E17; --on-a:#FFFFFF; --b:#2F5DA8; --on-b:#FFFFFF;
+  --ok:#1F7A4D; --mid:#E3A33B; --warn:#C23E17; --ring:#E1E3E8;
+  --hero:#14161A; --hero-ink:#FFFFFF; --hero-muted:#B9BEC7; --hero-line:#14161A;
+  --st:env(safe-area-inset-top); --sb:env(safe-area-inset-bottom);
+  --shadow:0 1px 3px rgba(20,22,26,.12);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#16181b; --surface:#1f2226; --surface2:#2a2e33; --ink:#ecebe7; --muted:#9b9a95;
-    --line:#33373d; --accent:#e0694f; --accent-ink:#16181b; --ok:#5cb47f; --part:#d9a640;
-    --quote:#f4f2ec; --shadow:none;
+    --bg:#0F1114; --card:#1A1D22; --soft:#23272E; --ink:#ECEEF1; --ink2:#C9CDD4; --muted:#9AA1AC;
+    --line:#2C3038; --line2:#5B616B; --a:#FF6B3D; --on-a:#0F1114; --b:#6E9BE8; --on-b:#0F1114;
+    --ok:#5CC48A; --mid:#E3A33B; --warn:#FF6B3D; --ring:#23272E;
+    --hero:#1A1D22; --hero-ink:#ECEEF1; --hero-muted:#9AA1AC; --hero-line:#2C3038;
+    --shadow:none;
   }
 }
 :root[data-theme="dark"]{
-    --bg:#16181b; --surface:#1f2226; --surface2:#2a2e33; --ink:#ecebe7; --muted:#9b9a95;
-    --line:#33373d; --accent:#e0694f; --accent-ink:#16181b; --ok:#5cb47f; --part:#d9a640;
-    --quote:#f4f2ec; --shadow:none;
+  --bg:#0F1114; --card:#1A1D22; --soft:#23272E; --ink:#ECEEF1; --ink2:#C9CDD4; --muted:#9AA1AC;
+  --line:#2C3038; --line2:#5B616B; --a:#FF6B3D; --on-a:#0F1114; --b:#6E9BE8; --on-b:#0F1114;
+  --ok:#5CC48A; --mid:#E3A33B; --warn:#FF6B3D; --ring:#23272E;
+  --hero:#1A1D22; --hero-ink:#ECEEF1; --hero-muted:#9AA1AC; --hero-line:#2C3038;
+  --shadow:none;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
-body{font:17px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
-  min-height:100vh;padding-bottom:calc(24px + var(--safe-b))}
+body{font:16px/1.45 Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
-.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.disp{font-family:Unbounded,Manrope,sans-serif;letter-spacing:-.02em}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
 .hidden{display:none!important}
+.view.tabbed{padding-bottom:calc(92px + var(--sb))}
+.view.barred{padding-bottom:calc(96px + var(--sb))}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
-/* header */
-.top{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:var(--safe-t);
-  border-bottom:1px solid transparent}
-.top.scrolled{border-bottom-color:var(--line)}
-.bar{display:flex;align-items:center;gap:8px;min-height:52px}
-.brand{flex:1;min-width:0;padding:6px 0 4px}
-.over{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:1px}
-.bar h1{font-size:19px;margin:0;flex:1;letter-spacing:-.01em;font-weight:700}
-.bar .ttl{flex:1;min-width:0;font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
-.ib{border:0;background:transparent;min-width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
-  color:var(--accent);font-size:16px;font-weight:600;padding:0 8px}
-.ib:active{background:var(--surface2)}
-.ib svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-.progress{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);padding:2px 0 10px}
-.pbar{flex:1;height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
-.pbar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
-
-.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);
-  border-radius:12px;padding:0 12px;height:42px}
-.search svg{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;flex:none}
-.search input{border:0;outline:0;background:transparent;flex:1;font-size:16px;min-width:0}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:15px}
-.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* bars */
+.top{position:sticky;top:0;z-index:5;background:var(--bg);padding-top:var(--st)}
+.top.scrolled{box-shadow:0 1px 0 var(--line)}
+.bar{display:flex;align-items:center;gap:4px;min-height:56px;max-width:640px;margin:0 auto;padding:0 8px}
+.bar .ttl{flex:1;min-width:0;text-align:center;font-weight:700;font-size:15px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .ttl.disp{color:var(--ink)}
+.ib{border:0;background:transparent;min-width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--ink);font-weight:700;font-size:15px;padding:0 8px}
+.ib.acc{color:var(--a)}
+.ib:active{background:var(--soft)}
+.sq{width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink);flex:none}
+.sq.pri{background:var(--a);border-color:var(--a);color:var(--on-a)}
 
 /* list */
-.list{display:flex;flex-direction:column;gap:10px;padding-top:4px}
-.card{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);
-  border-radius:16px;padding:14px;box-shadow:var(--shadow);text-align:left;width:100%}
-.card:active{transform:scale(.99)}
-.num{flex:none;min-width:38px;height:38px;border-radius:11px;background:var(--surface2);display:grid;place-items:center;
-  font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;padding:0 6px}
-.num.spare{background:transparent;border:1.5px dashed var(--line);color:var(--muted)}
-.card .body{flex:1;min-width:0}
-.card .t{font-weight:600;font-size:16px;display:flex;gap:6px;align-items:center}
-.card .q{color:var(--muted);font-size:15px;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.dot{flex:none;width:10px;height:10px;border-radius:50%;border:2px solid var(--line);margin-top:4px}
-.dot.part{border-color:var(--part);background:linear-gradient(90deg,var(--part) 50%,transparent 50%)}
-.dot.full{border-color:var(--ok);background:var(--ok)}
-.empty{color:var(--muted);text-align:center;padding:40px 10px}
+.head{display:flex;align-items:flex-end;gap:8px;padding:calc(16px + var(--st)) 0 0}
+.head .brand{flex:1;min-width:0}
+.over{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--a);text-transform:uppercase}
+h1.h{margin:4px 0 0;font-size:24px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px}
+.ready{padding:16px;margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.row1{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.lbl{font-size:13px;font-weight:800;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.big{font-size:20px;font-weight:700}
+.big small{font-size:14px;color:var(--muted)}
+.ticks{display:grid;gap:2px;height:22px}
+.ticks i{border-radius:2px;background:var(--soft)}
+.ticks i.part{background:var(--mid)} .ticks i.full{background:var(--ok)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);font-weight:600;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend b{width:10px;height:10px;border-radius:3px;display:inline-block;background:var(--soft)}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:1px solid var(--hero-line);background:var(--hero);color:var(--hero-ink);border-radius:18px;min-height:60px;padding:10px 12px 10px 20px;margin-top:12px;text-align:left}
+.cta strong{display:block;font-size:17px;font-weight:800}
+.cta small{display:block;font-size:12px;color:var(--hero-muted);font-weight:600}
+.playc{width:38px;height:38px;border-radius:50%;background:var(--a);display:grid;place-items:center;flex:none}
+.playc svg{width:15px;height:15px;fill:var(--on-a)}
+.banner{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;border-radius:16px;background:var(--card);border:1.5px solid var(--mid);font-size:14px;font-weight:600}
+.banner .t{flex:1}
+.banner button{border:0;background:transparent;font-weight:800;color:var(--a);min-height:36px;padding:0 6px}
+.search{display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:12px}
+.search svg{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;flex:none}
+.search input{border:0;outline:0;background:transparent;flex:1;font-size:16px;min-width:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px;font-weight:600}
+.chip em{font-style:normal;opacity:.6;margin-left:4px}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.list{display:flex;flex-direction:column;gap:10px}
+.sit{display:flex;gap:12px;width:100%;text-align:left;padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);color:inherit}
+.sit:active{transform:scale(.99)}
+.sit .n{flex:none;width:44px;font-size:19px;font-weight:700;padding-top:1px}
+.sit .n.spare{color:var(--muted);font-size:16px}
+.sit .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.sit .t{font-weight:800;font-size:16px}
+.sit .q{font-size:14px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pips{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pip{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.pip span{display:flex;gap:2px}
+.pip i{width:12px;height:5px;border-radius:2px;background:var(--soft)}
+.played{margin-left:auto;font-size:12px;font-weight:700;color:var(--ok)}
+.empty{color:var(--muted);text-align:center;padding:36px 10px}
+.ver{text-align:center;color:var(--muted);font-size:13px;padding:22px 0 6px}
 
-/* detail */
-.kicker{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin:16px 0 4px}
-.dtitle{font-size:26px;line-height:1.2;font-weight:700;margin:0 0 12px;letter-spacing:-.015em}
-.desc{margin:0 0 16px;white-space:pre-wrap}
-.quote{position:relative;font-size:23px;line-height:1.3;font-weight:600;color:var(--quote);
-  padding:16px 18px 16px 20px;background:var(--surface);border-radius:16px;border:1px solid var(--line);margin-bottom:8px}
-.quote::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 3px 3px 0;background:var(--accent)}
-.role{margin-top:22px}
-.rolehead{display:flex;align-items:center;gap:6px;margin-bottom:8px}
-.rolehead h3{margin:0;font-size:19px;flex:1}
-.said{font-size:13px;font-weight:600;color:var(--muted);background:var(--surface2);border-radius:6px;padding:2px 7px;vertical-align:3px;white-space:nowrap}
-.var{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 14px 12px;margin-bottom:10px;box-shadow:var(--shadow)}
-.var + .var{margin-top:0}
-.vhead{display:flex;align-items:center;justify-content:space-between;min-height:36px;color:var(--muted);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.vhead .ib{min-width:36px;height:36px;color:var(--muted)}
-.fl{display:block;font-size:14px;font-weight:600;margin:6px 0 4px}
-.fl.a{color:var(--accent)}
-.fl.c{color:var(--ok)}
-.fl.n{color:var(--ink)}
-.var.an{background:var(--surface2);box-shadow:none;border-style:dashed}
-.var.an textarea.f{background:var(--surface)}
-textarea.f{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:10px 12px;
-  font-size:17px;line-height:1.4;resize:none;min-height:52px;outline:0;overflow:hidden;display:block}
-textarea.f:focus{border-color:var(--accent)}
-.link{border:0;background:transparent;color:var(--accent);font-weight:600;padding:10px 0;font-size:16px}
-.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:600;font-size:17px;background:var(--surface2)}
-.btn.pri{background:var(--accent);color:var(--accent-ink)}
-.btn.dng{background:transparent;color:#c0392b;border:1px solid currentColor}
+/* tab bar, bottom bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-bottom:var(--sb)}
+.tabs .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);height:62px}
+.tab{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:var(--muted)}
+.tab.on{color:var(--ink);font-weight:800}
+.tab svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding:12px 20px calc(12px + var(--sb))}
+.sbar .in{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* buttons, fields */
+.btn{min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--card);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 14px;color:var(--ink);text-align:center}
+.btn svg{width:15px;height:15px}
+.btn.pri{background:var(--a);border-color:var(--a);color:var(--on-a)}
+.btn.pri svg{fill:var(--on-a)}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.ghost{border-style:dashed;border-color:var(--line2);background:transparent;color:var(--ink2);font-weight:700}
+.btn.dng{color:#c0392b;border-color:currentColor;background:transparent}
 .btn.full{width:100%}
-.row{display:flex;gap:10px;margin-top:20px}
-.row .btn{flex:1}
+.btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.link{border:0;background:transparent;color:var(--a);font-weight:700;padding:10px 0;font-size:15px}
+.mini{height:34px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:700}
+textarea.f{width:100%;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:11px 13px;font-size:16px;line-height:1.4;resize:none;min-height:50px;outline:0;overflow:hidden;display:block}
+textarea.f:focus{border-color:var(--ink2)}
+textarea.f::placeholder,input::placeholder{color:var(--line2)}
+.fl{display:block;font-size:14px;font-weight:800;margin:0 0 6px}
 
-/* sheet */
-.veil{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:20;display:flex;align-items:flex-end;justify-content:center}
-.sheet{background:var(--bg);width:100%;max-width:680px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;
-  padding:8px 16px calc(20px + var(--safe-b))}
+/* situation */
+.st h2{margin:0 0 10px;font-size:22px;font-weight:700;line-height:1.25}
+.desc{margin:0 0 14px;font-size:15px;line-height:1.5;color:var(--ink2);white-space:pre-wrap}
+.hero{background:var(--hero);color:var(--hero-ink);border:1px solid var(--hero-line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.hero .who{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--hero-muted);text-transform:uppercase}
+.hero .ph{font-size:21px;line-height:1.3;font-weight:700}
+.rtabsrow{display:flex;gap:6px;align-items:center;margin:16px 0 14px}
+.rtabs{flex:1;min-width:0;display:flex;gap:4px;background:var(--soft);border-radius:14px;padding:4px;overflow-x:auto;scrollbar-width:none}
+.rtabs::-webkit-scrollbar{display:none}
+.rtab{flex:1 0 auto;min-height:44px;border:0;border-radius:11px;background:transparent;font-size:15px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;white-space:nowrap}
+.rtab.on{background:var(--card);color:var(--ink);font-weight:800;box-shadow:var(--shadow)}
+.rdot{width:9px;height:9px;border-radius:50%;flex:none}
+.ok{color:var(--ok);font-weight:800}
+.said{font-size:13px;font-weight:600;color:var(--muted);margin:-4px 0 12px}
+.var{padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px;margin-bottom:10px}
+.vh{display:flex;justify-content:space-between;align-items:center;min-height:34px}
+.fa{border:1.5px solid var(--rc)!important}
+.fc{border:1.5px dashed var(--line2)!important}
+.sec{font-size:19px;margin:28px 0 10px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-weight:700}
+.sec small{font-size:13px;color:var(--muted);font-weight:700;font-family:Manrope,sans-serif;letter-spacing:0}
+.game{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:8px;color:inherit}
+.game .gn{flex:none;width:36px;font-size:16px;font-weight:700}
+.game .gb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.game .g1{font-weight:800;font-size:15px}
+.game .g2{font-size:13px;color:var(--muted);font-weight:600}
+.game .g3{font-size:14px;margin-top:4px;white-space:pre-wrap;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.res{flex:none;font-size:13px;font-weight:800;border-radius:9px;padding:6px 9px;background:var(--soft);color:var(--muted);text-align:center}
+.res.win{background:var(--ok);color:#fff} .res.loss{background:var(--a);color:var(--on-a)} .res.draw{background:var(--mid);color:#14161A}
+
+/* training */
+.hero.sm{padding:14px 16px;gap:6px;background:var(--card);color:var(--ink);border-color:var(--line)}
+.hero.sm .who{color:var(--muted)}
+.hero.sm .ph{font-size:18px}
+details.tdesc{margin:8px 0 0}
+details.tdesc summary{font-size:14px;font-weight:700;color:var(--muted);padding:8px 2px;cursor:pointer}
+details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
+.rcards{display:grid;gap:8px;margin-top:10px}
+.rc{border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;text-align:left;border:1px dashed var(--line2);background:var(--card);color:var(--ink)}
+.rc .k{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.rc .nm{font-size:16px;font-weight:800;display:flex;align-items:center;gap:6px}
+.rc .pl{font-size:12px;font-weight:700;color:var(--muted)}
+.rc.now{background:var(--rc);border:1px solid var(--rc);color:var(--on-rc)}
+.rc.now .k,.rc.now .pl{color:var(--on-rc);opacity:.85}
+.rc.done{border-style:solid}
+.ringwrap{display:grid;place-items:center;padding:16px 0 6px}
+.ring{position:relative;width:min(270px,70vw);aspect-ratio:1}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .tr{stroke:var(--ring)}
+.ring .pr{stroke:var(--rcol);transition:stroke-dashoffset .2s linear,stroke .3s}
+.ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.ring .num{font-size:clamp(60px,22vw,92px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.ring .num.warn{color:var(--warn)}
+.ring .cap{font-size:15px;font-weight:700;color:var(--muted);text-align:center;padding:0 34px}
+.rmsg{text-align:center;font-weight:800;font-size:17px;min-height:8px;margin:2px 0 10px;border-radius:12px;padding:4px 8px}
+.rmsg.flash{animation:fl .5s 3}
+@keyframes fl{50%{background:var(--a);color:var(--on-a)}}
+.toggles{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.tg{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px;font-weight:700}
+.tg svg{width:18px;height:18px}
+.tg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tstack{display:flex;flex-direction:column;gap:10px;padding-bottom:calc(24px + var(--sb))}
+.rv{padding:14px;display:flex;flex-direction:column;gap:12px;margin-bottom:10px}
+.rv .nm{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px}
+.seg3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.seg3 button{min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:14px;font-weight:700}
+.seg3 button.on.good{background:var(--ok);border-color:var(--ok);color:#fff}
+.seg3 button.on.mid{background:var(--mid);border-color:var(--mid);color:#14161A}
+.seg3 button.on.bad{background:var(--a);border-color:var(--a);color:var(--on-a)}
+.audio{display:flex;gap:8px;align-items:center}
+.audio audio{flex:1;min-width:0;height:40px}
+.lead{margin:0 0 14px;color:var(--ink2);font-size:15px}
+.h2{margin:4px 0 6px;font-size:24px;font-weight:700}
+
+/* cheat sheet */
+.cs .ph{font-size:24px;font-weight:800;line-height:1.3;margin:6px 0 4px}
+.cs .role{margin-top:26px}
+.cs .rn{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--rc);display:flex;align-items:center;gap:8px}
+.cs .an{color:var(--muted);font-size:15px;margin:8px 0 0;white-space:pre-wrap}
+.cs .ans{font-size:22px;font-weight:700;line-height:1.35;margin:12px 0 6px;white-space:pre-wrap}
+.cs .cnt{font-size:18px;line-height:1.45;color:var(--ink2);padding-left:14px;border-left:3px dashed var(--line2);white-space:pre-wrap}
+.cs .vn{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.06em;margin-top:16px}
+
+/* journal */
+.jhero{background:var(--hero);color:var(--hero-ink);border:1px solid var(--hero-line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.jstats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.jstats div{display:flex;flex-direction:column;gap:2px}
+.jstats b{font-size:26px;font-weight:700;line-height:1.1}
+.jstats span{font-size:12px;font-weight:700;color:var(--hero-muted)}
+.form{display:flex;gap:6px;flex-wrap:wrap}
+.form span{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:800;color:#0F1114;background:#5B616B}
+.form span.win{background:#5CC48A} .form span.loss{background:#FF8A63} .form span.draw{background:#E3A33B}
+.opps{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.opps::-webkit-scrollbar{display:none}
+.opp{flex:none;min-height:56px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:6px 14px;gap:2px;text-align:left}
+.opp b{font-size:15px}
+.opp span{font-size:12px;font-weight:700;color:var(--muted)}
+
+/* help */
+.help h3{font-size:17px;margin:24px 0 6px}
+.help p,.help li{font-size:15px;line-height:1.55;color:var(--ink2)}
+.help ul{padding-left:20px;margin:6px 0}
+.help b{color:var(--ink)}
+
+/* sheet, toast */
+.veil{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--bg);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:8px 20px calc(20px + var(--sb))}
 .sheet .grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:4px auto 8px}
 .sheet h2{font-size:20px;margin:6px 0 12px}
 .fld{margin-bottom:12px}
-.fld label{display:block;font-size:14px;font-weight:600;margin-bottom:4px;color:var(--muted)}
-.fld input,.fld select{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:10px 12px;font-size:17px;outline:0}
-.fld textarea.f{background:var(--surface)}
-.seg{display:flex;background:var(--surface2);border-radius:12px;padding:3px}
-.seg button{flex:1;border:0;background:transparent;border-radius:10px;padding:8px;font-size:15px;font-weight:600}
-.seg button.on{background:var(--surface);box-shadow:var(--shadow)}
-.menu button{display:block;width:100%;text-align:left;border:0;background:var(--surface);padding:15px 16px;font-size:17px;border-bottom:1px solid var(--line)}
+.fld>label{display:block;font-size:14px;font-weight:700;margin-bottom:5px;color:var(--muted)}
+.fld input,.fld select{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:11px 12px;font-size:16px;outline:0;min-height:46px}
+.seg{display:flex;background:var(--soft);border-radius:12px;padding:3px}
+.seg button{flex:1;border:0;background:transparent;border-radius:10px;min-height:40px;font-size:14px;font-weight:700}
+.seg button.on{background:var(--card);box-shadow:var(--shadow)}
+.menu button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;background:var(--card);padding:15px 16px;font-size:16px;border-bottom:1px solid var(--line)}
 .menu button:first-child{border-radius:14px 14px 0 0}
 .menu button:last-child{border-radius:0 0 14px 14px;border-bottom:0}
-.menu .note{font-size:14px;color:var(--muted);padding:12px 4px 0}
-
-/* training */
-.tr-q{font-size:27px;line-height:1.28;font-weight:700;margin:6px 0 18px}
-.tr-desc{color:var(--muted);margin-bottom:6px}
-.rolepick{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
-.reveal{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
-.reveal .lbl{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.reveal .lbl.a{color:var(--accent)} .reveal .lbl.c{color:var(--ok)} .reveal .lbl.n{color:var(--muted)}
-.reveal .txt{white-space:pre-wrap;font-size:19px}
-.cover{border:2px dashed var(--line);border-radius:16px;padding:22px;text-align:center;color:var(--muted);font-weight:600;background:transparent;width:100%;margin-bottom:10px}
-.timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted);font-size:15px}
-.plink{border:0;background:transparent;color:var(--accent);font-weight:600;font-size:14px;padding:4px 0 4px 6px;white-space:nowrap}
-.meta{display:block;font-size:13px;color:var(--muted);margin-top:4px;font-weight:600}
-.meta .w{color:var(--ok)} .meta .l{color:var(--accent)}
-.sec{font-size:20px;margin:30px 0 10px;display:flex;align-items:baseline;gap:8px}
-.sec small{font-size:14px;color:var(--muted);font-weight:600}
-.game{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);
-  border-radius:14px;padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow)}
-.game .gb{flex:1;min-width:0}
-.game .g1{font-weight:600;font-size:16px}
-.game .g2{font-size:14px;color:var(--muted);margin-top:2px}
-.game .g3{font-size:15px;margin-top:6px;white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.res{flex:none;font-size:13px;font-weight:700;border-radius:8px;padding:4px 8px;background:var(--surface2);color:var(--muted);text-align:center;min-width:76px}
-.res.win{background:var(--ok);color:#fff} .res.loss{background:var(--accent);color:var(--accent-ink)} .res.draw{background:var(--part);color:#fff}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center}
-.stat b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
-.stat span{font-size:12px;color:var(--muted);font-weight:600}
-.opps{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
-.opp{display:flex;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:16px;width:100%;text-align:left}
-.opp span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.ver{text-align:center;color:var(--muted);font-size:13px;padding:22px 0 6px}
-.round{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center;margin:4px 0 16px}
-.rbig{font-size:60px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.05}
-.rbig.warn{color:var(--accent)}
-.rlbl{font-size:15px;color:var(--muted);font-weight:600;margin-bottom:6px}
-.rmsg{font-weight:700;font-size:17px;margin-bottom:10px}
-.rbar{height:8px;border-radius:4px;background:var(--surface2);overflow:hidden;margin:12px 0 14px}
-.rbar i{display:block;height:100%;background:var(--accent);transition:width .2s linear}
-.round .btn{min-width:160px}
-.round.flash{animation:rflash .5s 3}
-@keyframes rflash{50%{background:var(--accent);color:var(--accent-ink)}}
-.toast{position:fixed;left:50%;bottom:calc(24px + var(--safe-b));transform:translateX(-50%);background:var(--ink);color:var(--bg);
-  padding:10px 16px;border-radius:12px;font-size:15px;z-index:40;opacity:0;transition:opacity .2s;pointer-events:none}
+.menu button:only-child{border-radius:14px}
+.note{font-size:14px;color:var(--muted);padding:12px 2px 0}
+.hint .blk{margin-bottom:14px}
+.hint .txt{font-size:18px;white-space:pre-wrap;line-height:1.4}
+.toast{position:fixed;left:50%;bottom:calc(96px + var(--sb));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;z-index:40;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw;text-align:center}
 .toast.on{opacity:1}
 </style>
 <script>try{var th=localStorage.getItem("express-poedinki-theme");if(th==="light"||th==="dark")document.documentElement.setAttribute("data-theme",th)}catch(e){}</script>
@@ -184,51 +268,155 @@ textarea.f:focus{border-color:var(--accent)}
 <body>
 
 <!-- LIST -->
-<section id="vList">
-  <div class="top" id="topList"><div class="wrap">
-    <div class="bar">
-      <div class="brand"><div class="over">КСТ. Дзен-клуб. 2026</div><h1>Экспресс-поединки</h1></div>
-      <button class="ib" id="btnTrainAll" aria-label="Тренировка"><svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
-      <button class="ib" id="btnMenu" aria-label="Меню"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg></button>
-      <button class="ib" id="btnAdd" aria-label="Добавить ситуацию"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+<section id="vList" class="view tabbed">
+  <div class="wrap">
+    <div class="head">
+      <div class="brand"><div class="over">КСТ · Дзен-клуб · 2026</div><h1 class="h disp">Экспресс-поединки</h1></div>
+      <button class="sq" id="btnMenu" aria-label="Меню"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg></button>
+      <button class="sq" id="btnAdd" aria-label="Добавить ситуацию"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
     </div>
-    <div class="progress"><div class="pbar"><i id="pbar"></i></div><span id="ptext"></span><button class="plink" id="btnJournal"></button></div>
-    <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Поиск по ситуациям и фразам" autocomplete="off"></div>
+    <div id="lBanner"></div>
+    <div class="card ready" id="lReady"></div>
+    <button class="cta" id="btnTrain"><span><strong>Тренировка</strong><small id="ctaSub"></small></span>
+      <span class="playc"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg></span></button>
+    <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Поиск по ситуациям и фразам" autocomplete="off"></label>
     <div class="chips" id="chips"></div>
-  </div></div>
-  <div class="wrap"><div class="list" id="list"></div><div class="ver" id="verFoot"></div></div>
+    <div class="list" id="list"></div>
+    <div class="ver" id="verFoot"></div>
+  </div>
 </section>
 
-<!-- DETAIL -->
-<section id="vDetail" class="hidden">
-  <div class="top" id="topDetail"><div class="wrap"><div class="bar">
-    <button class="ib" id="dBack" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-    <div class="ttl" id="dBarTitle"></div>
-    <button class="ib" id="dEdit">Правка</button>
-  </div></div></div>
-  <div class="wrap" id="dBody"></div>
+<!-- SITUATION -->
+<section id="vSit" class="view barred hidden">
+  <div class="top"><div class="bar">
+    <button class="ib" id="sBack" aria-label="Назад"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="ttl disp" id="sNum"></div>
+    <button class="ib" id="sCheat" aria-label="Шпаргалка"><svg class="i" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 8h5"/></svg></button>
+    <button class="ib acc" id="sEdit">Правка</button>
+  </div></div>
+  <div class="wrap st" id="sBody"></div>
+  <div class="sbar"><div class="in">
+    <button class="btn" id="sGame">Записать поединок</button>
+    <button class="btn pri" id="sRound"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg><span id="sRoundT">Раунд</span></button>
+  </div></div>
+</section>
+
+<!-- CHEAT SHEET -->
+<section id="vCheat" class="view hidden">
+  <div class="top"><div class="bar">
+    <button class="ib" id="cBack" aria-label="Назад"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="ttl">Шпаргалка</div>
+    <div style="width:44px"></div>
+  </div></div>
+  <div class="wrap cs" id="cBody" style="padding-bottom:calc(40px + var(--sb))"></div>
+</section>
+
+<!-- TRAINING -->
+<section id="vTrain" class="view hidden">
+  <div class="top"><div class="bar">
+    <button class="ib" id="tBack" aria-label="Закрыть тренировку"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="ttl" id="tTtl">Тренировка</div>
+    <button class="ib" id="tSkip" aria-label="Следующая ситуация"><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+  </div></div>
+  <div class="wrap" id="tBody"></div>
 </section>
 
 <!-- JOURNAL -->
-<section id="vJournal" class="hidden">
-  <div class="top"><div class="wrap"><div class="bar">
-    <button class="ib" id="jBack" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-    <div class="ttl">Журнал поединков</div>
-    <button class="ib" id="jAdd" aria-label="Записать поединок"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
-  </div></div></div>
-  <div class="wrap" id="jBody"></div>
+<section id="vJournal" class="view tabbed hidden">
+  <div class="wrap">
+    <div class="head">
+      <div class="brand"><div class="over">КСТ · Дзен-клуб · 2026</div><h1 class="h disp">Журнал</h1></div>
+      <button class="sq pri" id="jAdd" aria-label="Записать поединок"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    </div>
+    <div id="jBody"></div>
+  </div>
 </section>
 
-<!-- TRAIN -->
-<section id="vTrain" class="hidden">
-  <div class="top"><div class="wrap"><div class="bar">
-    <button class="ib" id="tBack" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <div class="ttl" id="tBarTitle">Тренировка</div>
-    <span class="timer" id="tTimer"></span>
-  </div></div></div>
-  <div class="wrap" id="tBody"></div>
+<!-- HELP -->
+<section id="vHelp" class="view hidden">
+  <div class="top"><div class="bar">
+    <button class="ib" id="hBack" aria-label="Назад"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="ttl">Как пользоваться</div>
+    <div style="width:44px"></div>
+  </div></div>
+  <div class="wrap help" style="padding-bottom:calc(40px + var(--sb))">
+    <div class="over" style="margin-top:6px">КСТ · Дзен-клуб · 2026</div>
+    <h2 class="h2 disp">Как пользоваться</h2>
+    <p>Приложение помогает готовиться к экспресс-поединкам: продумать ответы за каждую роль, потренироваться с таймером и вести журнал сыгранных поединков.</p>
+
+    <h3>1. Подготовка ситуации</h3>
+    <ul>
+      <li>Откройте ситуацию в списке. Наверху описание и фраза, ниже вкладки ролей. Первой стоит роль того, кто произносит фразу.</li>
+      <li>Для каждой роли есть поле <b>«Анализ»</b>: чего хочет роль, что стоит за фразой, какую цель преследует ответ.</li>
+      <li>Ниже <b>ответная фраза</b> и <b>контрфраза</b>: что вам могут сказать в ответ и как это парировать. Кнопка «+ вариант» добавляет еще пару «ответ и контрфраза».</li>
+      <li>Все сохраняется само, кнопки «Сохранить» нет.</li>
+      <li>Ситуация считается <b>готовой</b>, когда у каждой роли есть хотя бы один ответ вместе с контрфразой. Готовность видна полосой на главном экране: каждая черточка соответствует одной ситуации.</li>
+      <li>Роль можно переименовать или удалить кнопкой «⋯» справа от вкладок, а добавить ссылкой «+ Добавить роль».</li>
+    </ul>
+
+    <h3>2. Тренировка: 40 секунд на роль</h3>
+    <ul>
+      <li>В поединке за каждую роль играешь по 40 секунд. Кнопка «Раунд» в ситуации запускает таймер для нее, а вкладка «Тренировка» ведет по всем ситуациям подряд.</li>
+      <li>Нажмите «Старт» и говорите ответ вслух. За 10 секунд до конца цифры становятся красными, в конце звучит сигнал, и приложение переходит ко второй роли.</li>
+      <li>«Передать роль» заканчивает роль досрочно, «Пауза» останавливает время.</li>
+      <li>Пока раунд не начат, можно выбрать, с какой роли начать: нажмите на ее карточку.</li>
+      <li>«Подсказка» показывает вашу подготовку за текущую роль.</li>
+      <li>Во время раунда экран не гаснет. На iPhone сигнал не слышен при включенном беззвучном режиме, но цифры и мигание видны.</li>
+    </ul>
+
+    <h3>3. Запись голоса</h3>
+    <ul>
+      <li>Перед стартом включите «Записывать голос». Телефон попросит доступ к микрофону.</li>
+      <li>После раунда ответ за каждую роль можно прослушать. Записи хранятся, пока вы не перейдете к другой ситуации. Чтобы оставить запись себе, нажмите «Сохранить» рядом с ней.</li>
+    </ul>
+
+    <h3>4. Вдвоем на одном телефоне</h3>
+    <ul>
+      <li>Включите «Вдвоем»: Игрок 1 играет первую роль, Игрок 2 вторую. Когда время выходит, приложение подсказывает передать телефон.</li>
+      <li>После раунда кнопка «Поменяться ролями» запускает его заново с обменом ролями.</li>
+    </ul>
+
+    <h3>5. Итог и умная очередь</h3>
+    <ul>
+      <li>После раунда оцените каждую роль: «Получилось», «Средне» или «Не вышло».</li>
+      <li>Вкладка «Тренировка» сама подбирает порядок: сначала ситуации, где вышло хуже, и те, что еще не тренировали. «Не вышло» вернется на следующий день, «средне» через 3 дня, «получилось» примерно через неделю.</li>
+      <li>Если в раунде родилась удачная фраза, впишите ее в «Что забрать в подготовку»: она добавится вариантом ответа к выбранной роли.</li>
+    </ul>
+
+    <h3>6. Шпаргалка</h3>
+    <ul>
+      <li>Значок книжки вверху ситуации открывает шпаргалку: фраза и все ваши ответы крупным шрифтом, без полей ввода. Удобно просмотреть перед выходом.</li>
+    </ul>
+
+    <h3>7. Журнал поединков</h3>
+    <ul>
+      <li>После настоящего поединка нажмите «Записать поединок» в ситуации или «+» во вкладке «Журнал». Укажите дату, соперника, с какой роли начинали, результат, голоса судей и заметки.</li>
+      <li>В журнале общий счет, форма за последние поединки, счет против каждого соперника (нажмите на соперника, чтобы оставить только его поединки) и поиск.</li>
+    </ul>
+
+    <h3>8. Свои ситуации</h3>
+    <ul>
+      <li>«+» на главном экране добавляет новую ситуацию: номер, название, описание, фразу и роли через запятую. Первая роль считается автором фразы.</li>
+      <li>«Правка» в ситуации меняет ее текст или удаляет ее.</li>
+    </ul>
+
+    <h3>9. Где хранятся ваши записи</h3>
+    <ul>
+      <li>Только на этом телефоне, в этом браузере. Никуда не отправляются. Другой человек по той же ссылке увидит чистое приложение.</li>
+      <li>Добавьте приложение на экран «Домой» (Поделиться → На экран «Домой») и работайте через значок: так iOS не удалит данные. Safari и значок хранят записи раздельно.</li>
+      <li>Меню «⋯» → «Сохранить резервную копию» сохраняет все в файл. Если копии давно не было, на главном экране появится напоминание. Загрузить копию можно там же, например на новом телефоне.</li>
+      <li>В меню «⋯» также выбирается тема: как в системе, светлая или темная.</li>
+    </ul>
+    <p class="ver" id="verHelp"></p>
+  </div>
 </section>
+
+<nav class="tabs" id="tabs"><div class="in">
+  <button class="tab" data-tab=""><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Ситуации</button>
+  <button class="tab" data-tab="t/*"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>Тренировка</button>
+  <button class="tab" data-tab="j"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M9 10h6M9 14h6"/></svg>Журнал</button>
+</div></nav>
 
 <div id="sheetHost"></div>
 <div class="toast" id="toast"></div>
@@ -236,45 +424,49 @@ textarea.f:focus{border-color:var(--accent)}
 
 <script>
 "use strict";
-/* ---------- theme ---------- */
+const APP_VERSION = "2.0";
+const ROUND_SEC = 40; // в поединке за каждую роль играешь по 40 секунд
+const ROUND_MS = ROUND_SEC * 1000;
+const SEED = [{"id": "o1","kind": "main","num": "1","title": "Человек собаке друг","text": "На прогулке с собакой Наталья заметила, что соседка Елена не убрала за своим питомцем. Наталья предложила Елене пакетик, чтобы та исправила ситуацию, но в ответ услышала:","phrase": "Если тебе надо, ты и убирай!","roles": ["Елена","Наталья"]},{"id": "o2","kind": "main","num": "2","title": "Идеальный монтаж","text": "Марина купила дорогую люстру. Пригласила электрика Игоря и объясняет ему, что монтаж светильника нужно производить строго по инструкции. На что Игорь отвечает:","phrase": "Тогда вы ее вешайте, а я инструкцию вам зачитаю","roles": ["Игорь, электрик","Марина"]},{"id": "o3","kind": "main","num": "3","title": "Нормальный специалист","text": "Совещание команды по проекту вел генеральный директор, а не лидер команды, так как по проекту были большие проблемы. Дойдя до раздела маркетинга, директор долго пытался добиться от маркетолога обоснования ее действий и обозначения следующих шагов. Утомившись, он произнес:","phrase": "Лена, ну просто представь, что бы ты делала, если бы была нормальным специалистом","roles": ["Генеральный директор","Лена, маркетолог"]},{"id": "o4","kind": "main","num": "4","title": "Шов раздора","text": "Дизайнер объяснила мастеру по укладке керамогранита, что шов между плитками должен быть «тонким и изящным», 2 мм. Приехав через день, она увидела швы в 4 мм. На вопрос «Что пошло не так?» мастер ответил:","phrase": "Какая плитка, такие и швы","roles": ["Мастер","Дизайнер"]},{"id": "o5","kind": "main","num": "5","title": "Рабочее поручение","text": "Молодой сотрудник получил задание, но выполнил его по-своему, не согласовав с руководителем. Начальник спросил его:","phrase": "Может, стоит сначала спросить, как правильно? Или вы художник и так видите?","roles": ["Начальник","Молодой сотрудник"]},{"id": "o6","kind": "main","num": "6","title": "Дрова везем","text": "Пассажир в маршрутном такси сделал замечание водителю о его резкой манере вождения: «Можно, пожалуйста, поаккуратнее? Не дрова везете». В ответ он услышал:","phrase": "Что погрузили, то и везу","roles": ["Водитель маршрутки","Пассажир"]},{"id": "o7","kind": "main","num": "7","title": "Опоздание","text": "Перед началом планерки несколько коллег пили кофе на общей кухне и случайно его пролили. Один из менеджеров остался прибрать и опоздал на планерку. Второй менеджер обратил на это внимание, сказав:","phrase": "Ты опоздал, полы мыть, видимо, важнее","roles": ["Второй менеджер","Опоздавший менеджер"]},{"id": "o8","kind": "main","num": "8","title": "Чашку кофею я тебе бодрящего налью","text": "Молодой бариста попросил постоянного клиента не пользоваться своей чашкой, ссылаясь на правила заведения. Клиент ответил:","phrase": "Вы каждый месяц меняетесь, а я уже пять лет пью здесь кофе из этой чашки","roles": ["Клиент","Бариста"]},{"id": "o9","kind": "main","num": "9","title": "Неприкрытая лесть","text": "В большом коллективе одной из Компаний кадровый работник предупредила, что приезжает проверяющий топ-руководитель и необходимо соблюдать в течение недели деловой стиль одежды. Мужчины надели деловые костюмы, девушки строгие платья и блузки. Начальница одного из отделов, состоящего из мужчин, сделала комплимент своим подчиненным, сказав, что мужчинам очень идут костюмы, смотрится это стильно. На что получила комментарий сотрудника:","phrase": "За доплату готовы всегда так одеваться!","roles": ["Сотрудник","Начальница отдела"]},{"id": "o10","kind": "main","num": "10","title": "Тайный переезд","text": "Три подруги гуляли по улице: Екатерина, Антонина и Алена. Подруга Антонина поделилась, что собирается переезжать в Питер в начале ноября, и попросила не рассказывать никому. Подруга Алена, обращаясь к Екатерине, сказала:","phrase": "Ну конечно, если знает Катя, знает и весь район!","roles": ["Алена","Екатерина","Антонина"]},{"id": "o11","kind": "main","num": "11","title": "Я так смотрю, вы совсем не боец?","text": "На собеседовании в динамичную компанию по продажам кандидат (Александр) рассказывает, что предпочитает взвешенные решения, не любит агрессивных методов и старается избегать конфликтов. Руководитель отдела (Елена), проводившая собеседование кандидата, перебивает:","phrase": "Я так смотрю, вы совсем не боец?","roles": ["Елена, руководитель отдела","Александр, кандидат"]},{"id": "o12","kind": "main","num": "12","title": "Анютины глазки","text": "В приемной руководителя секретарь заработалась за монитором и забыла, что своей очереди ожидает коллега. Когда он напомнил о себе, Анна с иронией объяснила, что у нее «память девичья». На что коллега ответил:","phrase": "Главное, чтобы не было «куриной слепоты»!","roles": ["Коллега","Анна, секретарь"]},{"id": "o13","kind": "main","num": "13","title": "Детектор лжи","text": "Директор на совещании, посвященном участившимся в фирме хищениям, дал распоряжение руководителям подразделений объявить своим работникам, что будут проходить проверку на «детекторе лжи». В ответ на это один руководитель заявил:","phrase": "А если не будет эффекта? Пытать всех начнете?","roles": ["Руководитель подразделения","Директор"]},{"id": "o14","kind": "main","num": "14","title": "Кто в кабинете хозяйка?","text": "Мария и Татьяна работают в одном кабинете. Мария ухаживает за всем кабинетом, цветами, интерьером. Татьяна только за своим рабочим местом. Марии нравится в целом поддерживать порядок, но энтузиазм угасает, так как от Татьяны в этом вопросе помощи практически нет. Как-то раз Мария направилась в уборную помыть свою кружку. Татьяна, увидев это, говорит:","phrase": "О! А ты не могла бы и мою кружку захватить?","roles": ["Татьяна","Мария"]},{"id": "o15","kind": "main","num": "15","title": "«Петь-то умеете?»","text": "Музыкальная группа перед выступлением прогоняет программу на сцене. Вокалистки поют старую добрую песню. Входит в зал солидный мужчина, усаживается в кресло, внимательно слушает. Как только песня закончилась, выдает:","phrase": "А вы неправильно поете. Так петь нельзя!","roles": ["Солидный мужчина","Вокалистка"]},{"id": "o16","kind": "main","num": "16","title": "На ковре начальника","text": "После стратегического совещания по благоустройству города, где молодой сотрудник Света активно предлагала идеи и вступала в профессиональную дискуссию, руководитель попросил ее задержаться. Когда дверь кабинета закрылась, он с улыбкой спросил:","phrase": "Света, а кто сказал, что ты можешь это все предлагать?","roles": ["Руководитель","Света"]},{"id": "o17","kind": "main","num": "17","title": "Непунктуальный друг","text": "Виктор с женой решил поехать на шашлыки, позвал с собой друга с семьей. Договорились встретиться в дороге на полпути в придорожном кафе в 11:00 и дальше ехать вместе. Друзья опоздали на час, не предупредив. Такое поведение и раньше за ними было замечено. Виктор в сердцах сказал другу:","phrase": "Ну наконец-то! Как у тебя еще бизнес не развалился при такой пунктуальности?","roles": ["Виктор","Друг"]},{"id": "o18","kind": "main","num": "18","title": "Удобное кресло","text": "Руководители заходят в кабинет директора на совещание. Директора еще нет, а за его местом работает директор по персоналу. Главный бухгалтер с ухмылкой произносит громко:","phrase": "А ты, никак, директора подсиживаешь?","roles": ["Главный бухгалтер","Директор по персоналу"]},{"id": "o19","kind": "main","num": "19","title": "Кто подаст стакан воды?","text": "Во время обеда на общей кухне Мария возмущенно обсуждает повышение цен на сено и то, что теперь ей сложно содержать своего жеребца в конюшне. Все увлеченно начали делиться, где дешевле закупить сено и корм. А Надежда Петровна из бухгалтерии ей говорит:","phrase": "Конь в старости стакан воды не подаст. Детей тебе надо","roles": ["Надежда Петровна","Мария"]},{"id": "o20","kind": "main","num": "20","title": "Усы","text": "Молодой сотрудник отдела продаж Роман приходит на работу после отпуска с новыми усами и ярким загаром. Во время планерки, при защите отчета, Роман допускает ошибку в расчетах и неловко подвешивает паузу в докладе. На что начальник отдела, не дав договорить, усмехается и говорит:","phrase": "Вижу, что усы ты просто так отрастил, чтобы умнее выглядеть","roles": ["Начальник отдела","Роман"]},{"id": "o21","kind": "main","num": "21","title": "Случай на парковке","text": "Татьяна приезжает на работу на новом автомобиле. Евгений, столкнувшись с ней на парковке, в привычной шутливой манере замечает, что с покупкой таких автомобилей люди становятся другими. На что получает ответ:","phrase": "Понятно, почему ты не меняешься!","roles": ["Татьяна","Евгений"]},{"id": "o22","kind": "main","num": "22","title": "Маркетолог или бариста","text": "Разговаривая на рабочей кухне, секретарь поделилась с коллегой, что хочет подать заявку на конкурсную вакансию в отдел маркетинга и пойти на повышение. На что получила от коллеги комментарий:","phrase": "В отделе маркетинга нужен специалист, а не бариста","roles": ["Коллега","Секретарь"]},{"id": "o23","kind": "main","num": "23","title": "Общение в чате","text": "Коллега написал в корпоративный чат сообщение слишком сложным языком, используя несвойственные ему речевые обороты. При встрече другой сотрудник спросил его:","phrase": "А в жизни двух слов связать не можешь. Ты что, искусственным интеллектом пользовался?","roles": ["Сотрудник","Коллега"]},{"id": "o24","kind": "main","num": "24","title": "Заказ","text": "Молодая девушка приехала в магазин, чтобы забрать свой заказ. Тут она узнает от менеджера по продажам, что заказ был отменен, но ее он об этом предупредить не успел. Выслушав этот ответ, девушка язвительно заявила:","phrase": "То есть ваше время настолько дороже моего?","roles": ["Девушка","Менеджер по продажам"]},{"id": "o25","kind": "main","num": "25","title": "Зато не пешком","text": "Иван подходил к своему припаркованному возле торгового центра автомобилю марки Нива. Рядом с ним стоял новый БМВ, в котором сидел его одноклассник. Одноклассник узнал Ивана, оглядел его машину и сказал с ухмылкой:","phrase": "Ну что, Ваня, зато не пешком?","roles": ["Одноклассник","Иван"]},{"id": "o26","kind": "main","num": "26","title": "На парковке","text": "Собираясь выезжать с парковки, Мария обратила внимание, что Николай перегородил ей выезд своей машиной. Перестраховавшись, дабы не задеть машину Николая, Мария попросила его немного отъехать, чтобы совершить маневр, на что услышала:","phrase": "Тот, кто умеет водить, сумеет и выехать","roles": ["Николай","Мария"]},{"id": "o27","kind": "main","num": "27","title": "Хрупкий авторитет","text": "На объекте строители несерьезно относились к молодому дизайнеру, которая делала им замечания по качеству работ. Когда дизайнер пришла на очередную встречу, Сергей встретил ее фразой:","phrase": "О, наша фантазерка пришла!","roles": ["Сергей, строитель","Дизайнер"]},{"id": "o28","kind": "main","num": "28","title": "Неграмотный гид","text": "Группа туристов заказала многодневный автобусный тур по городам области. Гид тура в первую встречу представился и поинтересовался у группы: «Вы откуда? С Москвы?» На что получил незамедлительный ответ от туристки:","phrase": "Мы ИЗ Москвы! Вам бы грамматику повторить, прежде чем в гиды идти!","roles": ["Туристка","Гид"]},{"id": "o29","kind": "main","num": "29","title": "Кто крайний?","text": "В отделении «Почты России» выстроилась внушительная очередь. Каждый входящий задавал вопрос «Кто здесь крайний». Мужчина не выдержал и ответил последнему спросившему посетителю:","phrase": "Крайний бывает Север, вы русский язык в школе учили?","roles": ["Мужчина в очереди","Посетитель"]},{"id": "o30","kind": "main","num": "30","title": "Волонтерская помощь","text": "Группа волонтеров приезжает в конный клуб. Руководитель, кратко поприветствовав их, сразу ведет к конюшне и вручает им лопаты и инструменты, с четкими указаниями, с чего начать уборку. В этот момент один из волонтеров, глядя на лопаты и указывая на привезенный пакет с яблоками, произносит:","phrase": "Я приехал кормить лошадей. На этом моя волонтерская миссия заканчивается!","roles": ["Волонтер","Руководитель конного клуба"]},{"id": "o31","kind": "main","num": "31","title": "Быстрый Юрий","text": "Менеджер по работе с клиентами Юрий договорился о встрече со своим постоянным крупным заказчиком. Договоренность была осуществлена по личному телефону с генеральным директором, когда тот ему позвонил со словами: «Срочно приезжай, будет большой проект». Приехав в самое ближайшее время, Юрий, как и всегда, сразу идет в сторону кабинета генерального, но ему перегораживает дорогу секретарь, явно недавно работающая здесь девушка, и говорит:","phrase": "Притормозите коней, мужчина! Тут вам не ипподром!","roles": ["Секретарь","Юрий"]},{"id": "o32","kind": "main","num": "32","title": "ГамлетОк","text": "В драматическом театре идет репетиция спектакля «Гамлет». У артиста, который играет главную роль, плохое настроение. Поэтому он вяло, без выражения произносит текст, не эмоционален, не убедителен. Режиссер, который делает большую ставку на этот спектакль и этого артиста в главной роли, через два часа репетиции произносит:","phrase": "А ну, соберись! Тебе только колобка играть!","roles": ["Режиссер","Артист"]},{"id": "z1","kind": "spare","num": "1","title": "Парковка","text": "Управляющая компания имеет собственную парковку. Борис работает в данной компании бухгалтером уже много лет и ставит свою машину всегда на одно и то же место (оно в тени и расположено близко к главному входу). Недавно устроившийся в эту компанию на должность юриста Олег, приехав пораньше, стал парковаться на это удобное место. Подъехавший Борис увидел происходящее и заявил новичку:","phrase": "Давай, отгоняй машину, это мое место!","roles": ["Борис, бухгалтер","Олег, юрист"]},{"id": "z2","kind": "spare","num": "2","title": "Новый цвет","text": "Семейная пара делает ремонт в своем доме. Жена выбрала новый цвет для покраски стен. Муж нанимает бригаду отделочников. Начальник бригады, увидев выбранный оттенок, говорит мужу:","phrase": "А у вашей жены все хорошо с настроением? Может, еще над цветом подумаете?","roles": ["Начальник бригады","Муж"]},{"id": "z3","kind": "spare","num": "3","title": "Вместительный шкаф","text": "В тесном общем коридоре Максим поставил шкаф без согласования с соседями. Елена, уходя на работу, встретилась с неожиданностью. В этот момент из квартиры выходит Максим, Елена говорит:","phrase": "Как сделать так, чтобы шкаф, который мешал в вашей квартире, в общем коридоре не мешал?","roles": ["Елена","Максим"]}];
+const KEY = "express-poedinki-v1";
 const THEME_KEY = "express-poedinki-theme";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const DAY = 864e5;
+
+/* ---------- theme ---------- */
 function getTheme(){ try{ return localStorage.getItem(THEME_KEY) || "auto"; }catch(e){ return "auto"; } }
 function applyTheme(){
   const th = getTheme(), root = document.documentElement;
   if(th === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", th);
   const dark = th === "dark" || (th === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.removeAttribute("media"); m.content = dark ? "#16181b" : "#f4f1ea"; });
+  document.querySelector('meta[name="theme-color"]').content = dark ? "#0F1114" : "#F2F3F5";
 }
 function setTheme(th){ try{ localStorage.setItem(THEME_KEY, th); }catch(e){} applyTheme(); }
 applyTheme();
-matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", applyTheme);
-const SEED = [{"id": "o1","kind": "main","num": "1","title": "Человек собаке друг","text": "На прогулке с собакой Наталья заметила, что соседка Елена не убрала за своим питомцем. Наталья предложила Елене пакетик, чтобы та исправила ситуацию, но в ответ услышала:","phrase": "Если тебе надо, ты и убирай!","roles": ["Елена","Наталья"]},{"id": "o2","kind": "main","num": "2","title": "Идеальный монтаж","text": "Марина купила дорогую люстру. Пригласила электрика Игоря и объясняет ему, что монтаж светильника нужно производить строго по инструкции. На что Игорь отвечает:","phrase": "Тогда вы ее вешайте, а я инструкцию вам зачитаю","roles": ["Игорь, электрик","Марина"]},{"id": "o3","kind": "main","num": "3","title": "Нормальный специалист","text": "Совещание команды по проекту вел генеральный директор, а не лидер команды, так как по проекту были большие проблемы. Дойдя до раздела маркетинга, директор долго пытался добиться от маркетолога обоснования ее действий и обозначения следующих шагов. Утомившись, он произнес:","phrase": "Лена, ну просто представь, что бы ты делала, если бы была нормальным специалистом","roles": ["Генеральный директор","Лена, маркетолог"]},{"id": "o4","kind": "main","num": "4","title": "Шов раздора","text": "Дизайнер объяснила мастеру по укладке керамогранита, что шов между плитками должен быть «тонким и изящным», 2 мм. Приехав через день, она увидела швы в 4 мм. На вопрос «Что пошло не так?» мастер ответил:","phrase": "Какая плитка, такие и швы","roles": ["Мастер","Дизайнер"]},{"id": "o5","kind": "main","num": "5","title": "Рабочее поручение","text": "Молодой сотрудник получил задание, но выполнил его по-своему, не согласовав с руководителем. Начальник спросил его:","phrase": "Может, стоит сначала спросить, как правильно? Или вы художник и так видите?","roles": ["Начальник","Молодой сотрудник"]},{"id": "o6","kind": "main","num": "6","title": "Дрова везем","text": "Пассажир в маршрутном такси сделал замечание водителю о его резкой манере вождения: «Можно, пожалуйста, поаккуратнее? Не дрова везете». В ответ он услышал:","phrase": "Что погрузили, то и везу","roles": ["Водитель маршрутки","Пассажир"]},{"id": "o7","kind": "main","num": "7","title": "Опоздание","text": "Перед началом планерки несколько коллег пили кофе на общей кухне и случайно его пролили. Один из менеджеров остался прибрать и опоздал на планерку. Второй менеджер обратил на это внимание, сказав:","phrase": "Ты опоздал, полы мыть, видимо, важнее","roles": ["Второй менеджер","Опоздавший менеджер"]},{"id": "o8","kind": "main","num": "8","title": "Чашку кофею я тебе бодрящего налью","text": "Молодой бариста попросил постоянного клиента не пользоваться своей чашкой, ссылаясь на правила заведения. Клиент ответил:","phrase": "Вы каждый месяц меняетесь, а я уже пять лет пью здесь кофе из этой чашки","roles": ["Клиент","Бариста"]},{"id": "o9","kind": "main","num": "9","title": "Неприкрытая лесть","text": "В большом коллективе одной из Компаний кадровый работник предупредила, что приезжает проверяющий топ-руководитель и необходимо соблюдать в течение недели деловой стиль одежды. Мужчины надели деловые костюмы, девушки строгие платья и блузки. Начальница одного из отделов, состоящего из мужчин, сделала комплимент своим подчиненным, сказав, что мужчинам очень идут костюмы, смотрится это стильно. На что получила комментарий сотрудника:","phrase": "За доплату готовы всегда так одеваться!","roles": ["Сотрудник","Начальница отдела"]},{"id": "o10","kind": "main","num": "10","title": "Тайный переезд","text": "Три подруги гуляли по улице: Екатерина, Антонина и Алена. Подруга Антонина поделилась, что собирается переезжать в Питер в начале ноября, и попросила не рассказывать никому. Подруга Алена, обращаясь к Екатерине, сказала:","phrase": "Ну конечно, если знает Катя, знает и весь район!","roles": ["Алена","Екатерина","Антонина"]},{"id": "o11","kind": "main","num": "11","title": "Я так смотрю, вы совсем не боец?","text": "На собеседовании в динамичную компанию по продажам кандидат (Александр) рассказывает, что предпочитает взвешенные решения, не любит агрессивных методов и старается избегать конфликтов. Руководитель отдела (Елена), проводившая собеседование кандидата, перебивает:","phrase": "Я так смотрю, вы совсем не боец?","roles": ["Елена, руководитель отдела","Александр, кандидат"]},{"id": "o12","kind": "main","num": "12","title": "Анютины глазки","text": "В приемной руководителя секретарь заработалась за монитором и забыла, что своей очереди ожидает коллега. Когда он напомнил о себе, Анна с иронией объяснила, что у нее «память девичья». На что коллега ответил:","phrase": "Главное, чтобы не было «куриной слепоты»!","roles": ["Коллега","Анна, секретарь"]},{"id": "o13","kind": "main","num": "13","title": "Детектор лжи","text": "Директор на совещании, посвященном участившимся в фирме хищениям, дал распоряжение руководителям подразделений объявить своим работникам, что будут проходить проверку на «детекторе лжи». В ответ на это один руководитель заявил:","phrase": "А если не будет эффекта? Пытать всех начнете?","roles": ["Руководитель подразделения","Директор"]},{"id": "o14","kind": "main","num": "14","title": "Кто в кабинете хозяйка?","text": "Мария и Татьяна работают в одном кабинете. Мария ухаживает за всем кабинетом, цветами, интерьером. Татьяна только за своим рабочим местом. Марии нравится в целом поддерживать порядок, но энтузиазм угасает, так как от Татьяны в этом вопросе помощи практически нет. Как-то раз Мария направилась в уборную помыть свою кружку. Татьяна, увидев это, говорит:","phrase": "О! А ты не могла бы и мою кружку захватить?","roles": ["Татьяна","Мария"]},{"id": "o15","kind": "main","num": "15","title": "«Петь-то умеете?»","text": "Музыкальная группа перед выступлением прогоняет программу на сцене. Вокалистки поют старую добрую песню. Входит в зал солидный мужчина, усаживается в кресло, внимательно слушает. Как только песня закончилась, выдает:","phrase": "А вы неправильно поете. Так петь нельзя!","roles": ["Солидный мужчина","Вокалистка"]},{"id": "o16","kind": "main","num": "16","title": "На ковре начальника","text": "После стратегического совещания по благоустройству города, где молодой сотрудник Света активно предлагала идеи и вступала в профессиональную дискуссию, руководитель попросил ее задержаться. Когда дверь кабинета закрылась, он с улыбкой спросил:","phrase": "Света, а кто сказал, что ты можешь это все предлагать?","roles": ["Руководитель","Света"]},{"id": "o17","kind": "main","num": "17","title": "Непунктуальный друг","text": "Виктор с женой решил поехать на шашлыки, позвал с собой друга с семьей. Договорились встретиться в дороге на полпути в придорожном кафе в 11:00 и дальше ехать вместе. Друзья опоздали на час, не предупредив. Такое поведение и раньше за ними было замечено. Виктор в сердцах сказал другу:","phrase": "Ну наконец-то! Как у тебя еще бизнес не развалился при такой пунктуальности?","roles": ["Виктор","Друг"]},{"id": "o18","kind": "main","num": "18","title": "Удобное кресло","text": "Руководители заходят в кабинет директора на совещание. Директора еще нет, а за его местом работает директор по персоналу. Главный бухгалтер с ухмылкой произносит громко:","phrase": "А ты, никак, директора подсиживаешь?","roles": ["Главный бухгалтер","Директор по персоналу"]},{"id": "o19","kind": "main","num": "19","title": "Кто подаст стакан воды?","text": "Во время обеда на общей кухне Мария возмущенно обсуждает повышение цен на сено и то, что теперь ей сложно содержать своего жеребца в конюшне. Все увлеченно начали делиться, где дешевле закупить сено и корм. А Надежда Петровна из бухгалтерии ей говорит:","phrase": "Конь в старости стакан воды не подаст. Детей тебе надо","roles": ["Надежда Петровна","Мария"]},{"id": "o20","kind": "main","num": "20","title": "Усы","text": "Молодой сотрудник отдела продаж Роман приходит на работу после отпуска с новыми усами и ярким загаром. Во время планерки, при защите отчета, Роман допускает ошибку в расчетах и неловко подвешивает паузу в докладе. На что начальник отдела, не дав договорить, усмехается и говорит:","phrase": "Вижу, что усы ты просто так отрастил, чтобы умнее выглядеть","roles": ["Начальник отдела","Роман"]},{"id": "o21","kind": "main","num": "21","title": "Случай на парковке","text": "Татьяна приезжает на работу на новом автомобиле. Евгений, столкнувшись с ней на парковке, в привычной шутливой манере замечает, что с покупкой таких автомобилей люди становятся другими. На что получает ответ:","phrase": "Понятно, почему ты не меняешься!","roles": ["Татьяна","Евгений"]},{"id": "o22","kind": "main","num": "22","title": "Маркетолог или бариста","text": "Разговаривая на рабочей кухне, секретарь поделилась с коллегой, что хочет подать заявку на конкурсную вакансию в отдел маркетинга и пойти на повышение. На что получила от коллеги комментарий:","phrase": "В отделе маркетинга нужен специалист, а не бариста","roles": ["Коллега","Секретарь"]},{"id": "o23","kind": "main","num": "23","title": "Общение в чате","text": "Коллега написал в корпоративный чат сообщение слишком сложным языком, используя несвойственные ему речевые обороты. При встрече другой сотрудник спросил его:","phrase": "А в жизни двух слов связать не можешь. Ты что, искусственным интеллектом пользовался?","roles": ["Сотрудник","Коллега"]},{"id": "o24","kind": "main","num": "24","title": "Заказ","text": "Молодая девушка приехала в магазин, чтобы забрать свой заказ. Тут она узнает от менеджера по продажам, что заказ был отменен, но ее он об этом предупредить не успел. Выслушав этот ответ, девушка язвительно заявила:","phrase": "То есть ваше время настолько дороже моего?","roles": ["Девушка","Менеджер по продажам"]},{"id": "o25","kind": "main","num": "25","title": "Зато не пешком","text": "Иван подходил к своему припаркованному возле торгового центра автомобилю марки Нива. Рядом с ним стоял новый БМВ, в котором сидел его одноклассник. Одноклассник узнал Ивана, оглядел его машину и сказал с ухмылкой:","phrase": "Ну что, Ваня, зато не пешком?","roles": ["Одноклассник","Иван"]},{"id": "o26","kind": "main","num": "26","title": "На парковке","text": "Собираясь выезжать с парковки, Мария обратила внимание, что Николай перегородил ей выезд своей машиной. Перестраховавшись, дабы не задеть машину Николая, Мария попросила его немного отъехать, чтобы совершить маневр, на что услышала:","phrase": "Тот, кто умеет водить, сумеет и выехать","roles": ["Николай","Мария"]},{"id": "o27","kind": "main","num": "27","title": "Хрупкий авторитет","text": "На объекте строители несерьезно относились к молодому дизайнеру, которая делала им замечания по качеству работ. Когда дизайнер пришла на очередную встречу, Сергей встретил ее фразой:","phrase": "О, наша фантазерка пришла!","roles": ["Сергей, строитель","Дизайнер"]},{"id": "o28","kind": "main","num": "28","title": "Неграмотный гид","text": "Группа туристов заказала многодневный автобусный тур по городам области. Гид тура в первую встречу представился и поинтересовался у группы: «Вы откуда? С Москвы?» На что получил незамедлительный ответ от туристки:","phrase": "Мы ИЗ Москвы! Вам бы грамматику повторить, прежде чем в гиды идти!","roles": ["Туристка","Гид"]},{"id": "o29","kind": "main","num": "29","title": "Кто крайний?","text": "В отделении «Почты России» выстроилась внушительная очередь. Каждый входящий задавал вопрос «Кто здесь крайний». Мужчина не выдержал и ответил последнему спросившему посетителю:","phrase": "Крайний бывает Север, вы русский язык в школе учили?","roles": ["Мужчина в очереди","Посетитель"]},{"id": "o30","kind": "main","num": "30","title": "Волонтерская помощь","text": "Группа волонтеров приезжает в конный клуб. Руководитель, кратко поприветствовав их, сразу ведет к конюшне и вручает им лопаты и инструменты, с четкими указаниями, с чего начать уборку. В этот момент один из волонтеров, глядя на лопаты и указывая на привезенный пакет с яблоками, произносит:","phrase": "Я приехал кормить лошадей. На этом моя волонтерская миссия заканчивается!","roles": ["Волонтер","Руководитель конного клуба"]},{"id": "o31","kind": "main","num": "31","title": "Быстрый Юрий","text": "Менеджер по работе с клиентами Юрий договорился о встрече со своим постоянным крупным заказчиком. Договоренность была осуществлена по личному телефону с генеральным директором, когда тот ему позвонил со словами: «Срочно приезжай, будет большой проект». Приехав в самое ближайшее время, Юрий, как и всегда, сразу идет в сторону кабинета генерального, но ему перегораживает дорогу секретарь, явно недавно работающая здесь девушка, и говорит:","phrase": "Притормозите коней, мужчина! Тут вам не ипподром!","roles": ["Секретарь","Юрий"]},{"id": "o32","kind": "main","num": "32","title": "ГамлетОк","text": "В драматическом театре идет репетиция спектакля «Гамлет». У артиста, который играет главную роль, плохое настроение. Поэтому он вяло, без выражения произносит текст, не эмоционален, не убедителен. Режиссер, который делает большую ставку на этот спектакль и этого артиста в главной роли, через два часа репетиции произносит:","phrase": "А ну, соберись! Тебе только колобка играть!","roles": ["Режиссер","Артист"]},{"id": "z1","kind": "spare","num": "1","title": "Парковка","text": "Управляющая компания имеет собственную парковку. Борис работает в данной компании бухгалтером уже много лет и ставит свою машину всегда на одно и то же место (оно в тени и расположено близко к главному входу). Недавно устроившийся в эту компанию на должность юриста Олег, приехав пораньше, стал парковаться на это удобное место. Подъехавший Борис увидел происходящее и заявил новичку:","phrase": "Давай, отгоняй машину, это мое место!","roles": ["Борис, бухгалтер","Олег, юрист"]},{"id": "z2","kind": "spare","num": "2","title": "Новый цвет","text": "Семейная пара делает ремонт в своем доме. Жена выбрала новый цвет для покраски стен. Муж нанимает бригаду отделочников. Начальник бригады, увидев выбранный оттенок, говорит мужу:","phrase": "А у вашей жены все хорошо с настроением? Может, еще над цветом подумаете?","roles": ["Начальник бригады","Муж"]},{"id": "z3","kind": "spare","num": "3","title": "Вместительный шкаф","text": "В тесном общем коридоре Максим поставил шкаф без согласования с соседями. Елена, уходя на работу, встретилась с неожиданностью. В этот момент из квартиры выходит Максим, Елена говорит:","phrase": "Как сделать так, чтобы шкаф, который мешал в вашей квартире, в общем коридоре не мешал?","roles": ["Елена","Максим"]}];
-const APP_VERSION = "1.3";
-const ROUND_SEC = 40; // в поединке за каждую роль играешь по 40 секунд
-const KEY = "express-poedinki-v1";
-const $ = s => document.querySelector(s);
-const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+try{ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme); }catch(e){}
 
 /* ---------- data ---------- */
 let db;
-function newVariant(){ return {a:"", c:""}; }
+const newVariant = () => ({a:"", c:""});
 function fromSeed(s){
   return {id:s.id, kind:s.kind, num:s.num, title:s.title, text:s.text, phrase:s.phrase,
-    roles:s.roles.map((r,i) => ({id:uid(), name:r, said:i===0, an:"", vars:[newVariant()]}))};
+    roles:s.roles.map((r,i) => ({id:uid(), name:r, said:i===0, an:"", vars:[newVariant()]})), games:[], reviews:[]};
 }
 function load(){
   try{ db = JSON.parse(localStorage.getItem(KEY) || "null"); }catch(e){ db = null; }
+  let fresh = false;
   if(!db || !Array.isArray(db.situations)){
-    db = {v:1, situations:SEED.map(fromSeed), seeded:SEED.map(s => s.id)};
-    save(true);
+    db = {v:1, situations:SEED.map(fromSeed), seeded:SEED.map(s => s.id), firstUse:Date.now()};
+    fresh = true;
   }else{
-    // новые ситуации из обновленной версии приложения
     db.seeded = db.seeded || [];
-    let added = 0;
-    for(const s of SEED){ if(!db.seeded.includes(s.id)){ db.situations.push(fromSeed(s)); db.seeded.push(s.id); added++; } }
-    if(added) save(true);
+    for(const s of SEED){ if(!db.seeded.includes(s.id)){ db.situations.push(fromSeed(s)); db.seeded.push(s.id); } }
+    db.firstUse = db.firstUse || Date.now();
   }
+  save(true);
+  return fresh;
 }
 let saveT;
 function save(now){
@@ -282,35 +474,76 @@ function save(now){
   const go = () => { try{ localStorage.setItem(KEY, JSON.stringify(db)); }catch(e){ toast("Не удалось сохранить: " + e.message); } };
   if(now) go(); else saveT = setTimeout(go, 300);
 }
-window.addEventListener("pagehide", () => save(true));
+addEventListener("pagehide", () => save(true));
 document.addEventListener("visibilitychange", () => { if(document.hidden) save(true); });
 if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{});
 
 const byId = id => db.situations.find(s => s.id === id);
-function roleDone(r){ return r.vars.some(v => v.a.trim() && v.c.trim()); }
+const games = s => s.games || (s.games = []);
+const reviews = s => s.reviews || (s.reviews = []);
+const roleDone = r => r.vars.some(v => v.a.trim() && v.c.trim());
 function status(s){
   if(!s.roles.length) return "none";
   if(s.roles.every(roleDone)) return "full";
-  if(s.roles.some(r => r.vars.some(v => v.a.trim() || v.c.trim()))) return "part";
+  if(s.roles.some(r => (r.an || "").trim() || r.vars.some(v => v.a.trim() || v.c.trim()))) return "part";
   return "none";
 }
-function numLabel(s){ return s.kind === "spare" ? "З" + s.num : s.num; }
-function fullNum(s){ return s.kind === "spare" ? "Запасная " + s.num : "Ситуация " + s.num; }
+const numLabel = s => s.kind === "spare" ? "З" + s.num : s.num;
+const fullNum = s => s.kind === "spare" ? "Запасная " + s.num : "Ситуация " + s.num;
 function sorted(){
   const k = s => (s.kind === "spare" ? 1 : 0);
   const n = s => { const x = parseFloat(s.num); return isNaN(x) ? 1e9 : x; };
   return db.situations.slice().sort((a,b) => k(a)-k(b) || n(a)-n(b) || String(a.title).localeCompare(b.title,"ru"));
 }
+const RC = ["var(--a)","var(--b)","var(--ok)","var(--mid)"];
+const RON = ["var(--on-a)","var(--on-b)","#fff","#14161A"];
+const rcol = (s, r) => RC[Math.max(0, s.roles.indexOf(r)) % 4];
+const ron = (s, r) => RON[Math.max(0, s.roles.indexOf(r)) % 4];
+function plural(n, a, b, c){ const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? a : (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20) ? b : c); }
+function today(){ const d = new Date(), p = n => String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+function fmtDate(d){ if(!d) return "без даты"; const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(d); return m ? `${m[3]}.${m[2]}.${m[1]}` : d; }
+function fmtShort(d){ const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(d || ""); return m ? `${m[3]}.${m[2]}` : (d || "без даты"); }
+
+/* ---------- умная очередь ---------- */
+const DUE_DAYS = {bad:1, mid:3, good:7};
+function lastReview(s){ const r = reviews(s).filter(x => Object.keys(x.ratings || {}).length); return r.length ? r[r.length-1] : null; }
+function worst(rv){ const v = Object.values(rv && rv.ratings || {}); return v.includes("bad") ? "bad" : v.includes("mid") ? "mid" : v.includes("good") ? "good" : null; }
+function priority(s){
+  const rv = lastReview(s), w = worst(rv);
+  if(!w) return 1;
+  if((Date.now() - rv.t) / DAY < DUE_DAYS[w]) return 9;
+  return {bad:0, mid:2, good:3}[w];
+}
+const dueCount = () => db.situations.filter(s => priority(s) < 9).length;
+function smartQueue(list){ return list.map(s => ({id:s.id, p:priority(s), r:Math.random()})).sort((a,b) => a.p-b.p || a.r-b.r).map(x => x.id); }
 
 /* ---------- list ---------- */
 let filter = "all";
-const FILTERS = [["all","Все"],["todo","Не готовы"],["done","Готовы"],["played","Сыгранные"],["main","Основные"],["spare","Запасные"]];
-function renderChips(){
-  $("#chips").innerHTML = FILTERS.map(([k,l]) => `<button class="chip${k===filter?" on":""}" data-f="${k}">${l}</button>`).join("");
+function renderList(){
+  const all = sorted(), st = all.map(status), done = st.filter(x => x === "full").length;
+  const nPlayed = all.filter(s => games(s).length).length;
+  $("#lReady").innerHTML = `
+    <div class="row1"><span class="lbl">Готовность</span><span class="big disp">${done}<small> / ${all.length}</small></span></div>
+    <div class="ticks" style="grid-template-columns:repeat(${Math.max(1, all.length)},1fr)" aria-hidden="true">${st.map(x => `<i class="${x}"></i>`).join("")}</div>
+    <div class="legend"><span><b style="background:var(--ok)"></b>готово</span><span><b style="background:var(--mid)"></b>начато</span><span><b></b>пусто</span></div>`;
+  const fresh = all.filter(s => !lastReview(s)).length, due = all.filter(s => lastReview(s) && priority(s) < 9).length;
+  $("#ctaSub").textContent = [due ? "к повтору " + due : "", fresh && fresh < all.length ? "новых " + fresh : "", !due && fresh === all.length ? "все ситуации по очереди" : "", ROUND_SEC + " с на роль"].filter(Boolean).join(" · ");
+  const F = [["all","Все",all.length],["todo","Не готовы",all.length-done],["done","Готовы",done],["played","Сыгранные",nPlayed],["main","Основные"],["spare","Запасные"]];
+  $("#chips").innerHTML = F.map(([k,l,n]) => `<button class="chip${k===filter?" on":""}" data-f="${k}">${l}${n !== undefined ? `<em>${n}</em>` : ""}</button>`).join("");
+  const items = visible();
+  $("#list").innerHTML = items.length ? items.map(s => {
+    const list = games(s), c = counts(list);
+    return `<button class="sit" data-id="${s.id}">
+      <span class="n disp${s.kind==="spare"?" spare":""}">${esc(numLabel(s))}</span>
+      <span class="b"><span class="t">${esc(s.title || "Без названия")}</span>
+        <span class="q">«${esc(s.phrase)}»</span>
+        <span class="pips">${s.roles.slice(0,3).map(r => { const a = r.vars.some(v => v.a.trim()), cc = r.vars.some(v => v.c.trim());
+          return `<span class="pip" style="color:${rcol(s,r)}"><span><i style="${a ? "background:" + rcol(s,r) : ""}"></i><i style="${cc ? "background:" + rcol(s,r) : ""}"></i></span>${esc(r.name)}</span>`; }).join("")}
+          ${list.length ? `<span class="played">сыграно ${list.length} · ${c.win}:${c.loss}</span>` : ""}</span>
+      </span></button>`;
+  }).join("") : `<div class="empty">Ничего не найдено</div>`;
+  $("#lBanner").innerHTML = needBackup() ? `<div class="banner"><span class="t">Давно не сохраняли резервную копию. Записи хранятся только на этом телефоне.</span><button id="bnSave">Сохранить</button><button id="bnLater">Позже</button></div>` : "";
 }
-$("#chips").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if(!b) return; filter = b.dataset.f; renderChips(); renderList(); });
-$("#q").addEventListener("input", renderList);
-
 function visible(){
   const q = $("#q").value.trim().toLowerCase();
   return sorted().filter(s => {
@@ -325,65 +558,63 @@ function visible(){
     return hay.includes(q);
   });
 }
-function renderList(){
-  const all = db.situations, done = all.filter(s => status(s) === "full").length;
-  $("#pbar").style.width = (all.length ? done/all.length*100 : 0) + "%";
-  $("#ptext").textContent = `готово ${done} из ${all.length}`;
-  const ng = allGames().length;
-  $("#btnJournal").textContent = ng ? `Журнал · ${ng}` : "Журнал";
-  const items = visible();
-  $("#list").innerHTML = items.length ? items.map(s => `
-    <button class="card" data-id="${s.id}">
-      <span class="num${s.kind==="spare"?" spare":""}">${esc(numLabel(s))}</span>
-      <span class="body"><span class="t">${esc(s.title || "Без названия")}</span>
-      <span class="q">«${esc(s.phrase)}»</span>${gamesMeta(s)}</span>
-      <span class="dot ${status(s)}" title="${{none:"не готово",part:"частично",full:"готово"}[status(s)]}"></span>
-    </button>`).join("") : `<div class="empty">Ничего не найдено</div>`;
+$("#chips").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if(!b) return; filter = b.dataset.f; renderList(); });
+$("#q").addEventListener("input", renderList);
+$("#list").addEventListener("click", e => { const c = e.target.closest(".sit"); if(c) go("s/" + c.dataset.id); });
+$("#lBanner").addEventListener("click", e => {
+  if(e.target.id === "bnSave") exportJSON();
+  if(e.target.id === "bnLater"){ db.snooze = Date.now() + 3 * DAY; save(true); renderList(); }
+});
+$("#btnTrain").onclick = () => go("t/*");
+function needBackup(){
+  const has = db.situations.some(s => status(s) !== "none" || games(s).length);
+  if(!has) return false;
+  const last = db.lastBackup || db.firstUse || Date.now();
+  return Date.now() - last > 7 * DAY && Date.now() > (db.snooze || 0);
 }
-$("#list").addEventListener("click", e => { const c = e.target.closest(".card"); if(c) go("s/" + c.dataset.id); });
 
-/* ---------- detail ---------- */
+/* ---------- situation ---------- */
 let cur = null;
-function renderDetail(){
-  const s = cur;
-  $("#dBarTitle").textContent = fullNum(s);
-  $("#dBody").innerHTML = `
-    <div class="kicker">${esc(fullNum(s))}</div>
-    <h2 class="dtitle">${esc(s.title)}</h2>
+const curRole = {};
+function selRole(s){ let r = s.roles.find(x => x.id === curRole[s.id]); if(!r){ r = s.roles[0]; if(r) curRole[s.id] = r.id; } return r; }
+function renderSit(){
+  const s = cur, r = selRole(s), said = s.roles.find(x => x.said);
+  $("#sNum").textContent = "№ " + numLabel(s);
+  $("#sRoundT").textContent = s.roles.length ? `Раунд ${s.roles.length} × ${ROUND_SEC} с` : "Раунд";
+  const list = games(s);
+  $("#sBody").innerHTML = `
+    <h2 class="disp">${esc(s.title)}</h2>
     <p class="desc">${esc(s.text)}</p>
-    <div class="quote">«${esc(s.phrase)}»</div>
-    <div id="roles">${s.roles.map(roleHTML).join("")}</div>
+    <div class="hero">${said ? `<div class="who">Говорит: ${esc(said.name)}</div>` : ""}<div class="ph">«${esc(s.phrase)}»</div></div>
+    ${r ? `<div class="rtabsrow"><div class="rtabs" role="tablist">${s.roles.map(x =>
+      `<button class="rtab${x === r ? " on" : ""}" role="tab" aria-selected="${x === r}" data-rt="${x.id}"><span class="rdot" style="background:${rcol(s,x)}"></span>${esc(x.name)}${roleDone(x) ? ` <span class="ok" aria-label="готово">✓</span>` : ""}</button>`).join("")}</div>
+      <button class="sq" id="roleMenu" aria-label="Роль: переименовать или удалить"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg></button></div>
+      ${r.said ? `<div class="said">${esc(r.name)} произносит фразу. Подумайте, как продолжить и что ответить на возражение.</div>` : ""}
+      ${roleHTML(s, r)}` : `<p class="desc" style="color:var(--muted)">У ситуации нет ролей.</p>`}
     <button class="link" id="addRole">+ Добавить роль</button>
-    <div class="row"><button class="btn pri" id="dTrain">Тренировать эту ситуацию</button></div>
-    <h3 class="sec">Сыгранные поединки ${games(s).length ? `<small>${scoreLine(games(s))}</small>` : ""}</h3>
-    ${games(s).length ? sortGames(games(s)).map(g => gameHTML(s, g, false)).join("") : `<p class="desc" style="color:var(--muted)">По этой ситуации поединков еще не было.</p>`}
-    <button class="link" id="addGame">+ Записать поединок</button>`;
-  $$autosize($("#dBody"));
+    <h3 class="sec disp">Сыгранные поединки ${list.length ? `<small>${scoreLine(list)}</small>` : ""}</h3>
+    ${list.length ? sortGames(list).map(g => gameHTML(s, g, false)).join("") : `<p class="desc" style="color:var(--muted)">По этой ситуации поединков еще не было.</p>`}`;
+  autosizeAll($("#sBody"));
 }
-function roleHTML(r){
-  const many = r.vars.length > 1;
-  return `<div class="role" data-r="${r.id}">
-    <div class="rolehead"><h3>${esc(r.name)}${r.said ? ` <span class="said">сказал(а) фразу</span>` : ""}</h3>
-      <button class="ib" data-act="roleMenu" aria-label="Роль: действия"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg></button></div>
-    <div class="var an">
-      <label class="fl n">Анализ ситуации</label>
-      <textarea class="f" data-k="an" rows="2" placeholder="Чего хочет ${esc(r.name)}, что стоит за фразой, какая цель у ответа, на что опереться">${esc(r.an || "")}</textarea>
-    </div>
+function roleHTML(s, r){
+  const many = r.vars.length > 1, c = rcol(s, r);
+  return `<div data-r="${r.id}" style="--rc:${c}">
+    <div class="fld"><label class="fl" for="an_${r.id}" style="color:var(--muted)">АНАЛИЗ · ${esc(r.name.toUpperCase())}</label>
+      <textarea class="f" id="an_${r.id}" data-k="an" rows="2" placeholder="Чего хочет ${esc(r.name)}, что стоит за фразой, какая цель у ответа">${esc(r.an || "")}</textarea></div>
     ${r.vars.map((v,i) => `<div class="var" data-v="${i}">
-      ${many ? `<div class="vhead"><span>Вариант ${i+1}</span>
-        <button class="ib" data-act="delVar" aria-label="Удалить вариант"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>` : ""}
-      <label class="fl a">Ответная фраза</label>
-      <textarea class="f" data-k="a" rows="1" placeholder="Что отвечает ${esc(r.name)}">${esc(v.a)}</textarea>
-      <label class="fl c">Контрфраза на ответ</label>
-      <textarea class="f" data-k="c" rows="1" placeholder="Что могут сказать в ответ и как парировать">${esc(v.c)}</textarea>
+      <div class="vh"><span class="lbl">Вариант ${i+1}</span>
+        ${many ? `<button class="mini" data-act="delVar">Удалить</button>` : `<button class="mini" data-act="addVar">+ вариант</button>`}</div>
+      <div><label class="fl" style="color:${c}" for="a_${r.id}_${i}">Ответная фраза</label>
+        <textarea class="f fa" id="a_${r.id}_${i}" data-k="a" rows="1" placeholder="Что отвечает ${esc(r.name)}">${esc(v.a)}</textarea></div>
+      <div><label class="fl" for="c_${r.id}_${i}">Контрфраза на ответ</label>
+        <textarea class="f fc" id="c_${r.id}_${i}" data-k="c" rows="1" placeholder="Что могут сказать в ответ и как парировать">${esc(v.c)}</textarea></div>
     </div>`).join("")}
-    <button class="link" data-act="addVar">+ Еще вариант</button>
+    ${many ? `<button class="link" data-act="addVar">+ Еще вариант</button>` : ""}
   </div>`;
 }
-function $$autosize(root){ root.querySelectorAll("textarea.f").forEach(autosize); }
+function autosizeAll(root){ root.querySelectorAll("textarea.f").forEach(autosize); }
 function autosize(t){ t.style.height = "auto"; t.style.height = (t.scrollHeight + 2) + "px"; }
-
-$("#dBody").addEventListener("input", e => {
+$("#sBody").addEventListener("input", e => {
   const t = e.target; if(!t.matches("textarea.f")) return;
   autosize(t);
   const r = cur.roles.find(x => x.id === t.closest("[data-r]").dataset.r);
@@ -391,33 +622,56 @@ $("#dBody").addEventListener("input", e => {
   else r.vars[+t.closest("[data-v]").dataset.v][t.dataset.k] = t.value;
   save();
 });
-$("#dBody").addEventListener("click", e => {
+$("#sBody").addEventListener("focusout", () => save(true));
+$("#sBody").addEventListener("click", e => {
   const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.rt){ save(true); curRole[cur.id] = b.dataset.rt; renderSit(); return; }
+  if(b.id === "roleMenu") return roleSheet(selRole(cur));
   if(b.id === "addRole") return roleSheet(null);
-  if(b.id === "addGame") return gameSheet(cur, null);
   if(b.dataset.g) return gameSheet(cur, games(cur).find(g => g.id === b.dataset.g));
-  if(b.id === "dTrain") return go("t/" + cur.id);
   const rEl = b.closest("[data-r]"); if(!rEl) return;
   const r = cur.roles.find(x => x.id === rEl.dataset.r);
-  if(b.dataset.act === "addVar"){ r.vars.push(newVariant()); save(); renderDetail(); focusLast(r); }
+  if(b.dataset.act === "addVar"){
+    r.vars.push(newVariant()); save(); renderSit();
+    const el = document.querySelectorAll(`[data-r="${r.id}"] .var`); const last = el[el.length-1];
+    if(last){ last.querySelector("textarea").focus(); last.scrollIntoView({block:"center", behavior:"smooth"}); }
+  }
   if(b.dataset.act === "delVar"){
     const i = +b.closest("[data-v]").dataset.v, v = r.vars[i];
     if((v.a || v.c) && !confirm("Удалить этот вариант?")) return;
-    r.vars.splice(i,1); save(); renderDetail();
+    r.vars.splice(i,1); if(!r.vars.length) r.vars.push(newVariant()); save(); renderSit();
   }
-  if(b.dataset.act === "roleMenu") roleSheet(r);
 });
-function focusLast(r){
-  const el = document.querySelector(`[data-r="${r.id}"] .var:last-of-type textarea`);
-  if(el){ el.focus(); el.scrollIntoView({block:"center", behavior:"smooth"}); }
+$("#sBack").onclick = () => back();
+$("#sEdit").onclick = () => editSheet(cur);
+$("#sCheat").onclick = () => go("c/" + cur.id);
+$("#sGame").onclick = () => gameSheet(cur, null);
+$("#sRound").onclick = () => go("t/" + cur.id);
+
+/* ---------- шпаргалка ---------- */
+function renderCheat(s){
+  $("#cBody").innerHTML = `
+    <div class="lbl" style="margin-top:6px">${esc(fullNum(s))} · ${esc(s.title)}</div>
+    <div class="ph">«${esc(s.phrase)}»</div>
+    ${s.roles.map(r => {
+      const vars = r.vars.filter(v => v.a.trim() || v.c.trim());
+      return `<div class="role" style="--rc:${rcol(s,r)}">
+        <div class="rn"><span class="rdot" style="background:${rcol(s,r)}"></span>${esc(r.name)}</div>
+        ${(r.an || "").trim() ? `<div class="an">${esc(r.an.trim())}</div>` : ""}
+        ${vars.length ? vars.map((v,i) => `${vars.length > 1 ? `<div class="vn">ВАРИАНТ ${i+1}</div>` : ""}
+          <div class="ans">${esc(v.a || "-")}</div>${v.c.trim() ? `<div class="cnt">${esc(v.c)}</div>` : ""}`).join("")
+          : `<div class="an">Ответы еще не подготовлены.</div>`}
+      </div>`; }).join("")}
+    <div class="btn2" style="margin-top:28px"><button class="btn" id="csEdit">К подготовке</button><button class="btn pri" id="csRound"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg>Раунд</button></div>`;
+  $("#csEdit").onclick = () => back();
+  $("#csRound").onclick = () => go("t/" + s.id, true);
 }
-$("#dBack").onclick = () => back();
-$("#dEdit").onclick = () => editSheet(cur);
+$("#cBack").onclick = () => back();
 
 /* ---------- sheets ---------- */
 function openSheet(html, onMount){
   const host = $("#sheetHost");
-  host.innerHTML = `<div class="veil"><div class="sheet"><div class="grab"></div>${html}</div></div>`;
+  host.innerHTML = `<div class="veil"><div class="sheet" role="dialog"><div class="grab"></div>${html}</div></div>`;
   const veil = host.firstElementChild;
   veil.addEventListener("click", e => { if(e.target === veil) closeSheet(); });
   onMount && onMount(veil.firstElementChild);
@@ -426,40 +680,41 @@ function closeSheet(){ $("#sheetHost").innerHTML = ""; }
 
 function roleSheet(r){
   openSheet(`<h2>${r ? "Роль" : "Новая роль"}</h2>
-    <div class="fld"><label>Название роли</label><input id="rName" value="${esc(r ? r.name : "")}" placeholder="Например: Начальник отдела"></div>
+    <div class="fld"><label for="rName">Название роли</label><input id="rName" value="${esc(r ? r.name : "")}" placeholder="Например: Начальник отдела"></div>
     <button class="btn pri full" id="rOk">${r ? "Сохранить" : "Добавить"}</button>
     ${r ? `<div style="height:10px"></div><button class="btn dng full" id="rDel">Удалить роль</button>` : ""}`, sh => {
     const inp = sh.querySelector("#rName"); setTimeout(() => inp.focus(), 50);
     sh.querySelector("#rOk").onclick = () => {
       const name = inp.value.trim(); if(!name) return inp.focus();
-      if(r) r.name = name; else cur.roles.push({id:uid(), name, vars:[newVariant()]});
-      save(); closeSheet(); renderDetail();
+      if(r) r.name = name;
+      else { const nr = {id:uid(), name, an:"", vars:[newVariant()]}; cur.roles.push(nr); curRole[cur.id] = nr.id; }
+      save(true); closeSheet(); renderSit();
     };
     const d = sh.querySelector("#rDel");
     if(d) d.onclick = () => {
-      if(!confirm(`Удалить роль «${r.name}» вместе с подготовленными фразами?`)) return;
-      cur.roles = cur.roles.filter(x => x !== r); save(); closeSheet(); renderDetail();
+      if(!confirm(`Удалить роль «${r.name}» вместе с подготовкой?`)) return;
+      cur.roles = cur.roles.filter(x => x !== r); delete curRole[cur.id]; save(true); closeSheet(); renderSit();
     };
   });
 }
 
 function editSheet(s){
   const isNew = !s;
-  const d = s || {kind:"main", num:"", title:"", text:"", phrase:"", roles:[]};
+  const d = s || {kind:"main", num:"", title:"", text:"", phrase:""};
   let kind = d.kind;
   openSheet(`<h2>${isNew ? "Новая ситуация" : "Правка ситуации"}</h2>
     <div class="fld"><div class="seg" id="eKind"><button data-k="main">Основная</button><button data-k="spare">Запасная</button></div></div>
-    <div class="fld"><label>Номер</label><input id="eNum" inputmode="numeric" value="${esc(d.num)}"></div>
-    <div class="fld"><label>Название</label><input id="eTitle" value="${esc(d.title)}"></div>
-    <div class="fld"><label>Описание ситуации</label><textarea class="f" id="eText" rows="3">${esc(d.text)}</textarea></div>
-    <div class="fld"><label>Фраза (без кавычек)</label><textarea class="f" id="ePhrase" rows="2">${esc(d.phrase)}</textarea></div>
-    ${isNew ? `<div class="fld"><label>Роли через запятую</label><input id="eRoles" placeholder="Кто сказал фразу, кому сказали"></div>` : ""}
+    <div class="fld"><label for="eNum">Номер</label><input id="eNum" inputmode="numeric" value="${esc(d.num)}"></div>
+    <div class="fld"><label for="eTitle">Название</label><input id="eTitle" value="${esc(d.title)}"></div>
+    <div class="fld"><label for="eText">Описание ситуации</label><textarea class="f" id="eText" rows="3">${esc(d.text)}</textarea></div>
+    <div class="fld"><label for="ePhrase">Фраза (без кавычек)</label><textarea class="f" id="ePhrase" rows="2">${esc(d.phrase)}</textarea></div>
+    ${isNew ? `<div class="fld"><label for="eRoles">Роли через запятую, первой та, кто говорит фразу</label><input id="eRoles" placeholder="Кто сказал фразу, Кому сказали"></div>` : ""}
     <button class="btn pri full" id="eOk">${isNew ? "Добавить" : "Сохранить"}</button>
     ${isNew ? "" : `<div style="height:10px"></div><button class="btn dng full" id="eDel">Удалить ситуацию</button>`}`, sh => {
     const seg = sh.querySelector("#eKind");
     const paint = () => seg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === kind));
     paint(); seg.onclick = e => { const b = e.target.closest("button"); if(b){ kind = b.dataset.k; paint(); } };
-    $$autosize(sh); sh.addEventListener("input", e => e.target.matches("textarea.f") && autosize(e.target));
+    autosizeAll(sh); sh.addEventListener("input", e => e.target.matches("textarea.f") && autosize(e.target));
     if(isNew){
       const nums = db.situations.filter(x => x.kind === "main").map(x => parseFloat(x.num)).filter(x => !isNaN(x));
       sh.querySelector("#eNum").value = nums.length ? Math.max(...nums) + 1 : 1;
@@ -471,72 +726,61 @@ function editSheet(s){
       if(isNew){
         const roles = (v("#eRoles") || "Кто сказал фразу, Кому сказали").split(/[,;]/).map(x => x.trim()).filter(Boolean);
         const ns = {id:"u" + uid(), kind, num:v("#eNum"), title:v("#eTitle"), text:v("#eText"), phrase,
-          roles:roles.map(name => ({id:uid(), name, vars:[newVariant()]}))};
+          roles:roles.map((name,i) => ({id:uid(), name, said:i===0, an:"", vars:[newVariant()]})), games:[], reviews:[]};
         db.situations.push(ns); save(true); closeSheet(); go("s/" + ns.id);
       }else{
         Object.assign(s, {kind, num:v("#eNum"), title:v("#eTitle"), text:v("#eText"), phrase});
-        save(true); closeSheet(); renderDetail();
+        save(true); closeSheet(); renderSit();
       }
     };
     const del = sh.querySelector("#eDel");
     if(del) del.onclick = () => {
-      if(!confirm(`Удалить ситуацию «${s.title}» со всей подготовкой?`)) return;
+      if(!confirm(`Удалить ситуацию «${s.title}» со всей подготовкой и журналом?`)) return;
       db.situations = db.situations.filter(x => x !== s); save(true); closeSheet(); back();
     };
   });
 }
 
-/* ---------- played duels ---------- */
+/* ---------- поединки (журнал) ---------- */
 const RES = {win:"Победа", loss:"Поражение", draw:"Ничья"};
-const games = s => s.games || (s.games = []);
 const allGames = () => db.situations.flatMap(s => games(s).map(g => ({s, g})));
 const sortGames = a => a.slice().sort((x,y) => String(y.date||"").localeCompare(String(x.date||"")) || (y.t||0) - (x.t||0));
 function gameRole(s, g){ const r = s.roles.find(x => x.id === g.role); return r ? r.name : (g.roleName || ""); }
-function fmtDate(d){ if(!d) return "без даты"; const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(d); return m ? `${m[3]}.${m[2]}.${m[1]}` : d; }
-function today(){ const d = new Date(), p = n => String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
-function plural(n, a, b, c){ const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? a : (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20) ? b : c); }
 function counts(list){ const c = {win:0, loss:0, draw:0}; list.forEach(g => { if(c[g.res] !== undefined) c[g.res]++; }); return c; }
 function scoreLine(list){ const c = counts(list); return `${c.win} ${plural(c.win,"победа","победы","побед")}, ${c.loss} ${plural(c.loss,"поражение","поражения","поражений")}${c.draw ? `, ${c.draw} ${plural(c.draw,"ничья","ничьи","ничьих")}` : ""}`; }
-function gamesMeta(s){
-  const list = games(s); if(!list.length) return "";
-  const c = counts(list);
-  return `<span class="meta">сыграно ${list.length}${c.win ? ` · <span class="w">${c.win} ${plural(c.win,"победа","победы","побед")}</span>` : ""}${c.loss ? ` · <span class="l">${c.loss} ${plural(c.loss,"поражение","поражения","поражений")}</span>` : ""}</span>`;
-}
 function gameHTML(s, g, withSit){
   const role = gameRole(s, g);
+  const meta = [fmtShort(g.date), withSit ? (g.opp || "соперник не указан") : null, role ? "начинал за " + role : null].filter(Boolean).join(" · ");
   return `<button class="game" data-g="${g.id}" data-s="${s.id}">
-    <span class="gb">
-      <span class="g1">${withSit ? esc(numLabel(s)) + ". " + esc(s.title) : (g.opp ? "с " + esc(g.opp) : "Соперник не указан")}</span>
-      <span class="g2">${esc(fmtDate(g.date))}${withSit ? " · " + (g.opp ? "с " + esc(g.opp) : "соперник не указан") : ""}${role ? " · начинал за: " + esc(role) : ""}</span>
-      ${g.note ? `<span class="g3">${esc(g.note)}</span>` : ""}
-    </span>
-    <span class="res ${g.res || ""}">${RES[g.res] || "без итога"}${g.score ? `<br>${esc(g.score)}` : ""}</span>
+    ${withSit ? `<span class="gn disp">${esc(numLabel(s))}</span>` : ""}
+    <span class="gb"><span class="g1">${withSit ? esc(s.title) : (g.opp ? "с " + esc(g.opp) : "Соперник не указан")}</span>
+      <span class="g2">${esc(meta)}</span>${g.note ? `<span class="g3">${esc(g.note)}</span>` : ""}</span>
+    <span class="res ${g.res || ""}">${RES[g.res] || "без итога"}${g.score ? " " + esc(g.score) : ""}</span>
   </button>`;
 }
 function oppNames(){ const m = new Map(); allGames().forEach(({g}) => { const n = (g.opp || "").trim(); if(n) m.set(n.toLowerCase(), n); }); return [...m.values()].sort((a,b) => a.localeCompare(b,"ru")); }
-
-function gameSheet(s, g){
+function gameSheet(s, g, pre){
   const isNew = !g;
-  const d = g || {date:today(), opp:"", role:"", res:"", score:"", note:""};
+  const d = g || Object.assign({date:today(), opp:"", role:"", res:"", score:"", note:""}, pre || {});
   let res = d.res, sit = s;
   const sitPick = !s;
   const roleOpts = x => `<option value="">не указана</option>` + (x ? x.roles.map(r => `<option value="${r.id}"${r.id === d.role ? " selected" : ""}>${esc(r.name)}</option>`).join("") : "");
   openSheet(`<h2>${isNew ? "Записать поединок" : "Поединок"}</h2>
-    ${sitPick ? `<div class="fld"><label>Ситуация</label><select id="gSit"><option value="">выберите ситуацию</option>${sorted().map(x =>
-      `<option value="${x.id}">${esc(numLabel(x))}. ${esc(x.title)}</option>`).join("")}</select></div>` : `<p class="desc" style="color:var(--muted);margin-top:-4px">${esc(fullNum(s))} · ${esc(s.title)}</p>`}
-    <div class="fld"><label>Дата</label><input id="gDate" type="date" value="${esc(d.date)}"></div>
-    <div class="fld"><label>С кем играл</label><input id="gOpp" list="oppList" value="${esc(d.opp)}" placeholder="Имя или псевдоним соперника" autocomplete="off">
+    ${sitPick ? `<div class="fld"><label for="gSit">Ситуация</label><select id="gSit"><option value="">выберите ситуацию</option>${sorted().map(x =>
+      `<option value="${x.id}">${esc(numLabel(x))}. ${esc(x.title)}</option>`).join("")}</select></div>` : `<p class="note" style="margin:-6px 0 10px;padding:0">${esc(fullNum(s))} · ${esc(s.title)}</p>`}
+    <div class="fld"><label for="gDate">Дата</label><input id="gDate" type="date" value="${esc(d.date)}"></div>
+    <div class="fld"><label for="gOpp">С кем играл</label><input id="gOpp" list="oppList" value="${esc(d.opp)}" placeholder="Имя или псевдоним соперника" autocomplete="off">
       <datalist id="oppList">${oppNames().map(n => `<option value="${esc(n)}">`).join("")}</datalist></div>
-    <div class="fld"><label>Начинал за роль</label><select id="gRole">${roleOpts(s)}</select></div>
+    <div class="fld"><label for="gRole">Начинал за роль</label><select id="gRole">${roleOpts(s)}</select></div>
     <div class="fld"><label>Результат</label><div class="seg" id="gRes"><button data-k="win">Победа</button><button data-k="loss">Поражение</button><button data-k="draw">Ничья</button></div></div>
-    <div class="fld"><label>Голоса судей (если есть)</label><input id="gScore" value="${esc(d.score)}" placeholder="например 3:2"></div>
-    <div class="fld"><label>Заметки: что сказал, что сработало, что бы сделал иначе</label><textarea class="f" id="gNote" rows="3">${esc(d.note)}</textarea></div>
+    <div class="fld"><label for="gScore">Голоса судей (если есть)</label><input id="gScore" value="${esc(d.score)}" placeholder="например 3:2"></div>
+    <div class="fld"><label for="gNote">Заметки: что сказал, что сработало, что сделал бы иначе</label><textarea class="f" id="gNote" rows="3">${esc(d.note)}</textarea></div>
     <button class="btn pri full" id="gOk">${isNew ? "Записать" : "Сохранить"}</button>
     ${isNew ? "" : `<div style="height:10px"></div><button class="btn dng full" id="gDel">Удалить запись</button>`}`, sh => {
     const seg = sh.querySelector("#gRes");
     const paint = () => seg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === res));
     paint(); seg.onclick = e => { const b = e.target.closest("button"); if(b){ res = res === b.dataset.k ? "" : b.dataset.k; paint(); } };
-    $$autosize(sh); sh.addEventListener("input", e => e.target.matches("textarea.f") && autosize(e.target));
+    autosizeAll(sh); sh.addEventListener("input", e => e.target.matches("textarea.f") && autosize(e.target));
     if(sitPick) sh.querySelector("#gSit").onchange = e => { sit = byId(e.target.value) || null; sh.querySelector("#gRole").innerHTML = roleOpts(sit); };
     sh.querySelector("#gOk").onclick = () => {
       if(!sit){ toast("Выберите ситуацию"); return; }
@@ -555,76 +799,322 @@ function gameSheet(s, g){
   });
 }
 function rerender(){
-  if(!$("#vDetail").classList.contains("hidden")) renderDetail();
-  else if(!$("#vJournal").classList.contains("hidden")) renderJournal();
+  const h = location.hash.slice(1);
+  if(h.startsWith("s/") && cur) renderSit();
+  else if(h === "j") renderJournal();
+  else if(h.startsWith("t/")) { if(T.stage !== "review") paintTrain(); }
   else renderList();
 }
 
-/* ---------- journal ---------- */
 let jQuery = "";
 function renderJournal(){
   const list = allGames(), c = counts(list.map(x => x.g));
   const q = jQuery.trim().toLowerCase();
-  const shown = list.filter(({s, g}) => !q || [g.opp, g.note, s.title, s.num, gameRole(s, g)].join(" ").toLowerCase().includes(q))
-    .sort((a,b) => String(b.g.date||"").localeCompare(String(a.g.date||"")) || (b.g.t||0) - (a.g.t||0));
+  const ordered = list.slice().sort((a,b) => String(b.g.date||"").localeCompare(String(a.g.date||"")) || (b.g.t||0) - (a.g.t||0));
+  const shown = ordered.filter(({s, g}) => !q || [g.opp, g.note, s.title, s.num, gameRole(s, g)].join(" ").toLowerCase().includes(q));
+  const form = ordered.slice(0, 10).reverse();
   const byOpp = new Map();
   list.forEach(({g}) => { const n = (g.opp || "").trim(); if(!n) return; const k = n.toLowerCase();
     const o = byOpp.get(k) || {name:n, list:[]}; o.list.push(g); byOpp.set(k, o); });
   const opps = [...byOpp.values()].sort((a,b) => b.list.length - a.list.length || a.name.localeCompare(b.name,"ru"));
   $("#jBody").innerHTML = `
-    <div class="stats">
-      <div class="stat"><b>${list.length}</b><span>всего</span></div>
-      <div class="stat"><b style="color:var(--ok)">${c.win}</b><span>побед</span></div>
-      <div class="stat"><b style="color:var(--accent)">${c.loss}</b><span>поражений</span></div>
-      <div class="stat"><b>${c.draw}</b><span>ничьих</span></div>
+    <div class="jhero">
+      <div class="jstats">
+        <div><b class="disp">${list.length}</b><span>${plural(list.length,"поединок","поединка","поединков")}</span></div>
+        <div><b class="disp" style="color:#5CC48A">${c.win}</b><span>${plural(c.win,"победа","победы","побед")}</span></div>
+        <div><b class="disp" style="color:#FF8A63">${c.loss}</b><span>${plural(c.loss,"поражение","поражения","поражений")}</span></div>
+        <div><b class="disp" style="color:#E3A33B">${c.draw}</b><span>${plural(c.draw,"ничья","ничьи","ничьих")}</span></div>
+      </div>
+      ${form.length ? `<div><div class="lbl" style="color:var(--hero-muted);margin-bottom:8px">Форма · последние ${form.length}</div>
+        <div class="form">${form.map(({g}) => `<span class="${g.res || ""}" title="${RES[g.res] || "без итога"}">${{win:"В",loss:"П",draw:"Н"}[g.res] || "?"}</span>`).join("")}</div></div>` : ""}
     </div>
-    ${list.length ? `<div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="jq" type="search" placeholder="Соперник, ситуация, заметки" value="${esc(jQuery)}" autocomplete="off"></div>` : ""}
-    ${opps.length && !q ? `<h3 class="sec">Соперники</h3><div class="opps">${opps.map(o => { const k = counts(o.list);
-      return `<button class="opp" data-opp="${esc(o.name)}"><span>${esc(o.name)}</span><span>${o.list.length} · ${k.win}:${k.loss}${k.draw ? ":" + k.draw : ""}</span></button>`; }).join("")}</div>` : ""}
-    <h3 class="sec">${q ? "Найдено: " + shown.length : "Все поединки"}</h3>
-    ${shown.length ? shown.map(({s, g}) => gameHTML(s, g, true)).join("") : `<div class="empty">${list.length ? "Ничего не найдено" : "Пока ни одного поединка. Записывайте их кнопкой «+» здесь или в карточке ситуации."}</div>`}`;
+    ${opps.length ? `<h3 class="sec disp">Соперники</h3><div class="opps">${opps.map(o => { const k = counts(o.list);
+      return `<button class="opp" data-opp="${esc(o.name)}"><b>${esc(o.name)}</b><span>${o.list.length} · ${k.win}:${k.loss}${k.draw ? ":" + k.draw : ""}</span></button>`; }).join("")}</div>` : ""}
+    ${list.length ? `<label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="jq" type="search" placeholder="Соперник, ситуация, заметки" value="${esc(jQuery)}" autocomplete="off"></label>` : ""}
+    <h3 class="sec disp">${q ? "Найдено: " + shown.length : "Все поединки"}</h3>
+    ${shown.length ? shown.map(({s, g}) => gameHTML(s, g, true)).join("") : `<div class="empty">${list.length ? "Ничего не найдено" : "Пока ни одного поединка. Записывайте их кнопкой «+» здесь или кнопкой «Записать поединок» в ситуации."}</div>`}
+    <div class="ver">Версия ${APP_VERSION}</div>`;
   const inp = $("#jq");
   if(inp) inp.oninput = () => { jQuery = inp.value; const pos = inp.selectionStart; renderJournal(); const n = $("#jq"); n.focus(); n.setSelectionRange(pos, pos); };
 }
 $("#jBody").addEventListener("click", e => {
-  const o = e.target.closest("[data-opp]"); if(o){ jQuery = o.dataset.opp; renderJournal(); return; }
+  const o = e.target.closest("[data-opp]"); if(o){ jQuery = jQuery === o.dataset.opp ? "" : o.dataset.opp; renderJournal(); return; }
   const b = e.target.closest("[data-g]"); if(!b) return;
   const s = byId(b.dataset.s); if(s) gameSheet(s, games(s).find(g => g.id === b.dataset.g));
 });
-$("#btnJournal").onclick = () => { jQuery = ""; go("j"); };
-$("#jBack").onclick = () => back();
 $("#jAdd").onclick = () => gameSheet(null, null);
 
-/* ---------- menu, export, import ---------- */
+/* ---------- тренировка ---------- */
+const T = {queue:[], idx:0, stage:"round", order:[], cur:0, state:"idle", end:0, left:ROUND_MS, done:new Set(),
+  duo:false, swap:false, rec:false, recs:{}, msg:"", flash:false, review:null, tick:null, warned:false};
+let audioCtx = null, wl = null, micStream = null, recorder = null;
+const RING_C = 2 * Math.PI * 130;
+
+function startTraining(ids){ T.queue = ids; T.idx = 0; resetRound(); }
+function curSit(){ return byId(T.queue[T.idx]); }
+function resetRound(keepOrder){
+  const s = curSit(); if(!s) return;
+  clearInterval(T.tick); stopRec(true); unwake();
+  if(!keepOrder || T.order.length !== s.roles.length) T.order = s.roles.map(r => r.id);
+  T.cur = 0; T.state = "idle"; T.left = ROUND_MS; T.done = new Set(); T.stage = "round"; T.msg = ""; T.flash = false; T.review = null;
+  Object.values(T.recs).forEach(x => { try{ URL.revokeObjectURL(x.url); }catch(e){} }); T.recs = {};
+  paintTrain();
+}
+function roleById(s, id){ return s.roles.find(r => r.id === id); }
+function playerFor(i){ return ["Игрок 1","Игрок 2"][(i + (T.swap ? 1 : 0)) % 2]; }
+function paintTrain(){
+  const s = curSit(); if(!s){ go("", true); return; }
+  $("#tTtl").textContent = T.queue.length > 1 ? `Ситуация ${T.idx+1} из ${T.queue.length}` : "Тренировка";
+  $("#tSkip").classList.toggle("hidden", T.queue.length < 2);
+  if(T.stage === "review") return paintReview(s);
+  const id = T.order[T.cur], r = roleById(s, id);
+  const left = T.state === "run" ? Math.max(0, T.end - Date.now()) : T.left;
+  const sec = Math.ceil(left / 1000);
+  const col = r ? rcol(s, r) : "var(--a)";
+  const said = s.roles.find(x => x.said);
+  const k = T.order.length, warn = sec <= 10 && T.state !== "idle";
+  $("#tBody").innerHTML = `
+    <div class="hero sm"><div class="who">№ ${esc(numLabel(s))} · ${esc(s.title)}${said ? " · говорит " + esc(said.name) : ""}</div><div class="ph">«${esc(s.phrase)}»</div></div>
+    <details class="tdesc"><summary>Описание ситуации</summary><p>${esc(s.text)}</p></details>
+    ${k ? `<div class="rcards" style="grid-template-columns:repeat(${Math.min(k, 3)},1fr)">${T.order.map((rid, i) => { const x = roleById(s, rid); if(!x) return "";
+      const isNow = i === T.cur, isDone = T.done.has(rid);
+      const lab = isDone ? "сыграна" : isNow ? (T.state === "idle" ? "сейчас" : "идет") : "далее";
+      return `<button class="rc${isNow ? " now" : ""}${isDone ? " done" : ""}" data-pick="${rid}" style="--rc:${rcol(s,x)};--on-rc:${ron(s,x)}">
+        <span class="k">Роль ${i+1} · ${lab}</span><span class="nm">${isDone ? `<span class="ok">✓</span>` : ""}${esc(x.name)}</span>
+        ${T.duo ? `<span class="pl">${playerFor(i)}</span>` : ""}</button>`; }).join("")}</div>` : `<div class="empty">У ситуации нет ролей.</div>`}
+    <div class="ringwrap"><div class="ring" id="rRing" style="--rcol:${warn ? "var(--warn)" : col}">
+      <svg viewBox="0 0 290 290" aria-hidden="true"><circle class="tr" cx="145" cy="145" r="130" fill="none" stroke-width="16"/>
+        <circle class="pr" id="rPr" cx="145" cy="145" r="130" fill="none" stroke-width="16" stroke-linecap="round" stroke-dasharray="${RING_C}" stroke-dashoffset="${RING_C * (1 - left / ROUND_MS)}"/></svg>
+      <div class="c"><div class="num disp${warn ? " warn" : ""}" id="rNum">${sec}</div>
+        <div class="cap">${T.state === "pause" ? "пауза" : r ? (T.duo ? playerFor(T.cur) + " за роль «" + esc(r.name) + "»" : "секунд у роли «" + esc(r.name) + "»") : ""}</div></div>
+    </div></div>
+    <div class="rmsg${T.flash ? " flash" : ""}" id="rMsg">${esc(T.msg)}</div>
+    ${T.state === "idle" && T.cur === 0 ? `<div class="toggles">
+      <button class="tg${T.rec ? " on" : ""}" id="tgRec" aria-pressed="${T.rec}"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Записывать голос</button>
+      <button class="tg${T.duo ? " on" : ""}" id="tgDuo" aria-pressed="${T.duo}"><svg class="i" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 5-5s5 2 5 5M13 15.5c.9-.3 1.9-.5 3-.5 2.5 0 5 2 5 5"/></svg>Вдвоем</button>
+    </div>` : ""}
+    <div class="tstack">
+      ${r ? `<button class="btn ghost full" id="tHint">Подсказка: моя подготовка за «${esc(r.name)}»</button>` : ""}
+      ${!r ? "" : T.state === "idle" ? `<button class="btn pri full" id="tStart"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg>Старт · ${ROUND_SEC} с</button>`
+        : T.state === "run" ? `<div class="btn2"><button class="btn" id="tPause">Пауза</button><button class="btn dark" id="tPass">${T.cur < k - 1 ? "Передать роль →" : "Завершить"}</button></div>`
+        : `<div class="btn2"><button class="btn" id="tReset">Сначала</button><button class="btn pri" id="tResume">Продолжить</button></div>`}
+    </div>`;
+  T.flash = false;
+}
+function tickRound(){
+  if(T.state !== "run") return;
+  const left = T.end - Date.now();
+  if(left <= 0) return finishRole(false);
+  const sec = Math.ceil(left / 1000), num = $("#rNum"), pr = $("#rPr"), ring = $("#rRing");
+  if(num){ num.textContent = sec; num.classList.toggle("warn", sec <= 10); }
+  if(pr) pr.setAttribute("stroke-dashoffset", RING_C * (1 - left / ROUND_MS));
+  if(ring && sec <= 10) ring.style.setProperty("--rcol", "var(--warn)");
+  if(sec === 10 && !T.warned){ T.warned = true; beep(1); }
+}
+async function roundStart(){
+  try{ audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); audioCtx.resume(); }catch(e){}
+  if(T.rec && !micStream){
+    try{ micStream = await navigator.mediaDevices.getUserMedia({audio:true}); }
+    catch(e){ T.rec = false; toast("Нет доступа к микрофону, раунд без записи"); }
+  }
+  T.state = "run"; T.msg = ""; T.warned = false; T.end = Date.now() + T.left;
+  clearInterval(T.tick); T.tick = setInterval(tickRound, 200);
+  if(T.rec) startRec(T.order[T.cur]);
+  wake(); paintTrain();
+}
+function roundPause(){
+  T.left = Math.max(0, T.end - Date.now()); T.state = "pause"; clearInterval(T.tick);
+  try{ recorder && recorder.state === "recording" && recorder.pause(); }catch(e){}
+  paintTrain();
+}
+function roundResume(){
+  T.state = "run"; T.end = Date.now() + T.left; clearInterval(T.tick); T.tick = setInterval(tickRound, 200);
+  try{ recorder && recorder.state === "paused" && recorder.resume(); }catch(e){}
+  paintTrain();
+}
+function finishRole(early){
+  clearInterval(T.tick); stopRec(false);
+  if(!early){ beep(3); try{ navigator.vibrate && navigator.vibrate([200,100,200]); }catch(e){} }
+  const s = curSit(); T.done.add(T.order[T.cur]); T.cur++; T.left = ROUND_MS; T.state = "idle";
+  if(T.cur >= T.order.length){ unwake(); T.stage = "review"; T.review = null; paintTrain(); scrollTo(0,0); return; }
+  const nx = roleById(s, T.order[T.cur]);
+  T.msg = T.duo ? `${early ? "" : "Время! "}Передайте телефон: ${playerFor(T.cur)} за роль «${nx.name}»` : `${early ? "" : "Время! "}Теперь роль «${nx.name}»`;
+  T.flash = !early;
+  paintTrain();
+}
+function beep(n){
+  if(!audioCtx) return;
+  try{
+    for(let i = 0; i < n; i++){
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t = audioCtx.currentTime + i * .28;
+      o.frequency.value = n === 1 ? 660 : (i === n-1 ? 1175 : 880); o.connect(g); g.connect(audioCtx.destination);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(n === 1 ? .2 : .35, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + .2);
+      o.start(t); o.stop(t + .22);
+    }
+  }catch(e){}
+}
+async function wake(){ try{ if(navigator.wakeLock && !wl){ wl = await navigator.wakeLock.request("screen"); wl.addEventListener("release", () => { wl = null; }); } }catch(e){} }
+function unwake(){ try{ wl && wl.release(); }catch(e){} wl = null; }
+document.addEventListener("visibilitychange", () => { if(!document.hidden && T.state === "run") wake(); });
+
+/* запись голоса */
+function startRec(roleId){
+  if(!micStream || typeof MediaRecorder === "undefined") return;
+  const types = ["audio/mp4", "audio/webm", "audio/ogg"];
+  const type = types.find(t => { try{ return MediaRecorder.isTypeSupported(t); }catch(e){ return false; } }) || "";
+  const chunks = [];
+  let rec;
+  try{ rec = type ? new MediaRecorder(micStream, {mimeType:type}) : new MediaRecorder(micStream); }catch(e){ recorder = null; return; }
+  rec._discard = false;
+  rec.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
+  rec.onstop = () => {
+    if(rec._discard || !chunks.length) return;
+    const blob = new Blob(chunks, {type:rec.mimeType || type || "audio/mp4"});
+    const old = T.recs[roleId]; if(old) try{ URL.revokeObjectURL(old.url); }catch(e){}
+    T.recs[roleId] = {blob, url:URL.createObjectURL(blob), type:blob.type};
+    if(T.stage === "review" && location.hash.startsWith("#t/")) paintReview(curSit());
+  };
+  try{ rec.start(); recorder = rec; }catch(e){ recorder = null; }
+}
+function stopRec(discard){
+  if(!recorder) return;
+  recorder._discard = !!discard;
+  try{ if(recorder.state !== "inactive") recorder.stop(); }catch(e){}
+  recorder = null;
+}
+function releaseMic(){ if(micStream){ micStream.getTracks().forEach(t => t.stop()); micStream = null; } }
+async function shareRec(roleName, x){
+  const ext = /mp4|m4a|aac/.test(x.type) ? "m4a" : /webm/.test(x.type) ? "webm" : "ogg";
+  const s = curSit(), name = `poedinok-${numLabel(s)}-${roleName}-${today()}.${ext}`.replace(/\s+/g, "_");
+  const file = new File([x.blob], name, {type:x.type});
+  if(navigator.canShare && navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file], title:name}); return; }catch(e){ if(e.name === "AbortError") return; } }
+  const a = document.createElement("a"); a.href = x.url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* итог после раунда */
+function ensureReview(s){
+  if(!T.review){ T.review = {t:Date.now(), date:today(), ratings:{}}; reviews(s).push(T.review); }
+  return T.review;
+}
+function paintReview(s){
+  const rat = T.review ? T.review.ratings : {};
+  const roles = T.order.map(id => roleById(s, id)).filter(Boolean);
+  const keep = $("#tkText") ? $("#tkText").value : "";
+  $("#tBody").innerHTML = `
+    <div class="lbl" style="margin-top:6px">№ ${esc(numLabel(s))} · ${roles.length > 1 ? "все роли сыграны" : "роль сыграна"}</div>
+    <h2 class="h2 disp">Как прошло?</h2>
+    <p class="lead">Оценка определяет, когда ситуация снова попадет в тренировку: «не вышло» завтра, «средне» через 3 дня, «получилось» через неделю.</p>
+    ${roles.map(r => { const x = T.recs[r.id]; return `<div class="card rv">
+      <div class="nm"><span class="rdot" style="background:${rcol(s,r)}"></span>${esc(r.name)}${T.duo ? ` <span class="lbl" style="margin-left:4px">${playerFor(T.order.indexOf(r.id))}</span>` : ""}</div>
+      <div class="seg3">${[["good","Получилось"],["mid","Средне"],["bad","Не вышло"]].map(([k,l]) =>
+        `<button class="${k}${rat[r.id] === k ? " on" : ""}" data-rate="${r.id}:${k}" aria-pressed="${rat[r.id] === k}">${l}</button>`).join("")}</div>
+      ${x ? `<div class="audio"><audio controls preload="metadata" src="${x.url}"></audio><button class="mini" data-share="${r.id}">Сохранить</button></div>`
+        : T.rec ? `<div class="note" style="padding:0">Запись готовится…</div>` : ""}
+    </div>`; }).join("")}
+    <div class="card rv">
+      <label class="fl" for="tkText">Что забрать в подготовку</label>
+      <textarea class="f" id="tkText" rows="2" placeholder="Удачная фраза из раунда">${esc(keep)}</textarea>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <select id="tkRole" aria-label="К какой роли" style="flex:1;min-width:150px;min-height:44px;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 10px;font-size:15px">
+          ${roles.map(r => `<option value="${r.id}">к роли «${esc(r.name)}»</option>`).join("")}</select>
+        <button class="btn" id="tkSave" style="min-height:44px">Добавить вариантом</button>
+      </div>
+    </div>
+    <div class="tstack">
+      ${T.duo ? `<button class="btn full" id="tSwap">Поменяться ролями</button>` : ""}
+      <div class="btn2"><button class="btn" id="tAgain">Еще раз</button><button class="btn" id="tWasDuel">Это был поединок</button></div>
+      ${T.queue.length > 1 ? `<button class="btn dark full" id="tNext">Следующая ситуация →</button>` : `<button class="btn dark full" id="tDone">Готово</button>`}
+    </div>`;
+  autosizeAll($("#tBody"));
+}
+function nextSit(){
+  T.idx++;
+  if(T.idx >= T.queue.length){ T.queue = smartQueue(T.queue.map(byId).filter(Boolean)); T.idx = 0; }
+  resetRound(); scrollTo(0,0);
+}
+function hintSheet(s, r){
+  const vars = r.vars.filter(v => v.a.trim() || v.c.trim());
+  openSheet(`<h2 style="color:${rcol(s,r)}">${esc(r.name)}</h2><div class="hint">
+    ${(r.an || "").trim() ? `<div class="blk"><div class="lbl">Анализ</div><div class="txt" style="font-size:16px;color:var(--ink2)">${esc(r.an.trim())}</div></div>` : ""}
+    ${vars.length ? vars.map((v,i) => `<div class="blk"><div class="lbl" style="color:${rcol(s,r)}">Ответная фраза${vars.length > 1 ? " · вариант " + (i+1) : ""}</div><div class="txt">${esc(v.a || "-")}</div></div>
+      ${v.c.trim() ? `<div class="blk"><div class="lbl">Контрфраза</div><div class="txt">${esc(v.c)}</div></div>` : ""}`).join("")
+      : `<p class="note">Для этой роли фразы еще не подготовлены. Придумайте ответ вслух, а потом запишите его в подготовку.</p>`}
+  </div><button class="btn full" id="hClose">Закрыть</button>`, sh => { sh.querySelector("#hClose").onclick = closeSheet; });
+}
+$("#tBody").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  const s = curSit(); if(!s) return;
+  if(b.dataset.pick){
+    if(T.state !== "idle" || T.cur !== 0 || T.done.size) return;
+    const i = T.order.indexOf(b.dataset.pick); if(i > 0){ T.order.splice(i, 1); T.order.unshift(b.dataset.pick); paintTrain(); }
+    return;
+  }
+  if(b.id === "tgRec"){ T.rec = !T.rec; if(!T.rec) releaseMic(); paintTrain(); return; }
+  if(b.id === "tgDuo"){ T.duo = !T.duo; paintTrain(); return; }
+  if(b.id === "tHint") return hintSheet(s, roleById(s, T.order[T.cur]));
+  if(b.id === "tStart") return roundStart();
+  if(b.id === "tPause") return roundPause();
+  if(b.id === "tResume") return roundResume();
+  if(b.id === "tReset"){ clearInterval(T.tick); stopRec(true); T.state = "idle"; T.left = ROUND_MS; T.msg = ""; unwake(); return paintTrain(); }
+  if(b.id === "tPass") return finishRole(true);
+  if(b.dataset.rate){
+    const [rid, k] = b.dataset.rate.split(":"), rv = ensureReview(s);
+    if(rv.ratings[rid] === k) delete rv.ratings[rid]; else rv.ratings[rid] = k;
+    save(true);
+    b.parentNode.querySelectorAll("button").forEach(x => { const on = x.dataset.rate === `${rid}:${rv.ratings[rid]}`; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+    return;
+  }
+  if(b.dataset.share){ const r = roleById(s, b.dataset.share), x = T.recs[b.dataset.share]; if(r && x) shareRec(r.name, x); return; }
+  if(b.id === "tkSave"){
+    const txt = $("#tkText").value.trim(); if(!txt){ toast("Впишите фразу"); return; }
+    const r = roleById(s, $("#tkRole").value); if(!r) return;
+    const empty = r.vars.find(v => !v.a.trim() && !v.c.trim());
+    if(empty) empty.a = txt; else r.vars.push({a:txt, c:""});
+    save(true); $("#tkText").value = ""; autosize($("#tkText")); toast(`Добавлено к роли «${r.name}»`); return;
+  }
+  if(b.id === "tSwap"){ T.swap = !T.swap; return resetRound(true); }
+  if(b.id === "tAgain") return resetRound(true);
+  if(b.id === "tWasDuel") return gameSheet(s, null, {role:T.order[0] || ""});
+  if(b.id === "tNext") return nextSit();
+  if(b.id === "tDone") return back();
+});
+$("#tBody").addEventListener("input", e => { if(e.target.matches("textarea.f")) autosize(e.target); });
+$("#tBack").onclick = () => back();
+$("#tSkip").onclick = () => nextSit();
+function cleanupTraining(){ clearInterval(T.tick); stopRec(true); releaseMic(); unwake(); T.state = "idle"; T.left = ROUND_MS; }
+
+/* ---------- меню, копия, импорт ---------- */
 $("#btnAdd").onclick = () => editSheet(null);
-$("#btnMenu").onclick = () => openSheet(`<h2>Тема</h2>
-  <div class="fld"><div class="seg" id="mTheme"><button data-k="auto">Как в системе</button><button data-k="light">Светлая</button><button data-k="dark">Темная</button></div></div>
-  <h2>Данные</h2><div class="menu">
-    <button id="mExp">Сохранить резервную копию (JSON)</button>
+$("#btnMenu").onclick = () => openSheet(`<h2>Меню</h2>
+  <div class="menu" style="margin-bottom:16px"><button id="mHelp"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/></svg>Как пользоваться</button></div>
+  <div class="fld"><label>Тема</label><div class="seg" id="mTheme"><button data-k="auto">Как в системе</button><button data-k="light">Светлая</button><button data-k="dark">Темная</button></div></div>
+  <div class="fld"><label>Данные</label><div class="menu">
+    <button id="mExp">Сохранить резервную копию</button>
     <button id="mImp">Загрузить из копии</button>
     <button id="mTxt">Скопировать всю подготовку текстом</button>
-  </div>
-  <p class="menu note">Версия ${APP_VERSION}. Подготовка хранится только на этом устройстве, в этом браузере. Добавьте страницу на экран «Домой» (Поделиться → На экран «Домой»), чтобы iOS не очистила данные, и время от времени сохраняйте копию.</p>`, sh => {
+  </div></div>
+  <p class="note">Версия ${APP_VERSION}. ${db.lastBackup ? "Последняя копия: " + fmtDate(new Date(db.lastBackup).toISOString().slice(0,10)) + "." : "Резервных копий еще не было."} Записи хранятся только на этом телефоне.</p>`, sh => {
     const seg = sh.querySelector("#mTheme");
     const paint = () => seg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === getTheme()));
     paint(); seg.onclick = e => { const b = e.target.closest("button"); if(b){ setTheme(b.dataset.k); paint(); } };
+    sh.querySelector("#mHelp").onclick = () => { closeSheet(); go("h"); };
     sh.querySelector("#mExp").onclick = () => { closeSheet(); exportJSON(); };
     sh.querySelector("#mImp").onclick = () => { closeSheet(); $("#fileIn").click(); };
     sh.querySelector("#mTxt").onclick = () => { closeSheet(); copyText(); };
   });
-
+function markBackup(){ db.lastBackup = Date.now(); save(true); if(location.hash.slice(1) === "") renderList(); }
 async function exportJSON(){
   save(true);
-  const d = new Date(), p = n => String(n).padStart(2,"0");
-  const name = `express-poedinki-${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}.json`;
+  const name = `express-poedinki-${today()}.json`;
   const blob = new Blob([JSON.stringify(db, null, 1)], {type:"application/json"});
   const file = new File([blob], name, {type:"application/json"});
   if(navigator.canShare && navigator.canShare({files:[file]})){
-    try{ await navigator.share({files:[file], title:name}); return; }catch(e){ if(e.name === "AbortError") return; }
+    try{ await navigator.share({files:[file], title:name}); markBackup(); toast("Копия сохранена"); return; }catch(e){ if(e.name === "AbortError") return; }
   }
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
   document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  markBackup();
 }
 $("#fileIn").addEventListener("change", async e => {
   const f = e.target.files[0]; e.target.value = ""; if(!f) return;
@@ -632,16 +1122,16 @@ $("#fileIn").addEventListener("change", async e => {
     const d = JSON.parse(await f.text());
     if(!d || !Array.isArray(d.situations)) throw new Error("это не копия приложения");
     if(!confirm(`В копии ${d.situations.length} ситуаций. Заменить ими текущие данные?`)) return;
-    db = d; db.seeded = db.seeded || SEED.map(s => s.id); save(true); go("", true); toast("Копия загружена");
+    db = d; db.seeded = db.seeded || SEED.map(s => s.id); db.firstUse = db.firstUse || Date.now(); save(true); go("", true); toast("Копия загружена");
   }catch(err){ alert("Не удалось прочитать файл: " + err.message); }
 });
 function copyText(){
   const out = sorted().map(s => [
     `${fullNum(s)}. ${s.title}`, s.text, `«${s.phrase}»`,
-    ...s.roles.map(r => [`  ${r.name}:`, ...(r.an && r.an.trim() ? [`  Анализ: ${r.an.trim()}`] : []), ...r.vars.filter(v => v.a || v.c).map((v,i,arr) =>
+    ...s.roles.map(r => [`  ${r.name}:`, ...((r.an || "").trim() ? [`  Анализ: ${r.an.trim()}`] : []), ...r.vars.filter(v => v.a || v.c).map((v,i,arr) =>
       `${arr.length > 1 ? "  Вариант " + (i+1) + "\n" : ""}  Ответ: ${v.a || "-"}\n  Контрфраза: ${v.c || "-"}`)].join("\n")),
     ...(games(s).length ? ["  Сыгранные поединки:", ...sortGames(games(s)).map(g =>
-      `  ${fmtDate(g.date)}, соперник: ${g.opp || "-"}, начинал за: ${gameRole(s,g) || "-"}, ${RES[g.res] ? RES[g.res] : "результат не указан"}${g.score ? " " + g.score : ""}${g.note ? "\n    " + g.note.replace(/\n/g, "\n    ") : ""}`)] : [])
+      `  ${fmtDate(g.date)}, соперник: ${g.opp || "-"}, начинал за: ${gameRole(s,g) || "-"}, ${RES[g.res] || "результат не указан"}${g.score ? " " + g.score : ""}${g.note ? "\n    " + g.note.replace(/\n/g, "\n    ") : ""}`)] : [])
   ].join("\n")).join("\n\n");
   const done = () => toast("Скопировано");
   if(navigator.clipboard) navigator.clipboard.writeText(out).then(done, () => fallbackCopy(out));
@@ -652,168 +1142,57 @@ function fallbackCopy(t){
   document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); toast("Скопировано"); }catch(e){} ta.remove();
 }
 
-/* ---------- training ---------- */
-let tAn = false, tQueue = [], tIdx = 0, tRole = null, tShown = 0, tTick;
-let rState = "idle", rEnd = 0, rDone = new Set(), rMsg = "", audioCtx = null;
-function startTraining(ids){
-  tQueue = ids; tIdx = 0; tRole = null; renderTrain();
-}
-function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-function renderTrain(){
-  const s = byId(tQueue[tIdx]); if(!s){ back(); return; }
-  if(!tRole || !s.roles.find(r => r.id === tRole)) tRole = s.roles[0] && s.roles[0].id;
-  tShown = 0; tAn = false; clearInterval(tTick); rState = "idle"; rDone = new Set(); rMsg = ""; $("#tTimer").textContent = "";
-  $("#tBarTitle").textContent = tQueue.length > 1 ? `${tIdx+1} из ${tQueue.length}` : "Тренировка";
-  const r = s.roles.find(x => x.id === tRole);
-  $("#tBody").innerHTML = `
-    <div class="kicker">${esc(fullNum(s))} · ${esc(s.title)}</div>
-    <p class="tr-desc">${esc(s.text)}</p>
-    <div class="tr-q">«${esc(s.phrase)}»</div>
-    ${s.roles.length > 1 ? `<div class="kicker">Ваша роль</div><div class="rolepick">${s.roles.map(x =>
-      `<button class="chip${x.id===tRole?" on":""}" data-role="${x.id}">${esc(x.name)}</button>`).join("")}</div>` : ""}
-    <div class="round" id="tRound"></div>
-    <div id="tReveal"></div>
-    <div class="row">${tQueue.length > 1 ? `<button class="btn" id="tPrev">Назад</button><button class="btn pri" id="tNext">${tIdx < tQueue.length-1 ? "Дальше" : "Заново"}</button>` : `<button class="btn" id="tOpen">Открыть подготовку</button>`}</div>`;
-  paintReveal(r); paintRound();
-}
-
-/* ---------- раунд 40 секунд на роль ---------- */
-function paintRound(){
-  const s = byId(tQueue[tIdx]), box = $("#tRound"); if(!s || !box) return;
-  const r = s.roles.find(x => x.id === tRole);
-  document.querySelectorAll("[data-role]").forEach(x => {
-    x.classList.toggle("on", x.dataset.role === tRole);
-    const nm = s.roles.find(y => y.id === x.dataset.role).name;
-    x.textContent = (rDone.has(x.dataset.role) ? "✓ " : "") + nm;
-  });
-  if(rState === "run"){
-    const left = Math.max(0, rEnd - Date.now()), sec = Math.ceil(left / 1000);
-    box.innerHTML = `<div class="rlbl">Играете за: ${esc(r ? r.name : "")}</div>
-      <div class="rbig${sec <= 10 ? " warn" : ""}" id="rNum">${sec}</div>
-      <div class="rbar"><i id="rBar" style="width:${left / (ROUND_SEC * 10)}%"></i></div>
-      <button class="btn" id="rStop">Стоп</button>`;
-    return;
-  }
-  const all = s.roles.length > 0 && s.roles.every(x => rDone.has(x.id));
-  box.innerHTML = `${rMsg ? `<div class="rmsg">${esc(rMsg)}</div>` : ""}
-    ${all ? `<button class="btn pri full" id="rAgain">Сыграть обе роли еще раз</button>`
-          : `<div class="rlbl">${r ? "Роль: " + esc(r.name) : ""}</div>
-             <div class="rbig">${ROUND_SEC}</div><div class="rlbl" style="margin-top:4px">секунд на роль</div>
-             <button class="btn pri full" id="rStart" style="margin-top:12px">Старт · ${ROUND_SEC} с</button>`}`;
-}
-function roundTick(){
-  if(rState !== "run") return;
-  const left = rEnd - Date.now();
-  if(left <= 0){ return roundOver(); }
-  const sec = Math.ceil(left / 1000), num = $("#rNum"), bar = $("#rBar");
-  $("#tTimer").textContent = "0:" + String(sec).padStart(2, "0");
-  if(num){ num.textContent = sec; num.classList.toggle("warn", sec <= 10); }
-  if(bar) bar.style.width = (left / (ROUND_SEC * 10)) + "%";
-}
-function roundStart(){
-  try{ audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); audioCtx.resume(); }catch(e){}
-  rState = "run"; rMsg = ""; rEnd = Date.now() + ROUND_SEC * 1000;
-  clearInterval(tTick); tTick = setInterval(roundTick, 200);
-  paintRound(); roundTick();
-}
-function roundStop(){ clearInterval(tTick); rState = "idle"; rMsg = ""; $("#tTimer").textContent = ""; paintRound(); }
-function roundOver(){
-  clearInterval(tTick); rState = "idle"; $("#tTimer").textContent = "";
-  beep(); try{ navigator.vibrate && navigator.vibrate([200, 100, 200]); }catch(e){}
-  const s = byId(tQueue[tIdx]); rDone.add(tRole);
-  const next = s.roles.find(x => !rDone.has(x.id));
-  if(next){ rMsg = `Время! Теперь играете за роль «${next.name}».`; tRole = next.id; tShown = 0; tAn = false; paintReveal(next); }
-  else rMsg = "Время! Обе роли сыграны.";
-  paintRound();
-  const box = $("#tRound"); box.classList.remove("flash"); void box.offsetWidth; box.classList.add("flash");
-}
-function beep(){
-  if(!audioCtx) return;
-  try{
-    [0, .28, .56].forEach((t0, i) => {
-      const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t = audioCtx.currentTime + t0;
-      o.frequency.value = i === 2 ? 1175 : 880; o.connect(g); g.connect(audioCtx.destination);
-      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.35, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + .22);
-      o.start(t); o.stop(t + .24);
-    });
-  }catch(e){}
-}
-
-function paintReveal(r){
-  const host = $("#tReveal"); if(!r){ host.innerHTML = ""; return; }
-  const an = (r.an || "").trim();
-  const anHTML = !an ? "" : tAn
-    ? `<div class="reveal"><div class="lbl n">Мой анализ · ${esc(r.name)}</div><div class="txt">${esc(an)}</div></div><button class="link" id="tAn">Скрыть анализ</button>`
-    : `<button class="link" id="tAn">Показать мой анализ</button>`;
-  const vars = r.vars.filter(v => v.a.trim() || v.c.trim());
-  if(!vars.length){ host.innerHTML = anHTML + `<div class="empty">Для роли «${esc(r.name)}» фразы еще не подготовлены. Придумайте ответ вслух, потом откройте подготовку и запишите его.</div>`; return; }
-  const steps = [];
-  vars.forEach((v,i) => {
-    const tag = vars.length > 1 ? ` · вариант ${i+1}` : "";
-    steps.push({cls:"a", lbl:"Ответная фраза" + tag, txt:v.a || "-"});
-    steps.push({cls:"c", lbl:"Контрфраза" + tag, txt:v.c || "-"});
-  });
-  host.innerHTML = anHTML + steps.slice(0, tShown).map(x => `<div class="reveal"><div class="lbl ${x.cls}">${x.lbl}</div><div class="txt">${esc(x.txt)}</div></div>`).join("")
-    + (tShown < steps.length ? `<button class="cover" id="tShow">${tShown === 0 ? "Сначала ответьте сами, потом нажмите: показать ответную фразу" : "Показать " + (steps[tShown].cls === "a" ? "следующий вариант" : "контрфразу")}</button>` : "");
-}
-$("#tBody").addEventListener("click", e => {
-  const b = e.target.closest("button"); if(!b) return;
-  const s = byId(tQueue[tIdx]);
-  if(b.id === "rStart") return roundStart();
-  if(b.id === "rStop") return roundStop();
-  if(b.id === "rAgain"){ rDone = new Set(); rMsg = ""; tRole = s.roles[0] && s.roles[0].id; tShown = 0; tAn = false; paintReveal(s.roles[0]); return paintRound(); }
-  if(b.dataset.role){
-    if(rState === "run"){ toast("Сначала остановите раунд"); return; }
-    tRole = b.dataset.role; tShown = 0; tAn = false; rMsg = "";
-    paintReveal(s.roles.find(x => x.id === tRole)); paintRound(); return; }
-  if(b.id === "tAn"){ tAn = !tAn; paintReveal(s.roles.find(x => x.id === tRole)); return; }
-  if(b.id === "tShow"){ tShown++; paintReveal(s.roles.find(x => x.id === tRole)); return; }
-  if(b.id === "tNext"){ tIdx = tIdx < tQueue.length-1 ? tIdx+1 : 0; if(tIdx === 0) shuffle(tQueue); renderTrain(); scrollTo(0,0); }
-  if(b.id === "tPrev"){ tIdx = Math.max(0, tIdx-1); renderTrain(); scrollTo(0,0); }
-  if(b.id === "tOpen"){ go("s/" + s.id, true); }
-});
-$("#tBack").onclick = () => back();
-$("#btnTrainAll").onclick = () => {
-  const ids = visible().map(s => s.id);
-  if(!ids.length){ toast("Нет ситуаций в этом списке"); return; }
-  trainList = shuffle(ids); go("t/*");
-};
-let trainList = null;
-
-/* ---------- routing ---------- */
-let listScroll = 0;
+/* ---------- навигация ---------- */
+let listScroll = 0, prevHash = null;
 function go(h, replace){
-  if(location.hash.slice(1) === "" ) listScroll = scrollY;
+  if(location.hash.slice(1) === "") listScroll = scrollY;
   if(replace) history.replaceState(null, "", "#" + h); else history.pushState(null, "", "#" + h);
   route();
 }
-function back(){ if(history.length > 1 && location.hash) history.back(); else go("", true); }
-window.addEventListener("popstate", route);
+function back(){ if(history.length > 1 && location.hash && location.hash !== "#") history.back(); else go("", true); }
+addEventListener("popstate", route);
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-tab]"); if(!b) return;
+  const h = b.dataset.tab; if(location.hash.slice(1) === h) return;
+  go(h, h !== "t/*");
+});
+$("#hBack").onclick = () => back();
 function route(){
-  closeSheet(); clearInterval(tTick);
+  closeSheet();
   const h = location.hash.slice(1);
-  ["#vList","#vDetail","#vTrain","#vJournal"].forEach(v => $(v).classList.add("hidden"));
+  if(prevHash !== null && prevHash.startsWith("t/") && prevHash !== h) cleanupTraining();
+  prevHash = h;
+  ["#vList","#vSit","#vCheat","#vTrain","#vJournal","#vHelp"].forEach(v => $(v).classList.add("hidden"));
+  let tab = null;
   if(h.startsWith("s/") && byId(h.slice(2))){
-    cur = byId(h.slice(2)); $("#vDetail").classList.remove("hidden"); renderDetail(); scrollTo(0,0);
-  }else if(h === "j"){
-    $("#vJournal").classList.remove("hidden"); renderJournal(); scrollTo(0,0);
-  }else if(h.startsWith("t/")){
-    $("#vTrain").classList.remove("hidden");
+    cur = byId(h.slice(2)); $("#vSit").classList.remove("hidden"); renderSit(); scrollTo(0,0);
+  }else if(h.startsWith("c/") && byId(h.slice(2))){
+    $("#vCheat").classList.remove("hidden"); renderCheat(byId(h.slice(2))); scrollTo(0,0);
+  }else if(h.startsWith("t/") && (h === "t/*" || byId(h.slice(2)))){
     const id = h.slice(2);
-    if(id === "*"){ startTraining(trainList || shuffle(sorted().map(s => s.id))); }
-    else if(byId(id)) startTraining([id]); else return go("", true);
-    scrollTo(0,0);
+    $("#vTrain").classList.remove("hidden");
+    startTraining(id === "*" ? smartQueue(db.situations) : [id]);
+    scrollTo(0,0); if(id === "*") tab = "t/*";
+  }else if(h === "j"){
+    $("#vJournal").classList.remove("hidden"); renderJournal(); scrollTo(0,0); tab = "j";
+  }else if(h === "h"){
+    $("#vHelp").classList.remove("hidden"); scrollTo(0,0);
   }else{
-    $("#vList").classList.remove("hidden"); renderChips(); renderList(); requestAnimationFrame(() => scrollTo(0, listScroll));
+    $("#vList").classList.remove("hidden"); renderList(); tab = ""; requestAnimationFrame(() => scrollTo(0, listScroll));
   }
+  $("#tabs").classList.toggle("hidden", tab === null || tab === "t/*");
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.tab === tab));
 }
 addEventListener("scroll", () => document.querySelectorAll(".top").forEach(t => t.classList.toggle("scrolled", scrollY > 4)), {passive:true});
 
 let toastT;
-function toast(m){ const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 1800); }
+function toast(m){ const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2000); }
 
-load(); route();
+const isFresh = load();
 $("#verFoot").textContent = "Версия " + APP_VERSION;
+$("#verHelp").textContent = "Версия " + APP_VERSION;
+if(isFresh && !location.hash){ history.replaceState(null, "", "#"); history.pushState(null, "", "#h"); }
+route();
 if("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
