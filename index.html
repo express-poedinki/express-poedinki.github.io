@@ -124,7 +124,7 @@ h1.h{margin:4px 0 0;font-size:24px;font-weight:700}
 
 /* tab bar, bottom bar */
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-bottom:var(--sb)}
-.tabs .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);height:62px}
+.tabs .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);height:62px}
 .tab{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:var(--muted)}
 .tab.on{color:var(--ink);font-weight:800}
 .tab svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -290,6 +290,32 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
 .opp b{font-size:15px}
 .opp span{font-size:12px;font-weight:700;color:var(--muted)}
 
+/* мои ситуации */
+.mintro{padding:16px;margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.mintro p{margin:0;font-size:15px;line-height:1.5;color:var(--ink2)}
+.mcard{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-bottom:10px}
+.mcard .mt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:0;background:transparent;padding:0;color:inherit}
+.mcard .mt .n{flex:none;width:40px;font-size:17px;font-weight:700;color:var(--muted)}
+.mcard .mt .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.mcard .mt .t{font-weight:800;font-size:16px}
+.mcard .mt .q{font-size:14px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mcard .mt .r{font-size:12px;font-weight:700;color:var(--ink2)}
+.mfoot{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mfoot .st{flex:1;min-width:0;font-size:12px;font-weight:700;color:var(--muted)}
+.mfoot .st.warn{color:var(--mid)}
+.mfoot .st.okc{color:var(--ok)}
+.tips{border:1px dashed var(--line2);border-radius:14px;padding:4px 14px;margin-bottom:12px;background:var(--card)}
+.tips summary{font-size:14px;font-weight:800;color:var(--ink2);padding:10px 0;cursor:pointer}
+.tips ul{margin:0 0 10px;padding-left:18px}
+.tips li{font-size:14px;line-height:1.5;color:var(--ink2);margin:3px 0}
+.prev{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.5;color:var(--ink2);white-space:pre-wrap;word-break:break-word;max-height:calc(30vh / var(--z));overflow:auto}
+.impi{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);margin-bottom:8px;text-align:left;width:100%}
+.impi input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--a)}
+.impi .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.impi .t{font-weight:800}
+.impi .q{font-size:14px;color:var(--muted)}
+.impi .w{font-size:12px;font-weight:700;color:var(--mid)}
+
 /* help */
 .help h3{font-size:17px;margin:24px 0 6px}
 .help p,.help li{font-size:15px;line-height:1.55;color:var(--ink2)}
@@ -409,6 +435,17 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
   </div>
 </section>
 
+<!-- MY SITUATIONS -->
+<section id="vMine" class="view tabbed hidden">
+  <div class="wrap">
+    <div class="head">
+      <div class="brand"><div class="over">КСТ · Дзен-клуб · 2026</div><h1 class="h disp">Мои ситуации</h1></div>
+      <button class="sq pri" id="mAdd" aria-label="Написать ситуацию"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    </div>
+    <div id="mBody"></div>
+  </div>
+</section>
+
 <!-- HELP -->
 <section id="vHelp" class="view hidden">
   <div class="top"><div class="bar">
@@ -425,9 +462,9 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
     <ul>
       <li>Полоса <b>«Готовность»</b>: каждая черточка соответствует одной ситуации. Зеленая означает «готово», желтая «начато», серая «пусто».</li>
       <li>Кнопка <b>«Тренировка»</b> запускает раунды по всем ситуациям. Подпись под ней показывает, сколько ситуаций пора повторить и сколько еще не тренировали.</li>
-      <li>Поиск ищет по названиям, фразам, вашим ответам, анализу, соперникам и заметкам. Фильтры: «Не готовы», «Готовы», «Сыгранные», «Основные», «Запасные».</li>
+      <li>Поиск ищет по названиям, фразам, вашим ответам, анализу, соперникам и заметкам. Фильтры: «Не готовы», «Готовы», «Сыгранные», «Основные», «Запасные», а если есть свои ситуации, еще «Свои».</li>
       <li>На карточке ситуации цветные черточки под ролями показывают, заполнены ли ответ и контрфраза, а справа видно «сыграно N» и счет.</li>
-      <li>Внизу три вкладки: «Ситуации», «Тренировка», «Журнал».</li>
+      <li>Внизу четыре вкладки: «Ситуации», «Мои» (свои и присланные ситуации), «Тренировка», «Журнал».</li>
     </ul>
 
     <h3>2. Подготовка ситуации</h3>
@@ -500,10 +537,17 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
       <li>В журнале общий счет, форма за последние поединки, счет против каждого соперника (нажмите на соперника, чтобы оставить только его поединки) и поиск. У поединков с записями видна пометка «видео», «аудио поединка» или «аудио судей».</li>
     </ul>
 
-    <h3>9. Свои ситуации</h3>
+    <h3>9. Свои ситуации: написать и поделиться</h3>
     <ul>
-      <li>«+» на главном экране добавляет новую ситуацию: основная или запасная, номер, название, описание, фраза и роли через запятую. Первой впишите того, кто сказал фразу: приложение само поставит его вторым в поединке.</li>
-      <li>Значок карандаша вверху ситуации меняет ее текст или удаляет ее вместе с подготовкой и журналом.</li>
+      <li>Вкладка <b>«Мои»</b> собирает ситуации, которые написали вы, и те, что вам прислали. Свои ситуации видны и в общем списке (номер с буквой «С», фильтр «Свои»), их можно готовить, тренировать и вносить в журнал, как ситуации из буклета.</li>
+      <li><b>Написать ситуацию</b>: кнопка «Написать ситуацию» или «+» во вкладке «Мои». Впишите название, описание (кто эти люди, где они, что случилось перед фразой), кто говорит фразу и кому ее говорят, саму фразу. «+ Еще роль» добавляет третью роль. Подсказка «Как написать ситуацию для поединка» в начале окна напоминает, из чего складывается хорошая ситуация. Тот, кто говорит фразу, в поединке встанет вторым.</li>
+      <li>«+» на главном экране открывает то же окно; переключатель вверху выбирает, основная это ситуация, запасная или своя.</li>
+      <li>На карточке своей ситуации видно, готова ли она к отправке («черновик: нет фразы», «еще не отправлялась», «отправлена» с датой). «Править» меняет текст, а в окне правки есть «Поделиться ситуацией» и «Удалить ситуацию».</li>
+      <li><b>Поделиться</b>: кнопка «Поделиться» на карточке. Можно указать подпись автора (имя или псевдоним, запоминается) и посмотреть, что получит адресат. «Отправить» открывает меню отправки iPhone (Telegram, WhatsApp, Сообщения, почта), «Скопировать текст» копирует сообщение. В нем текст ситуации и ссылка для добавления. «Поделиться всеми своими» отправляет сразу все свои ситуации одной ссылкой.</li>
+      <li>Отправляется только сама ситуация: название, описание, роли и фраза. Ваш анализ, ответы, оценки и журнал не отправляются.</li>
+      <li><b>Добавить присланную</b>: если вам прислали ситуацию, скопируйте сообщение целиком (или только ссылку), во вкладке «Мои» нажмите «Добавить присланную», затем «Вставить» (или вставьте в поле сами) и «Добавить». Присланная ситуация попадет в раздел «Присланные» с именем автора и в общий список; поля подготовки в ней пустые.</li>
+      <li>Ссылку можно и просто открыть: приложение откроется в браузере и предложит добавить ситуацию. Если вы работаете через значок на экране «Домой», так ситуация попадет только в браузер (у них раздельные записи), поэтому в приложении со значка пользуйтесь «Добавить присланную».</li>
+      <li>Если ту же ситуацию прислали еще раз (например, автор поправил текст), приложение отметит «Уже есть у вас» и обновит текст, а ваша подготовка и журнал сохранятся.</li>
     </ul>
 
     <h3>10. Шторки, шрифт и тема</h3>
@@ -515,7 +559,7 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
 
     <h3>11. Где хранятся ваши записи</h3>
     <ul>
-      <li>Только на этом телефоне, в этом браузере. Никуда не отправляются. Другой человек по той же ссылке увидит чистое приложение.</li>
+      <li>Только на этом телефоне, в этом браузере. Никуда не отправляются, кроме ситуаций, которыми вы сами поделились. Другой человек по той же ссылке увидит чистое приложение.</li>
       <li>Добавьте приложение на экран «Домой» (Поделиться → На экран «Домой») и работайте через значок: так iOS не удалит данные. Safari и значок хранят записи раздельно.</li>
       <li>Меню «⋯» → «Сохранить резервную копию» сохраняет все, кроме аудио, в файл. Если копии давно не было, на главном экране появится напоминание. «Загрузить из копии» восстанавливает данные, например на новом телефоне. «Скопировать всю подготовку текстом» копирует ответы и журнал, чтобы вставить их в заметки или мессенджер.</li>
     </ul>
@@ -530,6 +574,7 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
 
 <nav class="tabs" id="tabs"><div class="in">
   <button class="tab" data-tab=""><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Ситуации</button>
+  <button class="tab" data-tab="m"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>Мои</button>
   <button class="tab" data-tab="t/*"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>Тренировка</button>
   <button class="tab" data-tab="j"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M9 10h6M9 14h6"/></svg>Журнал</button>
 </div></nav>
@@ -542,7 +587,7 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
 
 <script>
 "use strict";
-const APP_VERSION = "3.5";
+const APP_VERSION = "3.6";
 const ROUND_SEC = 40; // в поединке за каждую роль играешь по 40 секунд
 const ROUND_MS = ROUND_SEC * 1000;
 const SEED = [{"id": "o1","kind": "main","num": "1","title": "Человек собаке друг","text": "На прогулке с собакой Наталья заметила, что соседка Елена не убрала за своим питомцем. Наталья предложила Елене пакетик, чтобы та исправила ситуацию, но в ответ услышала:","phrase": "Если тебе надо, ты и убирай!","roles": ["Елена","Наталья"]},{"id": "o2","kind": "main","num": "2","title": "Идеальный монтаж","text": "Марина купила дорогую люстру. Пригласила электрика Игоря и объясняет ему, что монтаж светильника нужно производить строго по инструкции. На что Игорь отвечает:","phrase": "Тогда вы ее вешайте, а я инструкцию вам зачитаю","roles": ["Игорь, электрик","Марина"]},{"id": "o3","kind": "main","num": "3","title": "Нормальный специалист","text": "Совещание команды по проекту вел генеральный директор, а не лидер команды, так как по проекту были большие проблемы. Дойдя до раздела маркетинга, директор долго пытался добиться от маркетолога обоснования ее действий и обозначения следующих шагов. Утомившись, он произнес:","phrase": "Лена, ну просто представь, что бы ты делала, если бы была нормальным специалистом","roles": ["Генеральный директор","Лена, маркетолог"]},{"id": "o4","kind": "main","num": "4","title": "Шов раздора","text": "Дизайнер объяснила мастеру по укладке керамогранита, что шов между плитками должен быть «тонким и изящным», 2 мм. Приехав через день, она увидела швы в 4 мм. На вопрос «Что пошло не так?» мастер ответил:","phrase": "Какая плитка, такие и швы","roles": ["Мастер","Дизайнер"]},{"id": "o5","kind": "main","num": "5","title": "Рабочее поручение","text": "Молодой сотрудник получил задание, но выполнил его по-своему, не согласовав с руководителем. Начальник спросил его:","phrase": "Может, стоит сначала спросить, как правильно? Или вы художник и так видите?","roles": ["Начальник","Молодой сотрудник"]},{"id": "o6","kind": "main","num": "6","title": "Дрова везем","text": "Пассажир в маршрутном такси сделал замечание водителю о его резкой манере вождения: «Можно, пожалуйста, поаккуратнее? Не дрова везете». В ответ он услышал:","phrase": "Что погрузили, то и везу","roles": ["Водитель маршрутки","Пассажир"]},{"id": "o7","kind": "main","num": "7","title": "Опоздание","text": "Перед началом планерки несколько коллег пили кофе на общей кухне и случайно его пролили. Один из менеджеров остался прибрать и опоздал на планерку. Второй менеджер обратил на это внимание, сказав:","phrase": "Ты опоздал, полы мыть, видимо, важнее","roles": ["Второй менеджер","Опоздавший менеджер"]},{"id": "o8","kind": "main","num": "8","title": "Чашку кофею я тебе бодрящего налью","text": "Молодой бариста попросил постоянного клиента не пользоваться своей чашкой, ссылаясь на правила заведения. Клиент ответил:","phrase": "Вы каждый месяц меняетесь, а я уже пять лет пью здесь кофе из этой чашки","roles": ["Клиент","Бариста"]},{"id": "o9","kind": "main","num": "9","title": "Неприкрытая лесть","text": "В большом коллективе одной из Компаний кадровый работник предупредила, что приезжает проверяющий топ-руководитель и необходимо соблюдать в течение недели деловой стиль одежды. Мужчины надели деловые костюмы, девушки строгие платья и блузки. Начальница одного из отделов, состоящего из мужчин, сделала комплимент своим подчиненным, сказав, что мужчинам очень идут костюмы, смотрится это стильно. На что получила комментарий сотрудника:","phrase": "За доплату готовы всегда так одеваться!","roles": ["Сотрудник","Начальница отдела"]},{"id": "o10","kind": "main","num": "10","title": "Тайный переезд","text": "Три подруги гуляли по улице: Екатерина, Антонина и Алена. Подруга Антонина поделилась, что собирается переезжать в Питер в начале ноября, и попросила не рассказывать никому. Подруга Алена, обращаясь к Екатерине, сказала:","phrase": "Ну конечно, если знает Катя, знает и весь район!","roles": ["Алена","Екатерина","Антонина"]},{"id": "o11","kind": "main","num": "11","title": "Я так смотрю, вы совсем не боец?","text": "На собеседовании в динамичную компанию по продажам кандидат (Александр) рассказывает, что предпочитает взвешенные решения, не любит агрессивных методов и старается избегать конфликтов. Руководитель отдела (Елена), проводившая собеседование кандидата, перебивает:","phrase": "Я так смотрю, вы совсем не боец?","roles": ["Елена, руководитель отдела","Александр, кандидат"]},{"id": "o12","kind": "main","num": "12","title": "Анютины глазки","text": "В приемной руководителя секретарь заработалась за монитором и забыла, что своей очереди ожидает коллега. Когда он напомнил о себе, Анна с иронией объяснила, что у нее «память девичья». На что коллега ответил:","phrase": "Главное, чтобы не было «куриной слепоты»!","roles": ["Коллега","Анна, секретарь"]},{"id": "o13","kind": "main","num": "13","title": "Детектор лжи","text": "Директор на совещании, посвященном участившимся в фирме хищениям, дал распоряжение руководителям подразделений объявить своим работникам, что будут проходить проверку на «детекторе лжи». В ответ на это один руководитель заявил:","phrase": "А если не будет эффекта? Пытать всех начнете?","roles": ["Руководитель подразделения","Директор"]},{"id": "o14","kind": "main","num": "14","title": "Кто в кабинете хозяйка?","text": "Мария и Татьяна работают в одном кабинете. Мария ухаживает за всем кабинетом, цветами, интерьером. Татьяна только за своим рабочим местом. Марии нравится в целом поддерживать порядок, но энтузиазм угасает, так как от Татьяны в этом вопросе помощи практически нет. Как-то раз Мария направилась в уборную помыть свою кружку. Татьяна, увидев это, говорит:","phrase": "О! А ты не могла бы и мою кружку захватить?","roles": ["Татьяна","Мария"]},{"id": "o15","kind": "main","num": "15","title": "«Петь-то умеете?»","text": "Музыкальная группа перед выступлением прогоняет программу на сцене. Вокалистки поют старую добрую песню. Входит в зал солидный мужчина, усаживается в кресло, внимательно слушает. Как только песня закончилась, выдает:","phrase": "А вы неправильно поете. Так петь нельзя!","roles": ["Солидный мужчина","Вокалистка"]},{"id": "o16","kind": "main","num": "16","title": "На ковре начальника","text": "После стратегического совещания по благоустройству города, где молодой сотрудник Света активно предлагала идеи и вступала в профессиональную дискуссию, руководитель попросил ее задержаться. Когда дверь кабинета закрылась, он с улыбкой спросил:","phrase": "Света, а кто сказал, что ты можешь это все предлагать?","roles": ["Руководитель","Света"]},{"id": "o17","kind": "main","num": "17","title": "Непунктуальный друг","text": "Виктор с женой решил поехать на шашлыки, позвал с собой друга с семьей. Договорились встретиться в дороге на полпути в придорожном кафе в 11:00 и дальше ехать вместе. Друзья опоздали на час, не предупредив. Такое поведение и раньше за ними было замечено. Виктор в сердцах сказал другу:","phrase": "Ну наконец-то! Как у тебя еще бизнес не развалился при такой пунктуальности?","roles": ["Виктор","Друг"]},{"id": "o18","kind": "main","num": "18","title": "Удобное кресло","text": "Руководители заходят в кабинет директора на совещание. Директора еще нет, а за его местом работает директор по персоналу. Главный бухгалтер с ухмылкой произносит громко:","phrase": "А ты, никак, директора подсиживаешь?","roles": ["Главный бухгалтер","Директор по персоналу"]},{"id": "o19","kind": "main","num": "19","title": "Кто подаст стакан воды?","text": "Во время обеда на общей кухне Мария возмущенно обсуждает повышение цен на сено и то, что теперь ей сложно содержать своего жеребца в конюшне. Все увлеченно начали делиться, где дешевле закупить сено и корм. А Надежда Петровна из бухгалтерии ей говорит:","phrase": "Конь в старости стакан воды не подаст. Детей тебе надо","roles": ["Надежда Петровна","Мария"]},{"id": "o20","kind": "main","num": "20","title": "Усы","text": "Молодой сотрудник отдела продаж Роман приходит на работу после отпуска с новыми усами и ярким загаром. Во время планерки, при защите отчета, Роман допускает ошибку в расчетах и неловко подвешивает паузу в докладе. На что начальник отдела, не дав договорить, усмехается и говорит:","phrase": "Вижу, что усы ты просто так отрастил, чтобы умнее выглядеть","roles": ["Начальник отдела","Роман"]},{"id": "o21","kind": "main","num": "21","title": "Случай на парковке","text": "Татьяна приезжает на работу на новом автомобиле. Евгений, столкнувшись с ней на парковке, в привычной шутливой манере замечает, что с покупкой таких автомобилей люди становятся другими. На что получает ответ:","phrase": "Понятно, почему ты не меняешься!","roles": ["Татьяна","Евгений"]},{"id": "o22","kind": "main","num": "22","title": "Маркетолог или бариста","text": "Разговаривая на рабочей кухне, секретарь поделилась с коллегой, что хочет подать заявку на конкурсную вакансию в отдел маркетинга и пойти на повышение. На что получила от коллеги комментарий:","phrase": "В отделе маркетинга нужен специалист, а не бариста","roles": ["Коллега","Секретарь"]},{"id": "o23","kind": "main","num": "23","title": "Общение в чате","text": "Коллега написал в корпоративный чат сообщение слишком сложным языком, используя несвойственные ему речевые обороты. При встрече другой сотрудник спросил его:","phrase": "А в жизни двух слов связать не можешь. Ты что, искусственным интеллектом пользовался?","roles": ["Сотрудник","Коллега"]},{"id": "o24","kind": "main","num": "24","title": "Заказ","text": "Молодая девушка приехала в магазин, чтобы забрать свой заказ. Тут она узнает от менеджера по продажам, что заказ был отменен, но ее он об этом предупредить не успел. Выслушав этот ответ, девушка язвительно заявила:","phrase": "То есть ваше время настолько дороже моего?","roles": ["Девушка","Менеджер по продажам"]},{"id": "o25","kind": "main","num": "25","title": "Зато не пешком","text": "Иван подходил к своему припаркованному возле торгового центра автомобилю марки Нива. Рядом с ним стоял новый БМВ, в котором сидел его одноклассник. Одноклассник узнал Ивана, оглядел его машину и сказал с ухмылкой:","phrase": "Ну что, Ваня, зато не пешком?","roles": ["Одноклассник","Иван"]},{"id": "o26","kind": "main","num": "26","title": "На парковке","text": "Собираясь выезжать с парковки, Мария обратила внимание, что Николай перегородил ей выезд своей машиной. Перестраховавшись, дабы не задеть машину Николая, Мария попросила его немного отъехать, чтобы совершить маневр, на что услышала:","phrase": "Тот, кто умеет водить, сумеет и выехать","roles": ["Николай","Мария"]},{"id": "o27","kind": "main","num": "27","title": "Хрупкий авторитет","text": "На объекте строители несерьезно относились к молодому дизайнеру, которая делала им замечания по качеству работ. Когда дизайнер пришла на очередную встречу, Сергей встретил ее фразой:","phrase": "О, наша фантазерка пришла!","roles": ["Сергей, строитель","Дизайнер"]},{"id": "o28","kind": "main","num": "28","title": "Неграмотный гид","text": "Группа туристов заказала многодневный автобусный тур по городам области. Гид тура в первую встречу представился и поинтересовался у группы: «Вы откуда? С Москвы?» На что получил незамедлительный ответ от туристки:","phrase": "Мы ИЗ Москвы! Вам бы грамматику повторить, прежде чем в гиды идти!","roles": ["Туристка","Гид"]},{"id": "o29","kind": "main","num": "29","title": "Кто крайний?","text": "В отделении «Почты России» выстроилась внушительная очередь. Каждый входящий задавал вопрос «Кто здесь крайний». Мужчина не выдержал и ответил последнему спросившему посетителю:","phrase": "Крайний бывает Север, вы русский язык в школе учили?","roles": ["Мужчина в очереди","Посетитель"]},{"id": "o30","kind": "main","num": "30","title": "Волонтерская помощь","text": "Группа волонтеров приезжает в конный клуб. Руководитель, кратко поприветствовав их, сразу ведет к конюшне и вручает им лопаты и инструменты, с четкими указаниями, с чего начать уборку. В этот момент один из волонтеров, глядя на лопаты и указывая на привезенный пакет с яблоками, произносит:","phrase": "Я приехал кормить лошадей. На этом моя волонтерская миссия заканчивается!","roles": ["Волонтер","Руководитель конного клуба"]},{"id": "o31","kind": "main","num": "31","title": "Быстрый Юрий","text": "Менеджер по работе с клиентами Юрий договорился о встрече со своим постоянным крупным заказчиком. Договоренность была осуществлена по личному телефону с генеральным директором, когда тот ему позвонил со словами: «Срочно приезжай, будет большой проект». Приехав в самое ближайшее время, Юрий, как и всегда, сразу идет в сторону кабинета генерального, но ему перегораживает дорогу секретарь, явно недавно работающая здесь девушка, и говорит:","phrase": "Притормозите коней, мужчина! Тут вам не ипподром!","roles": ["Секретарь","Юрий"]},{"id": "o32","kind": "main","num": "32","title": "ГамлетОк","text": "В драматическом театре идет репетиция спектакля «Гамлет». У артиста, который играет главную роль, плохое настроение. Поэтому он вяло, без выражения произносит текст, не эмоционален, не убедителен. Режиссер, который делает большую ставку на этот спектакль и этого артиста в главной роли, через два часа репетиции произносит:","phrase": "А ну, соберись! Тебе только колобка играть!","roles": ["Режиссер","Артист"]},{"id": "z1","kind": "spare","num": "1","title": "Парковка","text": "Управляющая компания имеет собственную парковку. Борис работает в данной компании бухгалтером уже много лет и ставит свою машину всегда на одно и то же место (оно в тени и расположено близко к главному входу). Недавно устроившийся в эту компанию на должность юриста Олег, приехав пораньше, стал парковаться на это удобное место. Подъехавший Борис увидел происходящее и заявил новичку:","phrase": "Давай, отгоняй машину, это мое место!","roles": ["Борис, бухгалтер","Олег, юрист"]},{"id": "z2","kind": "spare","num": "2","title": "Новый цвет","text": "Семейная пара делает ремонт в своем доме. Жена выбрала новый цвет для покраски стен. Муж нанимает бригаду отделочников. Начальник бригады, увидев выбранный оттенок, говорит мужу:","phrase": "А у вашей жены все хорошо с настроением? Может, еще над цветом подумаете?","roles": ["Начальник бригады","Муж"]},{"id": "z3","kind": "spare","num": "3","title": "Вместительный шкаф","text": "В тесном общем коридоре Максим поставил шкаф без согласования с соседями. Елена, уходя на работу, встретилась с неожиданностью. В этот момент из квартиры выходит Максим, Елена говорит:","phrase": "Как сделать так, чтобы шкаф, который мешал в вашей квартире, в общем коридоре не мешал?","roles": ["Елена","Максим"]}];
@@ -715,10 +760,10 @@ function status(s){
   if(s.roles.some(r => (r.an || "").trim() || r.vars.some(v => v.a.trim() || v.c.trim()))) return "part";
   return "none";
 }
-const numLabel = s => s.kind === "spare" ? "З" + s.num : s.num;
-const fullNum = s => s.kind === "spare" ? "Запасная " + s.num : "Ситуация " + s.num;
+const numLabel = s => s.kind === "spare" ? "З" + s.num : s.kind === "own" ? "С" + s.num : s.num;
+const fullNum = s => s.kind === "spare" ? "Запасная " + s.num : s.kind === "own" ? (s.from ? "Ситуация от " + s.from : "Своя ситуация " + s.num) : "Ситуация " + s.num;
 function sorted(){
-  const k = s => (s.kind === "spare" ? 1 : 0);
+  const k = s => (s.kind === "spare" ? 1 : s.kind === "own" ? 2 : 0);
   const n = s => { const x = parseFloat(s.num); return isNaN(x) ? 1e9 : x; };
   return db.situations.slice().sort((a,b) => k(a)-k(b) || n(a)-n(b) || String(a.title).localeCompare(b.title,"ru"));
 }
@@ -755,7 +800,9 @@ function renderList(){
     <div class="legend"><span><b style="background:var(--ok)"></b>готово</span><span><b style="background:var(--mid)"></b>начато</span><span><b></b>пусто</span></div>`;
   const fresh = all.filter(s => !lastReview(s)).length, due = all.filter(s => lastReview(s) && priority(s) < 9).length;
   $("#ctaSub").textContent = [due ? "к повтору " + due : "", fresh && fresh < all.length ? "новых " + fresh : "", !due && fresh === all.length ? "все ситуации по очереди" : "", ROUND_SEC + " с на роль"].filter(Boolean).join(" · ");
-  const F = [["all","Все",all.length],["todo","Не готовы",all.length-done],["done","Готовы",done],["played","Сыгранные",nPlayed],["main","Основные"],["spare","Запасные"]];
+  const nOwn = all.filter(s => s.kind === "own").length;
+  const F = [["all","Все",all.length],["todo","Не готовы",all.length-done],["done","Готовы",done],["played","Сыгранные",nPlayed],["main","Основные"],["spare","Запасные"], ...(nOwn ? [["own","Свои",nOwn]] : [])];
+  if(filter === "own" && !nOwn) filter = "all";
   $("#chips").innerHTML = F.map(([k,l,n]) => `<button class="chip${k===filter?" on":""}" data-f="${k}">${l}${n !== undefined ? `<em>${n}</em>` : ""}</button>`).join("");
   const items = visible();
   $("#list").innerHTML = items.length ? items.map(s => {
@@ -777,11 +824,12 @@ function visible(){
     const st = status(s);
     if(filter === "todo" && st === "full") return false;
     if(filter === "done" && st !== "full") return false;
-    if(filter === "main" && s.kind === "spare") return false;
+    if(filter === "main" && s.kind !== "main") return false;
     if(filter === "spare" && s.kind !== "spare") return false;
+    if(filter === "own" && s.kind !== "own") return false;
     if(filter === "played" && !games(s).length) return false;
     if(!q) return true;
-    const hay = [s.num, s.title, s.text, s.phrase, ...s.roles.flatMap(r => [r.name, r.an || "", ...r.vars.flatMap(v => [v.a, v.c, r.said ? effOpp(s, r, v) : ""])]), ...games(s).flatMap(g => [g.opp, g.note, g.turn, g.jsay, g.take])].join(" ").toLowerCase();
+    const hay = [s.num, s.title, s.text, s.phrase, s.from || "", ...s.roles.flatMap(r => [r.name, r.an || "", ...r.vars.flatMap(v => [v.a, v.c, r.said ? effOpp(s, r, v) : ""])]), ...games(s).flatMap(g => [g.opp, g.note, g.turn, g.jsay, g.take])].join(" ").toLowerCase();
     return hay.includes(q);
   });
 }
@@ -1144,48 +1192,268 @@ function roleSheet(r){
   });
 }
 
-function editSheet(s){
-  const isNew = !s;
-  const d = s || {kind:"main", num:"", title:"", text:"", phrase:""};
-  let kind = d.kind;
-  openSheet(`<h2>${isNew ? "Новая ситуация" : "Правка ситуации"}</h2>
-    <div class="fld"><div class="seg" id="eKind"><button data-k="main">Основная</button><button data-k="spare">Запасная</button></div></div>
+const OWN_TIPS = `<details class="tips" id="eTips"><summary>Как написать ситуацию для поединка</summary><ul>
+  <li>Возьмите случай из жизни: работа, семья, соседи, магазин, дорога. Чем узнаваемее, тем интереснее отвечать.</li>
+  <li>Описание: 2-5 предложений. Кто эти люди, где они и что случилось перед фразой. Удобно закончить словами «…и говорит:».</li>
+  <li>Фраза: одна колкость, на которую трудно ответить с ходу. Запишите ее так, как ее сказали бы вслух, без кавычек.</li>
+  <li>Роли обычно две: кто говорит фразу и кому ее говорят. В поединке первым отвечает тот, кому сказали.</li>
+  <li>Не подсказывайте в описании, как надо ответить: это работа игроков.</li>
+</ul></details>`;
+const nextNum = kind => { const n = db.situations.filter(x => x.kind === kind).map(x => parseFloat(x.num)).filter(x => !isNaN(x)); return n.length ? Math.max(...n) + 1 : 1; };
+function editSheet(s, opts){
+  const isNew = !s, fromMine = () => location.hash.slice(1) === "m";
+  const d = s || {kind:(opts && opts.kind) || "main", num:"", title:"", text:"", phrase:""};
+  let kind = d.kind, numTouched = !isNew;
+  const roleIn = (i, val) => `<div class="fld" data-ri="${i}"><label for="eR${i}">${i === 0 ? "Кто говорит фразу (роль)" : i === 1 ? "Кому говорят (эта роль отвечает первой)" : "Еще роль"}</label><input id="eR${i}" class="eRole" value="${esc(val || "")}" placeholder="${i === 0 ? "Например: Коллега" : i === 1 ? "Например: Секретарь" : "Например: Свидетель разговора"}" autocomplete="off"></div>`;
+  openSheet(`<h2 id="eH">${isNew ? (kind === "own" ? "Своя ситуация" : "Новая ситуация") : "Правка ситуации"}</h2>
+    ${s && s.src === "in" ? `<p class="note" style="margin:-6px 0 10px;padding:0">Присланная ситуация${s.from ? ", автор: " + esc(s.from) : ""}</p>` : ""}
+    <div class="fld"><div class="seg" id="eKind"><button data-k="main">Основная</button><button data-k="spare">Запасная</button><button data-k="own">Своя</button></div></div>
+    ${isNew ? OWN_TIPS : ""}
+    <div class="fld"><label for="eTitle">Название</label><input id="eTitle" value="${esc(d.title)}" placeholder="Коротко, о чем ситуация"></div>
+    <div class="fld"><div class="frow"><label for="eText">Описание ситуации</label><button type="button" class="lbtn" data-list="eText" aria-label="Маркированный список"><span>•</span> Список</button></div><textarea class="f" id="eText" rows="3" placeholder="Кто эти люди, где они, что случилось перед фразой">${esc(d.text)}</textarea></div>
+    ${isNew ? `<div id="eRoles">${roleIn(0)}${roleIn(1)}</div><button type="button" class="link" id="eMoreRole" style="margin:-8px 0 6px">+ Еще роль</button>` : ""}
+    <div class="fld"><label for="ePhrase">Фраза (без кавычек)</label><textarea class="f" id="ePhrase" rows="2" placeholder="Колкость, которую одна роль говорит другой">${esc(d.phrase)}</textarea></div>
     <div class="fld"><label for="eNum">Номер</label><input id="eNum" inputmode="numeric" value="${esc(d.num)}"></div>
-    <div class="fld"><label for="eTitle">Название</label><input id="eTitle" value="${esc(d.title)}"></div>
-    <div class="fld"><div class="frow"><label for="eText">Описание ситуации</label><button type="button" class="lbtn" data-list="eText" aria-label="Маркированный список"><span>•</span> Список</button></div><textarea class="f" id="eText" rows="3">${esc(d.text)}</textarea></div>
-    <div class="fld"><label for="ePhrase">Фраза (без кавычек)</label><textarea class="f" id="ePhrase" rows="2">${esc(d.phrase)}</textarea></div>
-    ${isNew ? `<div class="fld"><label for="eRoles">Роли через запятую, первой та, кто говорит фразу</label><input id="eRoles" placeholder="Кто сказал фразу, Кому сказали"></div>` : ""}
     <button class="btn pri full" id="eOk">${isNew ? "Добавить" : "Сохранить"}</button>
-    ${isNew ? "" : `<div style="height:10px"></div><button class="btn dng full" id="eDel">Удалить ситуацию</button>`}`, sh => {
-    const seg = sh.querySelector("#eKind");
-    const paint = () => seg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === kind));
+    ${isNew ? "" : `<div style="height:10px"></div><button class="btn full" id="eShare"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Поделиться ситуацией</button>
+      <div style="height:10px"></div><button class="btn dng full" id="eDel">Удалить ситуацию</button>`}`, sh => {
+    const seg = sh.querySelector("#eKind"), numIn = sh.querySelector("#eNum");
+    const paint = () => {
+      seg.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === kind));
+      if(isNew){ sh.querySelector("#eH").textContent = kind === "own" ? "Своя ситуация" : "Новая ситуация"; if(!numTouched) numIn.value = nextNum(kind); }
+    };
     paint(); seg.onclick = e => { const b = e.target.closest("button"); if(b){ kind = b.dataset.k; paint(); } };
+    numIn.addEventListener("input", () => { numTouched = true; });
     autosizeAll(sh); sh.addEventListener("input", e => e.target.matches("textarea.f") && autosize(e.target));
-    if(isNew){
-      const nums = db.situations.filter(x => x.kind === "main").map(x => parseFloat(x.num)).filter(x => !isNaN(x));
-      sh.querySelector("#eNum").value = nums.length ? Math.max(...nums) + 1 : 1;
-    }
+    const more = sh.querySelector("#eMoreRole");
+    if(more) more.onclick = () => {
+      const box = sh.querySelector("#eRoles"), n = box.querySelectorAll(".eRole").length;
+      box.insertAdjacentHTML("beforeend", roleIn(n)); if(n >= 5) more.classList.add("hidden");
+      sh.querySelector("#eR" + n).focus();
+    };
+    if(isNew && kind === "own") setTimeout(() => sh.querySelector("#eTitle").focus(), 60);
     sh.querySelector("#eOk").onclick = () => {
       const v = id => sh.querySelector(id).value.trim();
-      const phrase = v("#ePhrase").replace(/^[«"]+|[»"]+$/g, "").trim();
+      const phrase = v("#ePhrase").replace(/^[«"„“]+|[»"“”]+$/g, "").trim();
       if(!v("#eTitle") && !phrase){ toast("Нужно хотя бы название или фраза"); return; }
       if(isNew){
-        const roles = (v("#eRoles") || "Кто сказал фразу, Кому сказали").split(/[,;]/).map(x => x.trim()).filter(Boolean);
-        const ns = {id:"u" + uid(), kind, num:v("#eNum"), title:v("#eTitle"), text:v("#eText"), phrase,
+        const names = [...sh.querySelectorAll(".eRole")].map(x => x.value.trim());
+        if(!names[0]) names[0] = "Кто сказал фразу";
+        if(!names[1]) names[1] = "Кому сказали";
+        const roles = names.filter(Boolean);
+        const ns = {id:"u" + uid(), kind, num:v("#eNum"), title:v("#eTitle"), text:v("#eText"), phrase, created:Date.now(),
           roles:authorLast(roles.map((name,i) => ({id:uid(), name, said:i===0, an:"", vars:[newVariant()]}))), games:[], reviews:[]};
         db.situations.push(ns); save(true); closeSheet(); go("s/" + ns.id);
       }else{
         Object.assign(s, {kind, num:v("#eNum"), title:v("#eTitle"), text:v("#eText"), phrase});
-        save(true); closeSheet(); renderSit();
+        save(true); closeSheet(); fromMine() ? renderMine() : renderSit();
       }
+    };
+    const shr = sh.querySelector("#eShare");
+    if(shr) shr.onclick = () => {
+      if(!s.phrase.trim()){ toast("Сначала впишите фразу"); return; }
+      closeSheet(); shareSitSheet([s]);
     };
     const del = sh.querySelector("#eDel");
     if(del) del.onclick = () => {
       if(!confirm(`Удалить ситуацию «${s.title}» со всей подготовкой и журналом?`)) return;
-      games(s).forEach(deleteGameAudio); db.situations = db.situations.filter(x => x !== s); save(true); closeSheet(); back();
+      games(s).forEach(deleteGameAudio); db.situations = db.situations.filter(x => x !== s); save(true); closeSheet();
+      fromMine() ? renderMine() : back();
     };
   });
 }
+
+/* ---------- свои ситуации: написать, поделиться, добавить присланную ---------- */
+const SITE_URL = "https://express-poedinki.github.io/";
+const isMine = s => s.src !== "in" && (s.kind === "own" || /^u/.test(s.id));
+const isGot = s => s.src === "in";
+function b64u(bytes){ let s = ""; for(let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+function unb64u(str){ str = str.replace(/-/g, "+").replace(/_/g, "/"); while(str.length % 4) str += "="; const bin = atob(str), u = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; }
+async function pipeBytes(bytes, stream){ return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer()); }
+function authorFirst(s){ const au = s.roles.find(r => r.said); return au ? [au, ...s.roles.filter(r => r !== au)] : s.roles.slice(); }
+function sitPayload(s){
+  const au = s.roles.find(r => r.said), f = s.src === "in" ? (s.from || "") : (db.me || "").trim();
+  const o = {k:s.sk || s.id, t:s.title || "", x:s.text || "", p:s.phrase || "", r:authorFirst(s).map(r => r.name), a:au ? 0 : -1};
+  if(f) o.f = f;
+  return o;
+}
+/* код ситуации для ссылки: JSON, сжатый deflate (если телефон умеет), в base64url; первый символ - формат */
+async function encodeShare(list){
+  const json = new TextEncoder().encode(JSON.stringify({v:1, s:list.map(sitPayload)}));
+  if(typeof CompressionStream !== "undefined"){ try{ return "1" + b64u(await pipeBytes(json, new CompressionStream("deflate-raw"))); }catch(e){} }
+  return "0" + b64u(json);
+}
+async function decodeShare(code){
+  const fmt = code[0]; let raw;
+  try{
+    const bytes = unb64u(code.slice(1));
+    if(fmt === "1"){
+      if(typeof DecompressionStream === "undefined") throw new Error("old");
+      raw = await pipeBytes(bytes, new DecompressionStream("deflate-raw"));
+    }else if(fmt === "0") raw = bytes;
+    else throw new Error("fmt");
+  }catch(e){
+    throw new Error(e.message === "old" ? "этот телефон не умеет открывать такие ссылки, обновите iOS" : "ссылка повреждена или обрезана, попросите прислать ее еще раз");
+  }
+  let d; try{ d = JSON.parse(new TextDecoder().decode(raw)); }catch(e){ throw new Error("ссылка повреждена или обрезана, попросите прислать ее еще раз"); }
+  if(!d || !Array.isArray(d.s)) throw new Error("в ссылке нет ситуаций");
+  const str = (x, n) => String(x ?? "").slice(0, n);
+  return d.s.filter(x => x && (x.t || x.p)).map(x => ({k:str(x.k, 60), t:str(x.t, 300).trim(), x:str(x.x, 6000).trim(), p:str(x.p, 1000).trim(), f:str(x.f, 80).trim(),
+    r:(Array.isArray(x.r) ? x.r : []).map(n => str(n, 80).trim()).filter(Boolean).slice(0, 6), a:x.a === -1 ? -1 : 0}));
+}
+function findCodes(text){ const out = [], re = /[#?&]add=([01][A-Za-z0-9_-]{8,})/g; let m; while((m = re.exec(text))) if(!out.includes(m[1])) out.push(m[1]); return out; }
+function shareText(list, code){
+  const blocks = list.map(s => {
+    const roles = authorFirst(s), au = s.roles.find(r => r.said), f = s.src === "in" ? s.from : (db.me || "").trim();
+    return [`«${s.title || "Без названия"}»`, s.text ? plainList(s.text) : "",
+      roles.length ? "Роли: " + roles.map(r => r === au ? r.name + " (говорит фразу)" : r.name).join(", ") : "",
+      `Фраза: «${s.phrase}»`, f ? "Автор: " + f : ""].filter(Boolean).join("\n");
+  });
+  return [list.length === 1 ? "КСТ · Экспресс-поединки: ситуация для поединка" : `КСТ · Экспресс-поединки: ${list.length} ${plural(list.length, "ситуация", "ситуации", "ситуаций")} для поединков`, "",
+    blocks.join("\n\n"), "",
+    `Добавить в приложение «Экспресс-поединки»: ${SITE_URL}#add=${code}`,
+    `Если приложение у вас на экране «Домой», скопируйте это сообщение, откройте приложение и нажмите «Мои» → «Добавить присланную».`].join("\n");
+}
+function shareSitSheet(list){
+  list = list.filter(s => (s.phrase || "").trim());
+  if(!list.length){ toast("Сначала впишите фразу"); return; }
+  const needMe = list.some(s => s.src !== "in");
+  let text = "", busy = null;
+  openSheet(`<h2>${list.length === 1 ? "Поделиться ситуацией" : "Поделиться ситуациями: " + list.length}</h2>
+    ${needMe ? `<div class="fld"><label for="shMe">Подпись автора: имя или псевдоним (можно оставить пустым)</label><input id="shMe" value="${esc(db.me || "")}" placeholder="Например: Ник" autocomplete="off"></div>` : ""}
+    <div class="fld"><label>Что получит адресат</label><div class="prev" id="shPrev">Готовлю…</div></div>
+    <button class="btn pri full" id="shGo"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Отправить</button>
+    <div style="height:10px"></div><button class="btn full" id="shCopy">Скопировать текст</button>
+    <p class="note">Отправляется только сама ситуация: название, описание, роли и фраза. Ваш анализ, ответы и журнал остаются на телефоне. Получатель добавит ситуацию по ссылке или вставив сообщение в «Мои» → «Добавить присланную».</p>`, sh => {
+    const prev = sh.querySelector("#shPrev");
+    let gen = 0;
+    const build = () => { const my = ++gen; busy = encodeShare(list).then(code => { if(my !== gen) return; text = shareText(list, code); prev.textContent = text; busy = null; }); return busy; };
+    build();
+    const me = sh.querySelector("#shMe");
+    if(me) me.addEventListener("input", () => { db.me = me.value.trim(); save(); build(); });
+    const mark = () => { const t = Date.now(); list.forEach(s => { if(s.src !== "in") s.sharedAt = t; }); save(true); if(location.hash.slice(1) === "m") renderMine(); };
+    sh.querySelector("#shGo").onclick = async () => {
+      if(!text) await busy;
+      if(navigator.share){
+        try{ await navigator.share({text}); mark(); closeSheet(); toast("Отправлено"); return; }catch(e){ if(e.name === "AbortError") return; }
+      }
+      copyPlain(text, () => { mark(); toast("Текст скопирован, вставьте его в сообщение"); });
+    };
+    sh.querySelector("#shCopy").onclick = async () => { if(!text) await busy; copyPlain(text, () => { mark(); toast("Текст скопирован, вставьте его в сообщение"); }); };
+  });
+}
+function copyPlain(t, ok){
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, () => { fallbackCopy(t); ok && ok(); });
+  else { fallbackCopy(t); ok && ok(); }
+}
+function sameSit(x){ return db.situations.find(s => (s.sk && s.sk === x.k) || s.id === x.k); }
+function importSheet(code){
+  const isStandalone = navigator.standalone || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
+  const fromLink = !!code;
+  let found = [];
+  openSheet(`<h2>Добавить присланную ситуацию</h2>
+    ${fromLink ? (!isStandalone && /iPhone|iPad|iPod/.test(navigator.userAgent) ? `<div class="banner" style="margin:0 0 12px;flex-direction:column;align-items:flex-start;gap:4px"><span class="t">Ссылка открылась в браузере. Если приложение у вас на экране «Домой», ситуация добавится только сюда, а не в него. Чтобы добавить в приложение, скопируйте ссылку, откройте приложение со значка и вставьте ее в «Мои» → «Добавить присланную».</span><button id="imCopyLink">Скопировать ссылку</button></div>` : "")
+      : `<p class="note" style="padding:0 0 10px">Скопируйте сообщение с ситуацией целиком (или только ссылку из него) и вставьте сюда.</p>
+    <div class="fld"><textarea class="f" id="imText" rows="3" placeholder="Вставьте сообщение или ссылку" style="max-height:calc(22vh / var(--z));overflow:auto"></textarea></div>
+    <div class="btn2" style="margin-bottom:12px"><button class="btn" id="imPaste">Вставить</button><button class="btn dark" id="imFind">Найти ситуацию</button></div>`}
+    <div id="imRes"></div>`, sh => {
+    const res = sh.querySelector("#imRes");
+    const paint = () => {
+      if(!found.length){ res.innerHTML = ""; return; }
+      res.innerHTML = `<div class="lbl" style="margin:4px 0 8px">${found.length === 1 ? "Найдена ситуация" : "Найдено ситуаций: " + found.length}</div>
+        ${found.map((x, i) => { const ex = sameSit(x), same = ex && ex.title === x.t && ex.text === x.x && ex.phrase === x.p;
+          return `<label class="impi"><input type="checkbox" data-i="${i}"${same ? "" : " checked"}><span class="b"><span class="t">${esc(x.t || "Без названия")}</span>
+            <span class="q">«${esc(x.p)}»</span><span class="q">Роли: ${esc(x.r.map((n, k) => k === 0 && x.a === 0 ? n + " (говорит фразу)" : n).join(", ") || "не указаны")}${x.f ? " · автор: " + esc(x.f) : ""}</span>
+            ${ex ? `<span class="w">${same ? "Уже есть у вас" : "Уже есть у вас: текст обновится, ваша подготовка сохранится"}</span>` : ""}</span></label>`; }).join("")}
+        <button class="btn pri full" id="imAdd" style="margin-top:6px">Добавить</button>`;
+    };
+    const look = async txt => {
+      const codes = findCodes(txt);
+      if(!codes.length){ toast("В тексте нет ссылки на ситуацию"); found = []; paint(); return; }
+      found = [];
+      for(const c of codes){ try{ found.push(...await decodeShare(c)); }catch(e){ alert("Не удалось прочитать ситуацию: " + e.message); } }
+      if(!found.length && codes.length) toast("Ситуаций не найдено");
+      paint();
+      if(found.length && !fromLink) setTimeout(() => res.scrollIntoView({block:"start", behavior:"smooth"}), 50);
+    };
+    res.addEventListener("click", e => {
+      if(e.target.id !== "imAdd") return;
+      const pick = [...res.querySelectorAll("input[data-i]")].filter(x => x.checked).map(x => found[+x.dataset.i]);
+      if(!pick.length){ toast("Отметьте ситуацию"); return; }
+      let added = 0, upd = 0, last = null;
+      for(const x of pick){
+        const ex = sameSit(x);
+        if(ex){
+          Object.assign(ex, {title:x.t, text:x.x, phrase:x.p});
+          const now = authorFirst(ex);
+          if(now.length === x.r.length) now.forEach((r, k) => { r.name = x.r[k]; });
+          if(x.f && ex.src === "in") ex.from = x.f;
+          upd++; last = ex; continue;
+        }
+        const names = x.r.length ? x.r : ["Кто сказал фразу", "Кому сказали"];
+        const ns = {id:"i" + uid(), kind:"own", num:String(nextNum("own")), title:x.t, text:x.x, phrase:x.p, src:"in", from:x.f, sk:x.k || "", added:Date.now(),
+          roles:authorLast(names.map((name, k) => ({id:uid(), name, said:x.a === 0 && k === 0, an:"", vars:[newVariant()]}))), games:[], reviews:[]};
+        db.situations.push(ns); added++; last = ns;
+      }
+      save(true); closeSheet();
+      if(location.hash.slice(1) === "m") renderMine(); else go("m");
+      toast([added ? `Добавлено: ${added}` : "", upd ? `обновлено: ${upd}` : ""].filter(Boolean).join(", ") + ". Ситуации в «Мои» и в общем списке");
+    });
+    if(fromLink){
+      const cl = sh.querySelector("#imCopyLink");
+      if(cl) cl.onclick = () => copyPlain(SITE_URL + "#add=" + code, () => toast("Ссылка скопирована"));
+      look("#add=" + code);
+      return;
+    }
+    const ta = sh.querySelector("#imText");
+    sh.addEventListener("input", e => e.target.matches("textarea.f") && autosize(e.target));
+    ta.addEventListener("paste", () => setTimeout(() => look(ta.value), 0));
+    sh.querySelector("#imFind").onclick = () => look(ta.value);
+    sh.querySelector("#imPaste").onclick = async () => {
+      try{
+        const t = await navigator.clipboard.readText();
+        if(t){ ta.value = t; autosize(ta); look(t); } else toast("Буфер обмена пуст");
+      }catch(e){ ta.focus(); toast("Нажмите в поле и выберите «Вставить»"); }
+    };
+  });
+}
+function renderMine(){
+  const byNum = (a, b) => (parseFloat(a.num) || 0) - (parseFloat(b.num) || 0) || String(a.title).localeCompare(b.title, "ru");
+  const mine = db.situations.filter(isMine).sort(byNum), got = db.situations.filter(isGot).sort((a, b) => (b.added || 0) - (a.added || 0));
+  const roleLine = s => { const au = s.roles.find(r => r.said); return authorFirst(s).map(r => r === au ? r.name + " (говорит фразу)" : r.name).join(", "); };
+  const card = (s, own) => {
+    const draft = !(s.phrase || "").trim() ? "черновик: нет фразы" : s.roles.length < 2 ? "черновик: нужны две роли" : "";
+    const stt = own ? (draft ? `<span class="st warn">${draft}</span>` : s.sharedAt ? `<span class="st okc">отправлена ${fmtShort(new Date(s.sharedAt).toISOString().slice(0, 10))}</span>` : `<span class="st">еще не отправлялась</span>`)
+      : `<span class="st">${s.from ? "от " + esc(s.from) : "автор не указан"}${s.added ? " · " + fmtShort(new Date(s.added).toISOString().slice(0, 10)) : ""}</span>`;
+    return `<div class="mcard"><button class="mt" data-open="${s.id}"><span class="n disp">${esc(numLabel(s))}</span><span class="b">
+      <span class="t">${esc(s.title || "Без названия")}</span>${(s.phrase || "").trim() ? `<span class="q">«${esc(s.phrase)}»</span>` : ""}
+      ${s.roles.length ? `<span class="r">${esc(roleLine(s))}</span>` : ""}</span></button>
+      <div class="mfoot">${stt}<button class="mini" data-edit="${s.id}">Править</button>${(s.phrase || "").trim() ? `<button class="mini shr" data-share="${s.id}"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Поделиться</button>` : ""}</div></div>`;
+  };
+  const ready = mine.filter(s => (s.phrase || "").trim());
+  $("#mBody").innerHTML = `
+    <div class="card mintro">
+      ${mine.length || got.length ? "" : `<p>Запишите ситуацию из жизни: обстоятельства, колкость и роли. Она появится в общем списке, ее можно готовить и тренировать, как ситуации из буклета, и отправить другу: он добавит ее в свое приложение по ссылке.</p>`}
+      <button class="btn pri full" id="mWrite"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>Написать ситуацию</button>
+      <button class="btn full" id="mImport"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>Добавить присланную</button>
+    </div>
+    <h3 class="sec disp">Написанные мной ${mine.length ? `<small>${mine.length}</small>` : ""}</h3>
+    ${mine.length ? mine.map(s => card(s, true)).join("") : `<div class="empty" style="padding:18px 10px">Своих ситуаций пока нет.</div>`}
+    ${ready.length > 1 ? `<button class="btn ghost full" id="mShareAll" style="margin-top:4px">Поделиться всеми своими (${ready.length})</button>` : ""}
+    <h3 class="sec disp">Присланные ${got.length ? `<small>${got.length}</small>` : ""}</h3>
+    ${got.length ? got.map(s => card(s, false)).join("") : `<div class="empty" style="padding:18px 10px">Когда вам пришлют ситуацию, добавьте ее кнопкой «Добавить присланную» или откройте ссылку из сообщения.</div>`}
+    <div class="ver">Версия ${APP_VERSION}</div>`;
+}
+$("#mBody").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.id === "mWrite") return editSheet(null, {kind:"own"});
+  if(b.id === "mImport") return importSheet(null);
+  if(b.id === "mShareAll") return shareSitSheet(db.situations.filter(isMine));
+  if(b.dataset.open) return go("s/" + b.dataset.open);
+  if(b.dataset.edit){ const s = byId(b.dataset.edit); if(s) editSheet(s); return; }
+  if(b.dataset.share){ const s = byId(b.dataset.share); if(s) shareSitSheet([s]); return; }
+});
+$("#mAdd").onclick = () => editSheet(null, {kind:"own"});
 
 /* ---------- поединки (журнал) ---------- */
 const RES = {win:"Победа", loss:"Поражение"};
@@ -1467,6 +1735,7 @@ function rerender(){
   const h = location.hash.slice(1);
   if(h.startsWith("s/") && cur) renderSit();
   else if(h === "j") renderJournal();
+  else if(h === "m") renderMine();
   else if(h.startsWith("t/")) { if(T.stage !== "review") paintTrain(); }
   else renderList();
 }
@@ -1885,10 +2154,13 @@ $("#tabs").addEventListener("click", e => {
 $("#hBack").onclick = () => back();
 function route(){
   closeSheet();
-  const h = location.hash.slice(1);
+  let h = location.hash.slice(1), addCode = null;
+  /* ссылка «#add=…» из сообщения: добавить присланную ситуацию */
+  const am = /^add=([01][A-Za-z0-9_-]+)/.exec(h);
+  if(am){ addCode = am[1]; h = "m"; history.replaceState(null, "", "#m"); }
   if(prevHash !== null && prevHash.startsWith("t/") && prevHash !== h) cleanupTraining();
   prevHash = h;
-  ["#vList","#vSit","#vCheat","#vTrain","#vJournal","#vHelp"].forEach(v => $(v).classList.add("hidden"));
+  ["#vList","#vSit","#vCheat","#vTrain","#vJournal","#vMine","#vHelp"].forEach(v => $(v).classList.add("hidden"));
   let tab = null;
   if(h.startsWith("s/") && byId(h.slice(2))){
     cur = byId(h.slice(2)); $("#vSit").classList.remove("hidden"); renderSit(); scrollTo(0,0);
@@ -1901,6 +2173,8 @@ function route(){
     scrollTo(0,0); if(id === "*") tab = "t/*";
   }else if(h === "j"){
     $("#vJournal").classList.remove("hidden"); renderJournal(); scrollTo(0,0); tab = "j";
+  }else if(h === "m"){
+    $("#vMine").classList.remove("hidden"); renderMine(); scrollTo(0,0); tab = "m";
   }else if(h === "h"){
     $("#vHelp").classList.remove("hidden"); scrollTo(0,0);
   }else{
@@ -1908,6 +2182,7 @@ function route(){
   }
   $("#tabs").classList.toggle("hidden", tab === null || tab === "t/*");
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.tab === tab));
+  if(addCode) importSheet(addCode);
 }
 addEventListener("scroll", () => document.querySelectorAll(".top").forEach(t => t.classList.toggle("scrolled", scrollY > 4)), {passive:true});
 
