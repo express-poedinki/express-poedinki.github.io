@@ -143,6 +143,7 @@ h1.h{margin:4px 0 0;font-size:24px;font-weight:700}
 .btn.full{width:100%}
 .btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .link{border:0;background:transparent;color:var(--a);font-weight:700;padding:10px 0;font-size:15px}
+.cover .blk{display:inline-flex;align-items:center;gap:6px;padding:12px 0 2px;font-size:14px;text-align:left}
 .mini{height:34px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:700}
 textarea.f{width:100%;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:11px 13px;font-size:16px;line-height:1.4;resize:none;min-height:50px;outline:0;overflow:hidden;display:block}
 textarea.f:focus{border-color:var(--ink2)}
@@ -514,6 +515,7 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
       <li>В заголовке каждого варианта есть кнопка <b>«+ база»</b>: она открывает список 14 баз, где видно, какие уже заняты другими вариантами. Выбранная база показывается в заголовке варианта, в шпаргалке и в подсказке во время раунда. «Без базы» снимает отметку. На одну базу можно записать несколько вариантов.</li>
       <li>У роли автора фразы (она стоит второй) в каждом варианте сверху есть поле <b>«Ожидаемый ответ»</b> оппонента: запишите, что он, скорее всего, ответит на колкость, и готовьте свою ответную фразу, видя этот ответ перед глазами. Каждый вариант автора фразы привязывается к конкретному ответу оппонента: в блоке «На какой ответ … вы отвечаете?» выберите карточку «вариант N» с текстом его ответа. После выбора сверху видно «Отвечаю на: «Бариста», вариант N» и сам текст ответа; если ответ Баристы потом изменить, здесь он обновится сам. Чтобы подготовить ответ еще и на другой ответ Баристы, нажмите «Другой ответ» и выберите его карточку: откроется отдельный вариант, привязанный к этому ответу (или тот, что уже на него отвечает, на карточке это видно как «ваш ответ: вариант N»), а прежний вариант останется ответом на прежний ответ и не изменится. Если ответ был привязан по ошибке, нажмите «Другой ответ», затем «Перенести этот вариант» и выберите нужный ответ: тогда этот же вариант будет отвечать на него. «Свой текст» отвязывает и позволяет записать ожидаемый ответ вручную. С другой стороны, у роли, которая отвечает первой, под каждым ответом есть кнопка «→ Подготовить ответ «Клиента» на этот ответ»: она привязывает к нему вариант автора фразы и сразу открывает его; после этого там видно «✓ «Клиент» отвечает на него: вариант N →», нажатие переходит к этому варианту. Ожидаемый ответ виден и в шпаргалке, и в подсказке во время раунда.</li>
       <li>У роли автора фразы над вариантами есть карточка <b>«Ваши ответы на формулы «Бариста»»</b>: 14 строк по базам. В строке формула оппонента на эту базу, а справа ваш ответ на нее: «✓ вариант N», «начат: вариант N» или «+ ответить». Если формулы оппонента на эту базу еще нет, справа «→ придумать»: нажатие переходит к роли оппонента и открывает вариант с этой базой. Ниже ответы оппонента без базы и строка «поддавки» (если оппонент вдруг согласится). Сверху счет, например 9 / 14: база засчитывается, когда на каждую формулу оппонента по ней у вас есть ответ. Базу своего ответа автор фразы отмечает по желанию. Нажатие на строку открывает ваш вариант для этого ответа, а если его еще нет, создает его и ставит курсор в ответную фразу. Так проще просчитать все ходы противника и ничего не пропустить. Вариант «поддавки» можно вернуть в обычный кнопкой «Обычный ответ».</li>
+      <li><b>Выгрузка в бланк «Выбор базы»</b>: внизу карты 14 баз (и карточки ответов автора фразы) есть кнопка «Выгрузить в бланк «Выбор базы» (Word)», такая же есть в шпаргалке. Выберите роль или «Все роли одним файлом». Получится файл Word по листу «Выбор базы для составления вербальной формулы в экспресс-поединках»: сначала текст ситуации (номер, название, описание, роли и фраза), затем таблица «№ · Выбор базы · Вербальная формула» на 14 строк с вашими ответными фразами по каждой базе. Если на базу несколько вариантов, они идут подряд с подписью «Вариант N» (★ у приоритетных). У автора фразы в каждой строке сначала формула оппонента (курсивом), затем ваш ответ на нее. Пустые базы остаются пустыми строками, их можно дописать от руки. Фразы без базы печатаются после таблицы. Контрфразы, анализ и оценки в бланк не попадают. Файл открывается в меню отправки iPhone: «Сохранить в Файлы», Word, Telegram, почта.</li>
       <li>Ниже <b>ответная фраза</b> и <b>контрфраза</b>: что вам могут сказать в ответ и как это парировать. Кнопка «+ вариант» добавляет еще пару «ответ и контрфраза», «Удалить» убирает лишний вариант. Когда вариантов несколько, стрелки ↑ и ↓ у варианта меняют их местами: первым ставьте основной ответ, в таком порядке варианты показываются в шпаргалке и подсказке.</li>
       <li><b>Приоритетные формулировки</b>: когда у роли несколько вариантов, слева от «Вариант N» есть звездочка ☆. Нажмите ее у лучших формулировок: звездочка становится золотой, карточка варианта получает золотую рамку и поднимается наверх, над всеми вариантами без звездочки. Отмеченных может быть сколько угодно; каждый новый встает последним среди отмеченных. Стрелки ↑ и ↓ меняют порядок внутри своей группы: отмеченные всегда остаются выше остальных. Повторное нажатие на звездочку снимает отметку, вариант встает первым среди остальных. Звездочка видна в шпаргалке, в подсказке во время раунда, в картах баз («✓ ★ вариант 1») и в копии подготовки текстом. Привязки ответов автора фразы при перестановке не теряются.</li>
       <li><b>Маркированные списки</b>: кнопка «• Список» справа от названия поля ставит маркер «•» в начало строки, а если выделить несколько строк, во все сразу. Повторное нажатие убирает маркеры. Можно и просто начать строку с «- » или «* », это превратится в «• ». Enter продолжает список, Enter на пустом пункте завершает его. Нумерованные строки («1. », «2. ») тоже продолжаются сами. Кнопка есть в анализе, ответной фразе, контрфразе, описании ситуации и заметках к поединку. В шпаргалке и подсказке списки показываются с отступами.</li>
@@ -559,7 +561,7 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
 
     <h3>7. Шпаргалка</h3>
     <ul>
-      <li>Значок книжки вверху ситуации открывает шпаргалку: фраза и все ваши ответы крупным шрифтом, без полей ввода; над вариантом видна его база. Удобно просмотреть перед выходом. Из шпаргалки можно сразу начать раунд.</li>
+      <li>Значок книжки вверху ситуации открывает шпаргалку: фраза и все ваши ответы крупным шрифтом, без полей ввода; над вариантом видна его база. Удобно просмотреть перед выходом. Из шпаргалки можно сразу начать раунд или выгрузить ответы в бланк «Выбор базы» (Word).</li>
     </ul>
 
     <h3>8. Журнал поединков</h3>
@@ -629,7 +631,7 @@ details.tdesc p{margin:0 0 6px;font-size:15px;color:var(--ink2);line-height:1.5}
 
 <script>
 "use strict";
-const APP_VERSION = "4.0";
+const APP_VERSION = "4.1";
 const ROUND_SEC = 40; // в поединке за каждую роль играешь по 40 секунд
 const ROUND_MS = ROUND_SEC * 1000;
 const SEED = [{"id": "o1","kind": "main","num": "1","title": "Человек собаке друг","text": "На прогулке с собакой Наталья заметила, что соседка Елена не убрала за своим питомцем. Наталья предложила Елене пакетик, чтобы та исправила ситуацию, но в ответ услышала:","phrase": "Если тебе надо, ты и убирай!","roles": ["Елена","Наталья"]},{"id": "o2","kind": "main","num": "2","title": "Идеальный монтаж","text": "Марина купила дорогую люстру. Пригласила электрика Игоря и объясняет ему, что монтаж светильника нужно производить строго по инструкции. На что Игорь отвечает:","phrase": "Тогда вы ее вешайте, а я инструкцию вам зачитаю","roles": ["Игорь, электрик","Марина"]},{"id": "o3","kind": "main","num": "3","title": "Нормальный специалист","text": "Совещание команды по проекту вел генеральный директор, а не лидер команды, так как по проекту были большие проблемы. Дойдя до раздела маркетинга, директор долго пытался добиться от маркетолога обоснования ее действий и обозначения следующих шагов. Утомившись, он произнес:","phrase": "Лена, ну просто представь, что бы ты делала, если бы была нормальным специалистом","roles": ["Генеральный директор","Лена, маркетолог"]},{"id": "o4","kind": "main","num": "4","title": "Шов раздора","text": "Дизайнер объяснила мастеру по укладке керамогранита, что шов между плитками должен быть «тонким и изящным», 2 мм. Приехав через день, она увидела швы в 4 мм. На вопрос «Что пошло не так?» мастер ответил:","phrase": "Какая плитка, такие и швы","roles": ["Мастер","Дизайнер"]},{"id": "o5","kind": "main","num": "5","title": "Рабочее поручение","text": "Молодой сотрудник получил задание, но выполнил его по-своему, не согласовав с руководителем. Начальник спросил его:","phrase": "Может, стоит сначала спросить, как правильно? Или вы художник и так видите?","roles": ["Начальник","Молодой сотрудник"]},{"id": "o6","kind": "main","num": "6","title": "Дрова везем","text": "Пассажир в маршрутном такси сделал замечание водителю о его резкой манере вождения: «Можно, пожалуйста, поаккуратнее? Не дрова везете». В ответ он услышал:","phrase": "Что погрузили, то и везу","roles": ["Водитель маршрутки","Пассажир"]},{"id": "o7","kind": "main","num": "7","title": "Опоздание","text": "Перед началом планерки несколько коллег пили кофе на общей кухне и случайно его пролили. Один из менеджеров остался прибрать и опоздал на планерку. Второй менеджер обратил на это внимание, сказав:","phrase": "Ты опоздал, полы мыть, видимо, важнее","roles": ["Второй менеджер","Опоздавший менеджер"]},{"id": "o8","kind": "main","num": "8","title": "Чашку кофею я тебе бодрящего налью","text": "Молодой бариста попросил постоянного клиента не пользоваться своей чашкой, ссылаясь на правила заведения. Клиент ответил:","phrase": "Вы каждый месяц меняетесь, а я уже пять лет пью здесь кофе из этой чашки","roles": ["Клиент","Бариста"]},{"id": "o9","kind": "main","num": "9","title": "Неприкрытая лесть","text": "В большом коллективе одной из Компаний кадровый работник предупредила, что приезжает проверяющий топ-руководитель и необходимо соблюдать в течение недели деловой стиль одежды. Мужчины надели деловые костюмы, девушки строгие платья и блузки. Начальница одного из отделов, состоящего из мужчин, сделала комплимент своим подчиненным, сказав, что мужчинам очень идут костюмы, смотрится это стильно. На что получила комментарий сотрудника:","phrase": "За доплату готовы всегда так одеваться!","roles": ["Сотрудник","Начальница отдела"]},{"id": "o10","kind": "main","num": "10","title": "Тайный переезд","text": "Три подруги гуляли по улице: Екатерина, Антонина и Алена. Подруга Антонина поделилась, что собирается переезжать в Питер в начале ноября, и попросила не рассказывать никому. Подруга Алена, обращаясь к Екатерине, сказала:","phrase": "Ну конечно, если знает Катя, знает и весь район!","roles": ["Алена","Екатерина","Антонина"]},{"id": "o11","kind": "main","num": "11","title": "Я так смотрю, вы совсем не боец?","text": "На собеседовании в динамичную компанию по продажам кандидат (Александр) рассказывает, что предпочитает взвешенные решения, не любит агрессивных методов и старается избегать конфликтов. Руководитель отдела (Елена), проводившая собеседование кандидата, перебивает:","phrase": "Я так смотрю, вы совсем не боец?","roles": ["Елена, руководитель отдела","Александр, кандидат"]},{"id": "o12","kind": "main","num": "12","title": "Анютины глазки","text": "В приемной руководителя секретарь заработалась за монитором и забыла, что своей очереди ожидает коллега. Когда он напомнил о себе, Анна с иронией объяснила, что у нее «память девичья». На что коллега ответил:","phrase": "Главное, чтобы не было «куриной слепоты»!","roles": ["Коллега","Анна, секретарь"]},{"id": "o13","kind": "main","num": "13","title": "Детектор лжи","text": "Директор на совещании, посвященном участившимся в фирме хищениям, дал распоряжение руководителям подразделений объявить своим работникам, что будут проходить проверку на «детекторе лжи». В ответ на это один руководитель заявил:","phrase": "А если не будет эффекта? Пытать всех начнете?","roles": ["Руководитель подразделения","Директор"]},{"id": "o14","kind": "main","num": "14","title": "Кто в кабинете хозяйка?","text": "Мария и Татьяна работают в одном кабинете. Мария ухаживает за всем кабинетом, цветами, интерьером. Татьяна только за своим рабочим местом. Марии нравится в целом поддерживать порядок, но энтузиазм угасает, так как от Татьяны в этом вопросе помощи практически нет. Как-то раз Мария направилась в уборную помыть свою кружку. Татьяна, увидев это, говорит:","phrase": "О! А ты не могла бы и мою кружку захватить?","roles": ["Татьяна","Мария"]},{"id": "o15","kind": "main","num": "15","title": "«Петь-то умеете?»","text": "Музыкальная группа перед выступлением прогоняет программу на сцене. Вокалистки поют старую добрую песню. Входит в зал солидный мужчина, усаживается в кресло, внимательно слушает. Как только песня закончилась, выдает:","phrase": "А вы неправильно поете. Так петь нельзя!","roles": ["Солидный мужчина","Вокалистка"]},{"id": "o16","kind": "main","num": "16","title": "На ковре начальника","text": "После стратегического совещания по благоустройству города, где молодой сотрудник Света активно предлагала идеи и вступала в профессиональную дискуссию, руководитель попросил ее задержаться. Когда дверь кабинета закрылась, он с улыбкой спросил:","phrase": "Света, а кто сказал, что ты можешь это все предлагать?","roles": ["Руководитель","Света"]},{"id": "o17","kind": "main","num": "17","title": "Непунктуальный друг","text": "Виктор с женой решил поехать на шашлыки, позвал с собой друга с семьей. Договорились встретиться в дороге на полпути в придорожном кафе в 11:00 и дальше ехать вместе. Друзья опоздали на час, не предупредив. Такое поведение и раньше за ними было замечено. Виктор в сердцах сказал другу:","phrase": "Ну наконец-то! Как у тебя еще бизнес не развалился при такой пунктуальности?","roles": ["Виктор","Друг"]},{"id": "o18","kind": "main","num": "18","title": "Удобное кресло","text": "Руководители заходят в кабинет директора на совещание. Директора еще нет, а за его местом работает директор по персоналу. Главный бухгалтер с ухмылкой произносит громко:","phrase": "А ты, никак, директора подсиживаешь?","roles": ["Главный бухгалтер","Директор по персоналу"]},{"id": "o19","kind": "main","num": "19","title": "Кто подаст стакан воды?","text": "Во время обеда на общей кухне Мария возмущенно обсуждает повышение цен на сено и то, что теперь ей сложно содержать своего жеребца в конюшне. Все увлеченно начали делиться, где дешевле закупить сено и корм. А Надежда Петровна из бухгалтерии ей говорит:","phrase": "Конь в старости стакан воды не подаст. Детей тебе надо","roles": ["Надежда Петровна","Мария"]},{"id": "o20","kind": "main","num": "20","title": "Усы","text": "Молодой сотрудник отдела продаж Роман приходит на работу после отпуска с новыми усами и ярким загаром. Во время планерки, при защите отчета, Роман допускает ошибку в расчетах и неловко подвешивает паузу в докладе. На что начальник отдела, не дав договорить, усмехается и говорит:","phrase": "Вижу, что усы ты просто так отрастил, чтобы умнее выглядеть","roles": ["Начальник отдела","Роман"]},{"id": "o21","kind": "main","num": "21","title": "Случай на парковке","text": "Татьяна приезжает на работу на новом автомобиле. Евгений, столкнувшись с ней на парковке, в привычной шутливой манере замечает, что с покупкой таких автомобилей люди становятся другими. На что получает ответ:","phrase": "Понятно, почему ты не меняешься!","roles": ["Татьяна","Евгений"]},{"id": "o22","kind": "main","num": "22","title": "Маркетолог или бариста","text": "Разговаривая на рабочей кухне, секретарь поделилась с коллегой, что хочет подать заявку на конкурсную вакансию в отдел маркетинга и пойти на повышение. На что получила от коллеги комментарий:","phrase": "В отделе маркетинга нужен специалист, а не бариста","roles": ["Коллега","Секретарь"]},{"id": "o23","kind": "main","num": "23","title": "Общение в чате","text": "Коллега написал в корпоративный чат сообщение слишком сложным языком, используя несвойственные ему речевые обороты. При встрече другой сотрудник спросил его:","phrase": "А в жизни двух слов связать не можешь. Ты что, искусственным интеллектом пользовался?","roles": ["Сотрудник","Коллега"]},{"id": "o24","kind": "main","num": "24","title": "Заказ","text": "Молодая девушка приехала в магазин, чтобы забрать свой заказ. Тут она узнает от менеджера по продажам, что заказ был отменен, но ее он об этом предупредить не успел. Выслушав этот ответ, девушка язвительно заявила:","phrase": "То есть ваше время настолько дороже моего?","roles": ["Девушка","Менеджер по продажам"]},{"id": "o25","kind": "main","num": "25","title": "Зато не пешком","text": "Иван подходил к своему припаркованному возле торгового центра автомобилю марки Нива. Рядом с ним стоял новый БМВ, в котором сидел его одноклассник. Одноклассник узнал Ивана, оглядел его машину и сказал с ухмылкой:","phrase": "Ну что, Ваня, зато не пешком?","roles": ["Одноклассник","Иван"]},{"id": "o26","kind": "main","num": "26","title": "На парковке","text": "Собираясь выезжать с парковки, Мария обратила внимание, что Николай перегородил ей выезд своей машиной. Перестраховавшись, дабы не задеть машину Николая, Мария попросила его немного отъехать, чтобы совершить маневр, на что услышала:","phrase": "Тот, кто умеет водить, сумеет и выехать","roles": ["Николай","Мария"]},{"id": "o27","kind": "main","num": "27","title": "Хрупкий авторитет","text": "На объекте строители несерьезно относились к молодому дизайнеру, которая делала им замечания по качеству работ. Когда дизайнер пришла на очередную встречу, Сергей встретил ее фразой:","phrase": "О, наша фантазерка пришла!","roles": ["Сергей, строитель","Дизайнер"]},{"id": "o28","kind": "main","num": "28","title": "Неграмотный гид","text": "Группа туристов заказала многодневный автобусный тур по городам области. Гид тура в первую встречу представился и поинтересовался у группы: «Вы откуда? С Москвы?» На что получил незамедлительный ответ от туристки:","phrase": "Мы ИЗ Москвы! Вам бы грамматику повторить, прежде чем в гиды идти!","roles": ["Туристка","Гид"]},{"id": "o29","kind": "main","num": "29","title": "Кто крайний?","text": "В отделении «Почты России» выстроилась внушительная очередь. Каждый входящий задавал вопрос «Кто здесь крайний». Мужчина не выдержал и ответил последнему спросившему посетителю:","phrase": "Крайний бывает Север, вы русский язык в школе учили?","roles": ["Мужчина в очереди","Посетитель"]},{"id": "o30","kind": "main","num": "30","title": "Волонтерская помощь","text": "Группа волонтеров приезжает в конный клуб. Руководитель, кратко поприветствовав их, сразу ведет к конюшне и вручает им лопаты и инструменты, с четкими указаниями, с чего начать уборку. В этот момент один из волонтеров, глядя на лопаты и указывая на привезенный пакет с яблоками, произносит:","phrase": "Я приехал кормить лошадей. На этом моя волонтерская миссия заканчивается!","roles": ["Волонтер","Руководитель конного клуба"]},{"id": "o31","kind": "main","num": "31","title": "Быстрый Юрий","text": "Менеджер по работе с клиентами Юрий договорился о встрече со своим постоянным крупным заказчиком. Договоренность была осуществлена по личному телефону с генеральным директором, когда тот ему позвонил со словами: «Срочно приезжай, будет большой проект». Приехав в самое ближайшее время, Юрий, как и всегда, сразу идет в сторону кабинета генерального, но ему перегораживает дорогу секретарь, явно недавно работающая здесь девушка, и говорит:","phrase": "Притормозите коней, мужчина! Тут вам не ипподром!","roles": ["Секретарь","Юрий"]},{"id": "o32","kind": "main","num": "32","title": "ГамлетОк","text": "В драматическом театре идет репетиция спектакля «Гамлет». У артиста, который играет главную роль, плохое настроение. Поэтому он вяло, без выражения произносит текст, не эмоционален, не убедителен. Режиссер, который делает большую ставку на этот спектакль и этого артиста в главной роли, через два часа репетиции произносит:","phrase": "А ну, соберись! Тебе только колобка играть!","roles": ["Режиссер","Артист"]},{"id": "z1","kind": "spare","num": "1","title": "Парковка","text": "Управляющая компания имеет собственную парковку. Борис работает в данной компании бухгалтером уже много лет и ставит свою машину всегда на одно и то же место (оно в тени и расположено близко к главному входу). Недавно устроившийся в эту компанию на должность юриста Олег, приехав пораньше, стал парковаться на это удобное место. Подъехавший Борис увидел происходящее и заявил новичку:","phrase": "Давай, отгоняй машину, это мое место!","roles": ["Борис, бухгалтер","Олег, юрист"]},{"id": "z2","kind": "spare","num": "2","title": "Новый цвет","text": "Семейная пара делает ремонт в своем доме. Жена выбрала новый цвет для покраски стен. Муж нанимает бригаду отделочников. Начальник бригады, увидев выбранный оттенок, говорит мужу:","phrase": "А у вашей жены все хорошо с настроением? Может, еще над цветом подумаете?","roles": ["Начальник бригады","Муж"]},{"id": "z3","kind": "spare","num": "3","title": "Вместительный шкаф","text": "В тесном общем коридоре Максим поставил шкаф без согласования с соседями. Елена, уходя на работу, встретилась с неожиданностью. В этот момент из квартиры выходит Максим, Елена говорит:","phrase": "Как сделать так, чтобы шкаф, который мешал в вашей квартире, в общем коридоре не мешал?","roles": ["Елена","Максим"]}];
@@ -1051,6 +1053,8 @@ function baseMapHTML(s, r){
     ${fold ? "" : `<div class="note" style="padding:0 0 4px">Ситуация готова, когда за каждую из ${NB} баз есть вербальная формула ответа. Нажмите на базу, чтобы перейти к ее варианту или начать новый.</div>`}
     ${rows}
     ${!fold && loose ? `<div class="note" style="padding:4px 0 0">Еще ${loose} ${plural(loose, "вариант", "варианта", "вариантов")} без базы: отметьте базу кнопкой «+ база» в заголовке варианта.</div>` : ""}
+ 
+    <button type="button" class="link blk" data-act="blank"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>Выгрузить в бланк «Выбор базы» (Word)</button>
   </div>`;
 }
 function answerFor(s, r, lv){
@@ -1086,6 +1090,8 @@ function coverHTML(s, r){
     ${fold ? "" : `<div class="note" style="padding:0 0 4px">По каждой из ${NB} баз: формула «${esc(on)}» и ваш ответ на нее. База засчитывается, когда на каждую формулу по ней есть ответ.</div>`}
     ${rows.map(x => `<button type="button" class="crow" data-act="${x.act}"${x.lv ? ` data-lv="${x.lv}"` : ` data-o="${x.o}" data-b="${x.b}"`} style="--oc:${x.oc}"><span class="ct"><small>${esc(x.head)}</small><span>${esc(x.text)}</span></span>
       <span class="cst${x.st ? " " + x.st : ""}">${x.st === "ok" ? heroDot(r.vars[x.k]) + "✓ " + starMark(r.vars[x.k]) + "вариант " + (x.k + 1) : x.st === "part" ? "начат: вариант " + (x.k + 1) : x.st === "none" ? "→ придумать" : "+ ответить"}</span></button>`).join("")}
+ 
+    <button type="button" class="link blk" data-act="blank"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>Выгрузить в бланк «Выбор базы» (Word)</button>
   </div>`;
 }
 function baseSheet(s, r, i){
@@ -1200,6 +1206,7 @@ $("#sBody").addEventListener("click", e => {
     save(true); goVar(au, k, true); toast(`«${au.name}», вариант ${k + 1}: готовьте ответ`);
     return;
   }
+  if(b.dataset.act === "blank") return blankSheet(cur, r);
   if(b.dataset.act === "mapFold"){
     const y = b.getBoundingClientRect().top;
     r.mapFold = !r.mapFold; save(true); renderSit();
@@ -1323,12 +1330,158 @@ function renderCheat(s){
           ${v.a.trim() ? `<button class="mini shr" data-share-r="${r.id}" data-share-v="${r.vars.indexOf(v)}" style="margin-top:10px"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Поделиться ответом</button>` : ""}`).join("")
           : `<div class="an">Ответы еще не подготовлены.</div>`}
       </div>`; }).join("")}
-    <div class="btn2" style="margin-top:28px"><button class="btn" id="csEdit">К подготовке</button><button class="btn pri" id="csRound"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg>Раунд</button></div>`;
+    <button class="btn full" id="csBlank" style="margin-top:28px">Выгрузить в бланк «Выбор базы» (Word)</button>
+    <div class="btn2" style="margin-top:12px"><button class="btn" id="csEdit">К подготовке</button><button class="btn pri" id="csRound"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></svg>Раунд</button></div>`;
   $("#cBody").onclick = e => { const b = e.target.closest("[data-share-r]"); if(!b) return; const r = s.roles.find(x => x.id === b.dataset.shareR); if(r) shareAnswer(s, r, r.vars[+b.dataset.shareV]); };
+  $("#csBlank").onclick = () => blankSheet(s, null);
   $("#csEdit").onclick = () => back();
   $("#csRound").onclick = () => go("t/" + s.id, true);
 }
 $("#cBack").onclick = () => back();
+
+/* ---------- выгрузка в бланк «Выбор базы» (Word, .docx собирается на телефоне) ---------- */
+const BLANK_TITLE = "ВЫБОР БАЗЫ ДЛЯ СОСТАВЛЕНИЯ ВЕРБАЛЬНОЙ ФОРМУЛЫ В ЭКСПРЕСС-ПОЕДИНКАХ";
+const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+const xe = t => String(t ?? "").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g, "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function wR(t, o = {}){ return `<w:r><w:rPr>${o.b ? "<w:b/>" : ""}${o.i ? "<w:i/>" : ""}${o.c ? `<w:color w:val="${o.c}"/>` : ""}${o.sz ? `<w:sz w:val="${o.sz}"/><w:szCs w:val="${o.sz}"/>` : ""}</w:rPr><w:t xml:space="preserve">${xe(t)}</w:t></w:r>`; }
+function wP(runs, o = {}){
+  return `<w:p><w:pPr>${o.pb ? "<w:pageBreakBefore/>" : ""}${o.keep ? "<w:keepNext/>" : ""}<w:spacing w:before="${o.before || 0}" w:after="${o.after || 0}"/>${o.ind ? `<w:ind w:left="${o.ind}" w:hanging="${o.hang || 0}"/>` : ""}${o.jc ? `<w:jc w:val="${o.jc}"/>` : ""}</w:pPr>${Array.isArray(runs) ? runs.join("") : runs || ""}</w:p>`;
+}
+/* многострочный текст: каждая строка абзацем, маркеры списка с отступом */
+function wText(txt, o = {}){
+  const lines = String(txt || "").replace(/\r/g, "").split("\n");
+  while(lines.length && !lines[lines.length - 1].trim()) lines.pop();
+  return lines.map(l => { const m = BUL.exec(l), n = NUM.exec(l);
+    if(m) return wP(wR("•\t", o) + wR(l.slice(m[0].length), o), {ind:360, hang:240, after:o.after});
+    if(n) return wP(wR(l.trim(), o), {ind:360, hang:360, after:o.after});
+    return wP(wR(l, o), {after:o.after}); }).join("");
+}
+const wEmpty = n => Array.from({length:n}, () => wP("")).join("");
+function wCell(w, inner){ return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/></w:tcPr>${inner || wP("")}</w:tc>`; }
+const BLANK_W = [675, 2835, 6555];
+function wTable(head, rows){
+  const bd = ["top", "left", "bottom", "right", "insideH", "insideV"].map(k => `<w:${k} w:val="single" w:sz="4" w:space="0" w:color="000000"/>`).join("");
+  return `<w:tbl><w:tblPr><w:tblW w:w="10065" w:type="dxa"/><w:tblInd w:w="-601" w:type="dxa"/><w:tblBorders>${bd}</w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="108" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar><w:tblLook w:val="04A0"/></w:tblPr>
+<w:tblGrid>${BLANK_W.map(w => `<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>
+<w:tr><w:trPr><w:tblHeader/></w:trPr>${head.map((h, j) => wCell(BLANK_W[j], wP(wR(h, {b:1})))).join("")}</w:tr>
+${rows.map(r => `<w:tr>${r.map((c, j) => wCell(BLANK_W[j], c)).join("")}</w:tr>`).join("\n")}</w:tbl>`;
+}
+const GREY = "595959";
+/* одна роль: заголовок, таблица 14 баз, затем фразы без базы */
+function blankRole(s, r, first){
+  const out = [], opps = oppRoles(s, r), au = authorMode(s, r), vn = v => "Вариант " + (r.vars.indexOf(v) + 1) + (v.st ? " ★" : "");
+  const p = roleProg(s, r);
+  out.push(wP([wR("Роль: ", {b:1}), wR(r.name, {b:1}), wR(au ? " (говорит фразу, в поединке отвечает вторым)" : " (в поединке отвечает первым)")], {pb:!first, keep:1, before:first ? 120 : 0, after:60}));
+  out.push(wP(wR(au ? `Ответы на формулы ${opps.map(o => "«" + o.name + "»").join(", ")}: ${p.n} из ${p.of} баз` : `Вербальные формулы: ${p.n} из ${p.of} баз`, {c:GREY, sz:20}), {keep:1, after:120}));
+  const shown = new Set(), rows = [];
+  for(let b = 1; b <= NB; b++){
+    let cell = "";
+    if(!au){
+      const vs = r.vars.filter(v => v.b === b && hasA(v));
+      vs.forEach((v, k) => { shown.add(v);
+        if(vs.length > 1) cell += wP(wR(vn(v), {i:1, c:GREY, sz:20}), {before:k ? 120 : 0});
+        cell += wText(v.a); });
+    }else{
+      opps.forEach(o => o.vars.forEach((x, xi) => { if(x.b !== b || !hasA(x)) return;
+        const n = o.vars.filter(y => y.b === b && hasA(y)).length;
+        cell += wP(wR(`«${o.name}»${n > 1 ? ", вариант " + (xi + 1) : ""}:`, {i:1, c:GREY, sz:20}), {before:cell ? 160 : 0});
+        cell += wText(x.a, {i:1, c:GREY});
+        const ans = r.vars.filter(v => v.link === x.id && hasA(v));
+        cell += wP(wR("Ответ:", {b:1, sz:20}), {before:60});
+        if(ans.length) ans.forEach((v, k) => { shown.add(v); if(ans.length > 1) cell += wP(wR(vn(v), {i:1, c:GREY, sz:20}), {before:k ? 80 : 0}); cell += wText(v.a); });
+        else cell += wEmpty(2);
+      }));
+      r.vars.forEach(v => { if(shown.has(v) || v.b !== b || !hasA(v)) return; shown.add(v);
+        cell += wP(wR(vn(v) + (hasOpp(s, r, v) && effOpp(s, r, v) ? ", на ответ: " + oneLine(effOpp(s, r, v)) : ""), {i:1, c:GREY, sz:20}), {before:cell ? 160 : 0});
+        cell += wText(v.a); });
+    }
+    rows.push([wP(wR(String(b))), wP(wR(BASES[b - 1])), cell || wEmpty(3)]);
+  }
+  const col3 = au ? `ВЕРБАЛЬНАЯ ФОРМУЛА ${opps.length === 1 ? "«" + opps[0].name.toUpperCase() + "» " : "ОППОНЕНТА "}И ОТВЕТ` : "ВЕРБАЛЬНАЯ ФОРМУЛА";
+  out.push(wTable(["№", "ВЫБОР БАЗЫ", col3], rows));
+  const rest = r.vars.filter(v => !shown.has(v) && hasA(v));
+  if(rest.length){
+    out.push(wP(wR(au ? "Другие ответы (без базы, на ответы без базы, поддавки)" : "Ответные фразы без базы", {b:1}), {before:240, after:80, keep:1}));
+    rest.forEach(v => {
+      const head = vn(v) + (au && hasOpp(s, r, v) ? ". " + oppPlain(s, r, v) + (effOpp(s, r, v) ? ": " + oneLine(effOpp(s, r, v)) : "") : "");
+      out.push(wP(wR(head, {i:1, c:GREY, sz:20}), {before:80, keep:1}));
+      out.push(wText(v.a));
+    });
+  }
+  return out.join("\n");
+}
+function blankDoc(s, roles){
+  const said = s.roles.find(x => x.said), body = [];
+  body.push(wP(wR(BLANK_TITLE, {b:1}), {jc:"center", after:240}));
+  body.push(wP(wR(`${fullNum(s)}. ${s.title || "Без названия"}`, {b:1}), {after:80}));
+  if((s.text || "").trim()) body.push(wText(s.text, {after:40}));
+  body.push(wP([wR("Роли: ", {b:1}), wR(s.roles.map(x => x.name + (x.said ? " (говорит фразу)" : "")).join(", "))], {before:120}));
+  body.push(wP([wR(said ? `Фраза (${said.name}): ` : "Фраза: ", {b:1}), wR(`«${s.phrase || ""}»`, {b:1, i:1})], {before:60, after:120}));
+  roles.forEach((r, k) => body.push(blankRole(s, r, k === 0)));
+  body.push(wP(wR(`КСТ · Дзен-клуб · Экспресс-поединки, версия ${APP_VERSION} · выгружено ${fmtDate(today())}`, {c:GREY, sz:16}), {before:240}));
+  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
+  const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document ${W}><w:body>${body.join("\n")}<w:sectPr><w:pgSz w:w="11900" w:h="16840"/><w:pgMar w:top="1134" w:right="1800" w:bottom="567" w:left="1800" w:header="708" w:footer="708" w:gutter="0"/><w:cols w:space="708"/></w:sectPr></w:body></w:document>`;
+  const TNR = 'w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"';
+  const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts ${TNR}/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="ru-RU" w:eastAsia="ru-RU" w:bidi="ar-SA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style></w:styles>`;
+  return zipStore([
+    {name:"[Content_Types].xml", data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>`},
+    {name:"_rels/.rels", data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>`},
+    {name:"docProps/core.xml", data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${xe("Выбор базы: " + (s.title || ""))}</dc:title><dc:creator>Экспресс-поединки</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${new Date().toISOString().slice(0, 19)}Z</dcterms:created></cp:coreProperties>`},
+    {name:"word/_rels/document.xml.rels", data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`},
+    {name:"word/document.xml", data:doc},
+    {name:"word/styles.xml", data:styles}
+  ]);
+}
+/* zip без сжатия (stored): Word открывает такие файлы как обычные */
+const CRC_T = (() => { const t = new Uint32Array(256); for(let n = 0; n < 256; n++){ let c = n; for(let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u){ let c = 0xFFFFFFFF; for(let i = 0; i < u.length; i++) c = CRC_T[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function zipStore(files){
+  const enc = new TextEncoder(), loc = [], cen = []; let off = 0;
+  const d = new Date(), dt = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate(), tm = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+  for(const f of files){
+    const nm = enc.encode(f.name), dat = enc.encode(f.data), crc = crc32(dat);
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true); h.setUint16(10, tm, true); h.setUint16(12, dt, true);
+    h.setUint32(14, crc, true); h.setUint32(18, dat.length, true); h.setUint32(22, dat.length, true); h.setUint16(26, nm.length, true); h.setUint16(28, 0, true);
+    loc.push(h.buffer, nm, dat);
+    const c = new DataView(new ArrayBuffer(46));
+    c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, 0, true); c.setUint16(12, tm, true); c.setUint16(14, dt, true);
+    c.setUint32(16, crc, true); c.setUint32(20, dat.length, true); c.setUint32(24, dat.length, true); c.setUint16(28, nm.length, true); c.setUint32(42, off, true);
+    cen.push(c.buffer, nm);
+    off += 30 + nm.length + dat.length;
+  }
+  const csz = cen.reduce((a, b) => a + b.byteLength, 0), e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, csz, true); e.setUint32(16, off, true);
+  return new Blob([...loc, ...cen, e.buffer], {type:DOCX_MIME});
+}
+const fileSafe = t => String(t || "").replace(/[\\/:*?"<>|«»\u0000-\u001F]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 60).trim();
+async function exportBlank(s, roles){
+  try{
+    const blob = blankDoc(s, roles);
+    const name = fileSafe(`Выбор базы ${numLabel(s)} ${s.title || ""}${roles.length === 1 ? " - " + roles[0].name : ""}`) + ".docx";
+    const file = new File([blob], name, {type:DOCX_MIME});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file], title:name}); return; }catch(e){ if(e.name === "AbortError") return; }
+    }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast("Бланк сохранен");
+  }catch(err){ alert("Не удалось сделать бланк: " + err.message); }
+}
+function blankSheet(s, rr){
+  if(!s.roles.length){ toast("У ситуации нет ролей"); return; }
+  const list = s.roles.slice().sort((a, b) => (b === rr) - (a === rr));
+  openSheet(`<h2>Выгрузить в бланк</h2>
+    <p class="note" style="padding:0 0 10px;margin-top:-6px">Файл Word по бланку «Выбор базы для составления вербальной формулы»: сначала текст ситуации, затем таблица 14 баз с вашими ответными фразами. Пустые базы остаются пустыми строками, их можно дописать от руки.</p>
+    <div class="menu">${list.map(r => { const p = roleProg(s, r);
+      return `<button data-br="${r.id}"><span class="rdot" style="background:${rcol(s, r)};margin-right:10px"></span>${esc(r.name)}${r.said ? " (говорит фразу)" : ""}<span style="margin-left:auto;color:var(--muted);font-weight:600">${p.n} / ${p.of}</span></button>`; }).join("")}
+      ${s.roles.length > 1 ? `<button data-br="*">Все роли одним файлом</button>` : ""}</div>
+    <p class="note" style="padding:10px 0 0">Откроется меню отправки iPhone: «Сохранить в Файлы», Word, Telegram, почта.</p>`, sh => {
+    sh.addEventListener("click", e => { const b = e.target.closest("[data-br]"); if(!b) return; save(true);
+      const roles = b.dataset.br === "*" ? s.roles.slice() : s.roles.filter(x => x.id === b.dataset.br);
+      closeSheet(); exportBlank(s, roles); });
+  });
+}
 
 /* ---------- sheets ---------- */
 function openSheet(html, onMount){
